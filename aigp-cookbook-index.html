@@ -136,7 +136,9 @@
   .fc-card-front{background:var(--bg);border:1.5px solid var(--hair)}
   .fc-card-back{background:#f0f7ff;border:1.5px solid #b5d4f4;transform:rotateY(180deg)}
   .fc-hdr{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
-  .fc-body{flex:1;font-size:14.5px;line-height:1.65;color:var(--ink)}
+  .fc-body{flex:1;display:flex;align-items:center;justify-content:center;padding:4px 2px}
+  .fc-bi{font-size:17px;line-height:1.7;color:var(--ink);text-align:center;width:100%}
+  .fc-card-back .fc-bi{text-align:left}
   .fc-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
   .fc-due-lbl{font-size:10px;color:var(--muted);margin-top:6px}
   .fc-badge{font-size:9.5px;padding:2px 7px;border-radius:10px;font-weight:700;white-space:nowrap}
@@ -161,7 +163,7 @@
   .fc-restart{margin-top:18px;padding:10px 24px;border-radius:20px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:700;cursor:pointer}
   @media(max-width:640px){
     .fc-card-front,.fc-card-back,.fc-card,.fc-card-inner,.fc-card-wrap{min-height:260px}
-    .fc-body{font-size:13.5px}
+    .fc-bi{font-size:16px}
     .fc-rate{padding:13px 3px;font-size:11px}
   }
 
@@ -1192,13 +1194,13 @@ function fcShow(){
   const mLbl=c.m?`<span class="fc-mod-lbl">M${c.m}</span>`:'';
   document.getElementById('fcFront').innerHTML=
     `<div class="fc-hdr">${FC_BADGE[c.type]}${mLbl}<span class="fc-counter">${fcDone+1}&thinsp;/&thinsp;${fcTotal}</span></div>`+
-    `<div class="fc-body">${c.front}</div>`+
+    `<div class="fc-body"><div class="fc-bi">${c.front}</div></div>`+
     `<div class="fc-hint">Tap to reveal →</div>`;
   const plink=c.p?`<a class="fc-plink" href="${PDF}#page=${c.p}" target="_blank" onclick="event.stopPropagation()">📖 p.${c.p}</a>`:'';
   const dStr=prog?`Next: ${prog.due}`:'New card';
   document.getElementById('fcBack').innerHTML=
     `<div class="fc-hdr">${FC_BADGE[c.type]}${mLbl}${plink}</div>`+
-    `<div class="fc-body">${c.back}</div>`+
+    `<div class="fc-body"><div class="fc-bi">${c.back}</div></div>`+
     `<div class="fc-due-lbl">${dStr}</div>`;
   fcUpdateBar();
 }
