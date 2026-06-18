@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIGP Study Navigator — Cookbook Index & Exam Blueprint</title>
+<style>
+  :root{
+    --ink:#1a1a2e;--muted:#6b6880;--line:#ddd4f0;--hair:#ede8f5;
+    --lilac:#f5f0fc;--lilac2:#faf8fe;
+    --match:#fff3d6;--matchbd:#e8c766;
+    /* Cookbook module colours */
+    --m1:#1565C0;--m1bg:#e8f0fe;
+    --m2:#00695C;--m2bg:#e0f2f1;
+    --m3:#4527A0;--m3bg:#ede7f6;
+    --m4:#B71C1C;--m4bg:#ffebee;
+    --m5:#E65100;--m5bg:#fff3e0;
+    --m6:#2E7D32;--m6bg:#e8f5e9;
+    --m7:#283593;--m7bg:#e8eaf6;
+    /* Blueprint domain colours */
+    --d1:#1565C0;--d1bg:#e8f0fe;
+    --d2:#6A1B9A;--d2bg:#f3e5f5;
+    --d3:#2E7D32;--d3bg:#e8f5e9;
+    --d4:#BF360C;--d4bg:#fbe9e7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;padding:20px 22px 60px}
+  h1{font-size:21px;margin:0 0 4px;color:#1a1a2e}
+  .sub{font-size:12px;color:var(--muted);margin:0 0 14px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+  /* ── TABS ── */
+  .tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:2px solid var(--hair);padding-bottom:0}
+  .tab{font-family:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);border-bottom:none;
+    background:#fff;color:var(--muted);border-radius:8px 8px 0 0;padding:8px 18px;cursor:pointer;
+    position:relative;top:2px}
+  .tab.active{background:var(--lilac2);color:#3D1C5A;border-color:#c5b8e8;z-index:1}
+  .tab:hover:not(.active){background:var(--lilac)}
+
+  /* ── SHARED BAR ── */
+  .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+  button.ctrl{font-family:inherit;font-size:12px;border:1px solid var(--line);background:#fff;
+    color:#3D1C5A;border-radius:7px;padding:5px 10px;cursor:pointer}
+  button.ctrl:hover{background:var(--lilac2)}
+  .lbl{font-size:11.5px;color:var(--muted)}
+  input.search{font-family:inherit;font-size:12px;border:1px solid var(--line);border-radius:7px;
+    padding:5px 10px;min-width:240px;color:var(--ink)}
+  input.search:focus{outline:2px solid var(--lilac);border-color:#5B2C86}
+  mark{background:#ffe58a;color:inherit;border-radius:3px;padding:0 1px}
+
+  /* ── LEGEND ── */
+  .legend{display:flex;flex-wrap:wrap;gap:9px;align-items:center;background:var(--lilac2);
+    border:1px solid var(--line);border-radius:9px;padding:7px 12px;margin-bottom:16px;font-size:11px;color:#4a3f57}
+  .legend b{color:#3D1C5A}
+  .mbadge{display:inline-block;font-weight:700;font-size:10px;letter-spacing:.3px;color:#fff;
+    border-radius:5px;padding:2px 7px;margin:0 2px}
+
+  /* ── TREE SHARED ── */
+  ul.tree,ul.tree ul{list-style:none;margin:0;padding:0}
+  ul.tree ul{margin-left:22px;border-left:1.5px dashed var(--hair);padding-left:6px}
+  li{margin:2px 0}
+  .row{display:flex;align-items:flex-start;gap:7px;padding:5px 8px;border-radius:8px;border:1px solid transparent}
+  .row.clickable{cursor:pointer}.row.clickable:hover{background:var(--lilac2)}
+  .tog{flex:0 0 auto;width:18px;height:18px;border-radius:5px;border:1px solid var(--line);
+    background:#fff;font-size:12px;line-height:17px;text-align:center;user-select:none;margin-top:1px}
+  .tog.leaf{border-color:transparent;background:transparent}
+  .tog.leaf::after{content:"•";color:#c9bcdc;font-size:11px}
+  .tog.hc{cursor:pointer}
+  .nm{font-size:13px;font-weight:600;color:var(--ink);line-height:1.35;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+  .meta{font-size:11px;color:var(--muted);margin-top:2px;max-width:700px;line-height:1.4}
+  li.collapsed>ul{display:none}
+  .row.match{background:var(--match);border-color:var(--matchbd)}
+
+  /* ── PDF LINK ── */
+  .plink{font-size:10px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px;
+    text-decoration:none;white-space:nowrap;flex-shrink:0;line-height:1.7}
+  .plink:hover{opacity:.82}
+
+  /* ── COOKBOOK TREE ── */
+  li.mod1>.row>.div>.nm>.nmtext,li.mod1>.row>div>.nm>.nmtext{color:var(--m1)}
+  li.mod1>.row{background:var(--m1bg);border-color:rgba(21,101,192,.2)}
+  li.mod2>.row>div>.nm>.nmtext{color:var(--m2)}
+  li.mod2>.row{background:var(--m2bg);border-color:rgba(0,105,92,.2)}
+  li.mod3>.row>div>.nm>.nmtext{color:var(--m3)}
+  li.mod3>.row{background:var(--m3bg);border-color:rgba(69,39,160,.2)}
+  li.mod4>.row>div>.nm>.nmtext{color:var(--m4)}
+  li.mod4>.row{background:var(--m4bg);border-color:rgba(183,28,28,.2)}
+  li.mod5>.row>div>.nm>.nmtext{color:var(--m5)}
+  li.mod5>.row{background:var(--m5bg);border-color:rgba(230,81,0,.2)}
+  li.mod6>.row>div>.nm>.nmtext{color:var(--m6)}
+  li.mod6>.row{background:var(--m6bg);border-color:rgba(46,125,50,.2)}
+  li.mod7>.row>div>.nm>.nmtext{color:var(--m7)}
+  li.mod7>.row{background:var(--m7bg);border-color:rgba(40,53,147,.2)}
+  li.mod1 .plink{background:var(--m1)} li.mod2 .plink{background:var(--m2)}
+  li.mod3 .plink{background:var(--m3)} li.mod4 .plink{background:var(--m4)}
+  li.mod5 .plink{background:var(--m5)} li.mod6 .plink{background:var(--m6)}
+  li.mod7 .plink{background:var(--m7)}
+
+  /* ── BLUEPRINT TREE ── */
+  li.dom1>.row>div>.nm>.nmtext{color:var(--d1);font-size:14px;font-weight:700}
+  li.dom1>.row{background:var(--d1bg);border-color:rgba(21,101,192,.25)}
+  li.dom2>.row>div>.nm>.nmtext{color:var(--d2);font-size:14px;font-weight:700}
+  li.dom2>.row{background:var(--d2bg);border-color:rgba(106,27,154,.25)}
+  li.dom3>.row>div>.nm>.nmtext{color:var(--d3);font-size:14px;font-weight:700}
+  li.dom3>.row{background:var(--d3bg);border-color:rgba(46,125,50,.25)}
+  li.dom4>.row>div>.nm>.nmtext{color:var(--d4);font-size:14px;font-weight:700}
+  li.dom4>.row{background:var(--d4bg);border-color:rgba(191,54,12,.25)}
+  li.dom1 .plink{background:var(--d1)} li.dom2 .plink{background:var(--d2)}
+  li.dom3 .plink{background:var(--d3)} li.dom4 .plink{background:var(--d4)}
+  .qrange{font-size:10px;font-weight:700;color:#fff;border-radius:999px;
+    padding:2px 8px;white-space:nowrap;flex-shrink:0}
+  .refbadge{font-size:10px;font-weight:700;color:#fff;border-radius:4px;
+    padding:2px 7px;white-space:nowrap;flex-shrink:0}
+  .refname{font-size:10.5px;color:var(--muted);font-style:italic;flex-shrink:0}
+  .fit{font-size:9px;font-weight:700;color:#e65100;background:#fff3e0;border:1px solid #ffcc80;
+    border-radius:4px;padding:1px 5px;white-space:nowrap;flex-shrink:0}
+  .pi-text{font-size:12.5px;font-weight:400;color:var(--ink);line-height:1.5}
+  .pi-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;align-items:center}
+
+  footer{font-size:10.5px;color:var(--muted);margin-top:24px;border-top:1px solid var(--hair);padding-top:8px}
+
+  /* ── LIFECYCLE TAB ── */
+  .lc-intro{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+  .lc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:16px}
+  .lc-table{border-collapse:separate;border-spacing:4px;min-width:700px;width:100%}
+  /* Column headers */
+  .lc-table thead th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    text-align:center;padding:6px 8px;border-radius:6px}
+  .lc-th-phase{background:transparent;width:100px}
+  .lc-th-gov{background:#ddeaf8;color:#0c447c}
+  .lc-th-data{background:#d5ede3;color:#085041}
+  .lc-th-risk{background:#f5e4c8;color:#633806}
+  .lc-th-party{background:#e8e7e0;color:#444441}
+  /* Phase label */
+  .lc-phase{padding:10px 8px;border-radius:8px;vertical-align:top;text-align:center;width:100px}
+  .lc-pnum{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.7;margin-bottom:2px}
+  .lc-ptitle{font-size:12px;font-weight:700;line-height:1.3}
+  .lc-psub{font-size:10px;opacity:.65;margin-top:2px}
+  .lc-p1{background:#d8eaf6;color:#0c447c}
+  .lc-p2{background:#cdeade;color:#085041}
+  .lc-p3{background:#f5e3c4;color:#633806}
+  .lc-p4{background:#d0e9f5;color:#0c3a52}
+  .lc-p5{background:#f2d9e6;color:#72243e}
+  /* Cells */
+  .lc-cell{padding:9px 10px;border-radius:8px;border:0.5px solid transparent;vertical-align:top}
+  .lc-gov{background:#e8f3fb;border-color:#b5d4f4;color:#0c447c}
+  .lc-data{background:#ddeee4;border-color:#9fe1cb;color:#085041}
+  .lc-risk{background:#faedd6;border-color:#f5c87a;color:#633806}
+  .lc-party{background:#edece5;border-color:#d3d1c7;color:#444441}
+  .lc-cttl{font-size:11px;font-weight:700;margin-bottom:3px}
+  .lc-cdesc{font-size:10.5px;line-height:1.5;opacity:.88;margin-bottom:6px}
+  /* Chips */
+  .lc-chips{display:flex;flex-direction:column;gap:3px}
+  .lc-chip{display:block;font-size:10px;font-weight:600;padding:3px 7px;border-radius:5px;
+    text-decoration:none;line-height:1.4;transition:opacity .15s;border:0.5px solid transparent}
+  .lc-chip:hover{opacity:.78}
+  .lc-c-gov{background:#c8dff5;border-color:#91bce8;color:#0c447c}
+  .lc-c-data{background:#c6e6d4;border-color:#7fcfb0;color:#085041}
+  .lc-c-risk{background:#f5ddb0;border-color:#e8b86a;color:#633806}
+  .lc-c-party{background:#dddcd4;border-color:#c0beb4;color:#444441}
+  /* NIST bar */
+  .lc-nist{display:grid;grid-template-columns:100px repeat(5,1fr);gap:4px;margin:12px 0 20px}
+  .lc-nist-lbl{font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center}
+  .lc-nist-cell{text-align:center;padding:7px 6px;border-radius:8px;border:0.5px solid;font-size:11px}
+  .lc-nist-cell strong{display:block;font-weight:700;margin-bottom:1px}
+  .lc-nist-cell span{font-size:10px;opacity:.75}
+  .lc-nc1{background:#f2d9e6;border-color:#f4c0d1;color:#72243e}
+  .lc-nc2{background:#d5ede3;border-color:#9fe1cb;color:#085041}
+  .lc-nc3{background:#f5e3c4;border-color:#f5c87a;color:#633806}
+  .lc-nc4{background:#ddeaf8;border-color:#b5d4f4;color:#0c447c}
+  /* Tags */
+  .lc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+  .lc-tag{font-size:9px;padding:1px 6px;border-radius:20px;border:0.5px solid;font-weight:600}
+  .lc-tbok{background:#ddeaf8;border-color:#b5d4f4;color:#0c447c}
+  .lc-tsg{background:#d5ede3;border-color:#9fe1cb;color:#085041}
+  .lc-tnist{background:#f2d9e6;border-color:#f4c0d1;color:#72243e}
+  .lc-teu{background:#f5e3c4;border-color:#f5c87a;color:#633806}
+  .lc-tiso{background:#edece5;border-color:#d3d1c7;color:#444441}
+  @media(max-width:640px){
+    .lc-nist{grid-template-columns:80px repeat(2,1fr);gap:3px}
+    .lc-nist-cell:nth-child(n+4){display:none}
+  }
+
+  /* ── MOBILE ── */
+  @media(max-width:640px){
+    body{padding:14px 12px 50px}
+    h1{font-size:17px}
+    .sub{font-size:11px}
+    .tabs{gap:4px}
+    .tab{font-size:12px;padding:6px 12px}
+    .bar{gap:6px}
+    input.search{min-width:0;width:100%}
+    button.ctrl{font-size:11px;padding:5px 9px}
+    .legend{gap:6px;font-size:10.5px;padding:6px 10px}
+    .mbadge{font-size:9px;padding:1px 6px}
+    ul.tree ul{margin-left:12px;padding-left:4px}
+    .row{padding:4px 6px;gap:5px}
+    .tog{width:16px;height:16px;font-size:11px;line-height:15px}
+    .nm{font-size:12px;gap:4px}
+    .meta{font-size:10.5px}
+    .qrange{font-size:9px;padding:2px 7px}
+    .refbadge{font-size:9px;padding:2px 6px}
+    .refname{font-size:10px}
+    .plink{font-size:9px;padding:1px 5px}
+    .pi-text{font-size:12px}
+    .pi-meta{gap:4px;margin-top:4px}
+    .fit{font-size:8.5px}
+  }
+</style>
+</head>
+<body>
+<h1>AIGP Study Navigator</h1>
+<p class="sub">Cookbook Index + Exam Blueprint mapped to cookbook pages · PDF must be in the same folder as this file</p>
+
+<div class="tabs">
+  <button class="tab active" id="tab-cookbook" onclick="switchTab('cookbook')">📚 Cookbook Index</button>
+  <button class="tab" id="tab-blueprint" onclick="switchTab('blueprint')">🎯 Exam Blueprint → Cookbook</button>
+  <button class="tab" id="tab-lifecycle" onclick="switchTab('lifecycle')">🔄 AI Lifecycle → Cookbook</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 1: COOKBOOK INDEX
+══════════════════════════════════════════════════ -->
+<div id="sec-cookbook">
+  <div class="bar">
+    <input id="ckSearchBox" type="search" class="search" placeholder="Search topics, concepts, frameworks…" autocomplete="off">
+    <span class="lbl" id="ckSearchInfo"></span>
+    <button class="ctrl" id="ckExpandAll">Expand all</button>
+    <button class="ctrl" id="ckCollapseAll">Collapse all</button>
+  </div>
+  <div class="legend">
+    <span><b>Modules:</b></span>
+    <span><span class="mbadge" style="background:var(--m1)">M1</span> Foundations of AI</span>
+    <span><span class="mbadge" style="background:var(--m2)">M2</span> Impacts &amp; Principles</span>
+    <span><span class="mbadge" style="background:var(--m3)">M3</span> Governance &amp; Risk</span>
+    <span><span class="mbadge" style="background:var(--m4)">M4</span> AI Regulation</span>
+    <span><span class="mbadge" style="background:var(--m5)">M5</span> Other Laws</span>
+    <span><span class="mbadge" style="background:var(--m6)">M6</span> Governing Development</span>
+    <span><span class="mbadge" style="background:var(--m7)">M7</span> Governing Deployment</span>
+  </div>
+  <div id="ckRoot"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 2: EXAM BLUEPRINT
+══════════════════════════════════════════════════ -->
+<div id="sec-blueprint" style="display:none">
+  <div class="bar">
+    <input id="bpSearchBox" type="search" class="search" placeholder="Search performance indicators, competencies…" autocomplete="off">
+    <span class="lbl" id="bpSearchInfo"></span>
+    <button class="ctrl" id="bpExpandAll">Expand all</button>
+    <button class="ctrl" id="bpCollapseAll">Collapse all</button>
+  </div>
+  <div class="legend">
+    <span><b>Domains:</b></span>
+    <span><span class="mbadge" style="background:var(--d1)">I</span> Foundations of AI Governance (16–20 Qs)</span>
+    <span><span class="mbadge" style="background:var(--d2)">II</span> Laws, Standards &amp; Frameworks (19–23 Qs)</span>
+    <span><span class="mbadge" style="background:var(--d3)">III</span> Governing AI Development (21–25 Qs)</span>
+    <span><span class="mbadge" style="background:var(--d4)">IV</span> Governing AI Deployment &amp; Use (21–25 Qs)</span>
+    <span><span class="fit">⚑ Stakeholder</span> stakeholder-heavy PI — know the standard, not your natural style</span>
+  </div>
+  <div id="bpRoot"></div>
+</div>
+
+<div id="sec-lifecycle" style="display:none">
+  <div id="lcRoot"></div>
+</div>
+
+<footer>AIGP BoK v2.1 effective 2 Feb 2026 · 100 questions (85 scored, 15 pilot) · 3 hrs · Passing = 300/500 scaled · Cookbook page numbers are approximate (±2 pages)</footer>
+
+<script>
+/* ══════════════════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════════════════ */
+function switchTab(t){
+  ['cookbook','blueprint','lifecycle'].forEach(id=>{
+    document.getElementById('sec-'+id).style.display = t===id?'':'none';
+    document.getElementById('tab-'+id).classList.toggle('active', t===id);
+  });
+}
+
+/* ══════════════════════════════════════════════════
+   SHARED UTILITIES
+══════════════════════════════════════════════════ */
+const PDF = "Cookbook AIGP_BoK_v2.1 (Apr2026).pdf";
+function pLink(page, col, label){
+  if(!page) return "";
+  const bg = col ? `style="background:${col}"` : "";
+  return `<a class="plink" href="${PDF}#page=${page}" target="_blank" onclick="event.stopPropagation()" ${bg}>${label||('p.'+page)}</a>`;
+}
+function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function toggleLi(li, tog){
+  li.classList.toggle('collapsed');
+  const c = li.classList.contains('collapsed');
+  if(c){ const ul=li.querySelector(':scope>ul'); if(ul) ul.querySelectorAll(':scope>li').forEach(ch=>{const ct=ch.querySelector(':scope>.row>.tog.hc');if(ct)ct.textContent='▸';ch.classList.add('collapsed');}); }
+  if(tog) tog.textContent = c ? '▸' : '▾';
+}
+function setTog(li, open){ const t=li.querySelector(':scope>.row>.tog.hc'); if(t) t.textContent=open?'▾':'▸'; }
+function eachExpandable(root, fn){ root.querySelectorAll('li').forEach(li=>{if(li.querySelector(':scope>ul')) fn(li);}); }
+
+/* ══════════════════════════════════════════════════
+   COOKBOOK DATA
+══════════════════════════════════════════════════ */
+const MODULES = [
+  { mod:1, page:3, name:"Module 1 — Foundations of Artificial Intelligence", lessons:[
+    { name:"1.1 Core Concepts of AI", page:3, topics:[
+      {name:"Defining AI", page:3},
+      {name:"Categories of AI", meta:"ANI (Narrow) · AGI (General) · ASI (Super) · Broad AI", page:4},
+      {name:"OECD Classification Framework", page:6},
+      {name:"Technology Megatrends", page:8},
+      {name:"Use Cases & Benefits of AI", page:10}]},
+    { name:"1.2 Machine Learning and AI Models", page:13, topics:[
+      {name:"ML, Deep Learning, GenAI, Agentic AI", page:13},
+      {name:"ML Approaches", meta:"Supervised · Unsupervised · Semi-supervised · Reinforcement Learning", page:15},
+      {name:"Common Algorithms", page:16},
+      {name:"Foundation Models", page:17},
+      {name:"Generative / Specialised / Hybrid Architectures", page:18},
+      {name:"Comparing Model Types", meta:"Classic vs Generative · Proprietary vs Open Source · Small vs Large · Language vs Multimodal", page:20}]},
+    { name:"1.3 The AI System Development Life Cycle", page:23, topics:[
+      {name:"Life Cycle Stages", page:23},
+      {name:"Governance Requirements Across the Life Cycle", page:26}]}]},
+  { mod:2, page:28, name:"Module 2 — AI Impacts and Responsible Principles", lessons:[
+    { name:"2.1 AI Harms and Impacts", page:28, topics:[
+      {name:"Privacy Harms Taxonomies", page:29},
+      {name:"AI Harms Taxonomies", page:30},
+      {name:"Individual Harms", page:31},
+      {name:"Group & Societal Harms", page:33},
+      {name:"Environmental Harms", page:35},
+      {name:"Organisational Harms", page:36},
+      {name:"Other Potential Harms", page:37}]},
+    { name:"2.2 Principles of Trustworthy and Responsible AI", page:39, topics:[
+      {name:"OECD Guidelines & Fair Information Practices (FIPs)", page:39},
+      {name:"Key Ethical Issues in AI", page:41},
+      {name:"Mitigating Ethical Risk", page:43},
+      {name:"Ethics by Design", page:44},
+      {name:"Creating a Culture of Ethical AI", page:45},
+      {name:"Trustworthy AI Characteristics", page:46},
+      {name:"Building Trustworthy AI", page:48}]}]},
+  { mod:3, page:50, name:"Module 3 — AI Governance and Risk Management", lessons:[
+    { name:"3.1 Establishing AI Strategy", page:50, topics:[
+      {name:"AI Developer / Provider / Deployer / User Roles", page:51},
+      {name:"Tailoring AI Governance to Organisational Context", page:54},
+      {name:"Policies for Oversight & Accountability", page:57},
+      {name:"Use Case Assessment", meta:"Map · Measure · Manage", page:59}]},
+    { name:"3.2 Establishing AI Governance", page:63, topics:[
+      {name:"Defining AI Governance", page:63},
+      {name:"Principles vs Frameworks", page:65},
+      {name:"Governance Structure", meta:"Centralised · Decentralised · Hybrid", page:66},
+      {name:"Roles & Responsibilities", page:68},
+      {name:"Training & Awareness", page:71},
+      {name:"AI Literacy", page:73},
+      {name:"Operationalising Responsible AI", page:75}]},
+    { name:"3.3 AI Risk Management", page:78, topics:[
+      {name:"Categories of AI Risk", meta:"Operational · Legal · Security · Privacy", page:78},
+      {name:"Risk Calculation", page:81},
+      {name:"AI System Impact Assessment (ISO 42005)", page:83},
+      {name:"NIST AI RMF", meta:"Govern · Map · Measure · Manage", page:86}]}]},
+  { mod:4, page:92, name:"Module 4 — AI Regulation", lessons:[
+    { name:"4.1 Introduction to AI Regulation", page:92, topics:[
+      {name:"Global AI Regulatory Landscape", page:92},
+      {name:"Regulatory Approaches", page:94}]},
+    { name:"4.2 Global AI Laws", page:96, topics:[
+      {name:"EU AI Act", page:96},{name:"South Korea AI Basic Act", page:98},
+      {name:"United States", meta:"Executive Orders · Federal · State laws", page:99},
+      {name:"China", page:102},{name:"Japan", page:103},{name:"Brazil", page:104},
+      {name:"Canada", page:105},{name:"India", page:106},{name:"Singapore", page:107}]},
+    { name:"4.3 EU AI Act — Risk Classification Framework", page:111, topics:[
+      {name:"Prohibited AI Practices", page:111},
+      {name:"High-Risk AI Systems", page:113},
+      {name:"Limited-Risk AI Systems", page:116},
+      {name:"Minimal-Risk AI Systems", page:117}]},
+    { name:"4.4 Key Requirements for High-Risk AI", page:119, topics:[
+      {name:"Risk Management System", page:119},{name:"Data Governance", page:120},
+      {name:"Technical Documentation", page:120},{name:"Record-keeping & Logging", page:121},
+      {name:"Transparency & User Information", page:121},{name:"Human Oversight", page:122},
+      {name:"Accuracy, Robustness & Cybersecurity", page:123},{name:"Conformity Assessment", page:124}]},
+    { name:"4.5 Role-based Obligations under the EU AI Act", page:125, topics:[
+      {name:"Provider Obligations", page:125},{name:"Deployer Obligations", page:125},
+      {name:"Importer Obligations", page:126},{name:"Distributor Obligations", page:126}]},
+    { name:"4.6 General-Purpose AI (GPAI) Requirements", page:127},
+    { name:"4.7 Enforcement & Penalties", page:128}]},
+  { mod:5, page:129, name:"Module 5 — Other Laws That Apply to AI", lessons:[
+    { name:"5.1 Data Privacy Laws & AI", page:129, topics:[
+      {name:"Key Principles", meta:"Transparency · Choice · Lawful Basis · Purpose Limitation · Data Minimisation · Privacy by Design", page:130},
+      {name:"GDPR & AI", page:133},{name:"Automated Decision-Making", page:136},
+      {name:"Anonymisation & Pseudonymisation", page:139},{name:"Special Categories of Data", page:141}]},
+    { name:"5.2 Intellectual Property Laws & AI", page:144, topics:[
+      {name:"Copyright & AI", page:144},{name:"Patent Law & AI", page:147},
+      {name:"Trademark & AI", page:149},{name:"Training Data Licensing", page:150}]},
+    { name:"5.3 Non-Discrimination Laws & AI", page:153, topics:[
+      {name:"Healthcare", page:153},{name:"Insurance", page:154},
+      {name:"Hiring & Employment", page:155},{name:"Credit & Lending", page:156},{name:"Housing", page:157}]},
+    { name:"5.4 Consumer Protection & Product Liability", page:158, topics:[
+      {name:"FTC (US) — Consumer Protection", page:158},{name:"EU Digital Services Act (DSA)", page:159},
+      {name:"Product Liability", meta:"Fault-based vs Strict Liability", page:160},
+      {name:"EU AI Liability Directive 2024/2853", page:161}]}]},
+  { mod:6, page:164, name:"Module 6 — Governing AI Development", lessons:[
+    { name:"6.1 Governing Planning & Design", page:164, topics:[
+      {name:"5 Planning Steps", meta:"Define Problem · Identify Use Cases · Determine Scope · Evaluate Data · Establish Governance", page:165},
+      {name:"Stakeholder Engagement", page:167},{name:"Operational Controls", page:168},
+      {name:"Impact Assessments", page:169},
+      {name:"Risk Assessment Strategies", meta:"Use Case Evaluation · Stakeholder Mapping · Harms Matrix · Risk Mitigation Hierarchy · Benchmarking · Pre-deployment Pilots", page:170}]},
+    { name:"6.2 Governing Data Collection & Use", page:174, topics:[
+      {name:"Governance Across the AI Data Lifecycle", page:174},
+      {name:"Data Lineage & Provenance", page:175},{name:"Data Gathering", page:176},
+      {name:"Data Quality", meta:"5 V's: Volume · Velocity · Variety · Veracity · Value", page:177},
+      {name:"Data Formats", page:179},{name:"Data Preparation", page:180},
+      {name:"Privacy-Enhancing Technologies (PETs)", meta:"Differential Privacy · Federated Learning", page:181}]},
+    { name:"6.3 Governing AI Development (Model Build)", page:183, topics:[
+      {name:"Model Features & Feature Engineering", page:183},
+      {name:"Human Oversight", meta:"Three Lines of Defence (3LOD) Model", page:184},
+      {name:"System Architecture", page:186},{name:"Training, Testing & Validation", page:187},
+      {name:"Types of Testing", page:188},{name:"Metric & Threshold Evaluation", page:189},
+      {name:"System Audits", page:190},{name:"Managing & Monitoring", page:191},
+      {name:"Documentation", page:192},{name:"Communication Plan", page:192}]},
+    { name:"6.4 Decommissioning AI Systems", page:193}]},
+  { mod:7, page:195, name:"Module 7 — Governing AI Deployment", lessons:[
+    { name:"7.1 Key Considerations in Deployment Planning", page:195, topics:[
+      {name:"Adapting Existing Policies for AI", page:195},
+      {name:"Deployment Environments", meta:"Cloud · On-Premise · Edge Computing", page:197},
+      {name:"Packaging & Accessibility", page:199},{name:"Agentic AI Architectures", page:200},
+      {name:"Proprietary AI Risks & Opportunities", page:202},
+      {name:"Third-Party Products & Risks", page:203},
+      {name:"Vendor & Licensing Agreement Evaluation", page:205}]},
+    { name:"7.2 Governing Release, Monitoring & Maintenance", page:207, topics:[
+      {name:"Readiness Assessments", page:207},
+      {name:"Periodic Assessments", meta:"Performance · Reliability · Safety", page:208},
+      {name:"Adversarial Testing", meta:"Red Teaming · Challenger Models · Stress Tests · Threat Modelling", page:210},
+      {name:"Managing Data Quality Post-deployment", page:212},{name:"Model Drift", page:213},
+      {name:"Documentation — Model Cards", page:214},{name:"Disclosures & Transparency", page:215},
+      {name:"Incidents, Issues & Risks", page:216},{name:"AI Auditing & Accountability", page:217}]}]}
+];
+const CK_COLS = {1:"#1565C0",2:"#00695C",3:"#4527A0",4:"#B71C1C",5:"#E65100",6:"#2E7D32",7:"#283593"};
+
+/* ══════════════════════════════════════════════════
+   COOKBOOK RENDER
+══════════════════════════════════════════════════ */
+function ckLeaf(name, meta, page, col){
+  const li=document.createElement('li');
+  const row=document.createElement('div'); row.className='row';
+  const tog=document.createElement('span'); tog.className='tog leaf'; row.appendChild(tog);
+  const body=document.createElement('div');
+  body.innerHTML=`<div class="nm"><span class="nmtext">${name}</span>${page?pLink(page,col):''}
+  </div>`+(meta?`<div class="meta">${meta}</div>`:'');
+  const nt=body.querySelector('.nmtext'); if(nt) nt.dataset.raw=name;
+  li.dataset.search=(name+' '+(meta||'')).toLowerCase();
+  row.appendChild(body); li.appendChild(row); return li;
+}
+function ckLesson(lesson, col){
+  const li=document.createElement('li');
+  const topics=lesson.topics||[];
+  const row=document.createElement('div'); row.className='row'+(topics.length?' clickable':'');
+  const tog=document.createElement('span');
+  if(topics.length){ tog.className='tog hc'; tog.textContent='▾'; tog.style.color=col;
+    tog.addEventListener('click',e=>{e.stopPropagation();toggleLi(li,tog);}); }
+  else tog.className='tog leaf';
+  const body=document.createElement('div');
+  body.innerHTML=`<div class="nm"><span class="nmtext">${lesson.name}</span>${lesson.page?pLink(lesson.page,col):''}</div>`;
+  const nt=body.querySelector('.nmtext'); if(nt) nt.dataset.raw=lesson.name;
+  let s=lesson.name.toLowerCase()+' '; (lesson.topics||[]).forEach(t=>{s+=t.name+' '+(t.meta||'')+' ';});
+  li.dataset.search=s.toLowerCase();
+  row.appendChild(tog); row.appendChild(body);
+  if(topics.length) row.addEventListener('click',()=>toggleLi(li,tog));
+  li.appendChild(row);
+  if(topics.length){ const ul=document.createElement('ul');
+    topics.forEach(t=>ul.appendChild(ckLeaf(t.name,t.meta||'',t.page||lesson.page,col)));
+    li.appendChild(ul); li.classList.add('collapsed'); tog.textContent='▸'; }
+  return li;
+}
+function ckModule(mod){
+  const col=CK_COLS[mod.mod];
+  const li=document.createElement('li'); li.className='mod'+mod.mod;
+  const row=document.createElement('div'); row.className='row clickable';
+  const tog=document.createElement('span'); tog.className='tog hc'; tog.textContent='▾'; tog.style.color=col;
+  tog.addEventListener('click',e=>{e.stopPropagation();toggleLi(li,tog);});
+  const body=document.createElement('div');
+  body.innerHTML=`<div class="nm"><span class="nmtext">${mod.name}</span>${mod.page?pLink(mod.page,col,'p.'+mod.page+' →'):''}</div>`;
+  const nt=body.querySelector('.nmtext'); if(nt) nt.dataset.raw=mod.name;
+  let s=mod.name.toLowerCase()+' ';
+  (mod.lessons||[]).forEach(l=>{s+=l.name+' ';(l.topics||[]).forEach(t=>{s+=t.name+' '+(t.meta||'')+' ';});});
+  li.dataset.search=s.toLowerCase();
+  row.appendChild(tog); row.appendChild(body); row.addEventListener('click',()=>toggleLi(li,tog));
+  li.appendChild(row);
+  const ul=document.createElement('ul');
+  (mod.lessons||[]).forEach(l=>ul.appendChild(ckLesson(l,col)));
+  li.appendChild(ul); return li;
+}
+
+const ckRoot=document.getElementById('ckRoot');
+const ckUl=document.createElement('ul'); ckUl.className='tree';
+MODULES.forEach(m=>ckUl.appendChild(ckModule(m))); ckRoot.appendChild(ckUl);
+
+function ckCollapseAll(){ eachExpandable(ckUl,li=>{li.classList.add('collapsed');setTog(li,false);}); }
+function ckExpandAll(){ eachExpandable(ckUl,li=>{li.classList.remove('collapsed');setTog(li,true);}); }
+document.getElementById('ckExpandAll').onclick=()=>{ckExpandAll();ckSearchBox.value='';ckSearchInfo.textContent='';clearCkMarks();showAll(ckUl);};
+document.getElementById('ckCollapseAll').onclick=()=>{ckCollapseAll();ckSearchBox.value='';ckSearchInfo.textContent='';clearCkMarks();showAll(ckUl);};
+
+const ckSearchBox=document.getElementById('ckSearchBox');
+const ckSearchInfo=document.getElementById('ckSearchInfo');
+function clearCkMarks(){ckUl.querySelectorAll('.nmtext').forEach(s=>{if(s.dataset.raw!==undefined) s.innerHTML=s.dataset.raw;});}
+function showAll(ul){ul.querySelectorAll('li').forEach(li=>li.style.display='');}
+function markName(nt,kw){const raw=nt.dataset.raw; nt.innerHTML=raw.replace(new RegExp('('+escRe(kw)+')','ig'),'<mark>$1</mark>');}
+
+let ckMatchCount=0;
+function ckWalk(li,kw){
+  const txt=li.dataset.search||''; const self=txt.indexOf(kw)>=0; let child=false;
+  li.querySelectorAll(':scope>ul>li').forEach(c=>{if(ckWalk(c,kw)) child=true;});
+  const vis=self||child; li.style.display=vis?'':'none';
+  if(child){li.classList.remove('collapsed');setTog(li,true);}
+  else{li.classList.add('collapsed');setTog(li,false);}
+  const nt=li.querySelector(':scope>.row .nmtext');
+  if(nt&&nt.dataset.raw!==undefined){if(self&&nt.dataset.raw.toLowerCase().indexOf(kw)>=0) markName(nt,kw); else nt.innerHTML=nt.dataset.raw;}
+  if(self&&li.querySelector(':scope>.row .tog.leaf')) ckMatchCount++;
+  else if(self&&!li.querySelector(':scope>ul')) ckMatchCount++;
+  return vis;
+}
+ckSearchBox.addEventListener('input',e=>{
+  const kw=e.target.value.trim().toLowerCase(); clearCkMarks(); showAll(ckUl);
+  if(!kw){ckSearchInfo.textContent=''; ckCollapseAll(); return;}
+  ckMatchCount=0;
+  ckUl.querySelectorAll(':scope>li').forEach(li=>ckWalk(li,kw));
+  ckSearchInfo.textContent=ckMatchCount?(ckMatchCount+' match'+(ckMatchCount>1?'es':'')):'no matches';
+});
+ckCollapseAll();
+
+/* ══════════════════════════════════════════════════
+   BLUEPRINT DATA
+══════════════════════════════════════════════════ */
+const BLUEPRINT = [
+  { id:"I", name:"Domain I — Understanding the foundations of AI governance",
+    min:16, max:20, col:"#1565C0", colBg:"#e8f0fe",
+    competencies:[
+      { id:"I.A", min:4, max:6, desc:"Understand what AI is and why it needs governance",
+        pis:[
+          { text:"Know the generally accepted definitions and types of AI", ref:"M1 L1", refName:"Core Concepts of AI", page:3 },
+          { text:"Identify the types of risks and harms posed by AI to individuals, groups, organizations and society (e.g., misalignment with objectives, ethics and bias risk, and complexity and scalability)", ref:"M2 L1", refName:"AI Harms and Impacts", page:28 },
+          { text:"Identify the unique characteristics of AI that require a comprehensive approach to governance (e.g., complexity, opacity, autonomy, speed and scale, potential for harm or misuse, data dependency, and probabilistic versus deterministic outputs)", ref:"M3 L2", refName:"Establishing AI Governance", page:63 },
+          { text:"Identify and apply the common principles of responsible AI (e.g., fairness, safety and reliability, privacy and security, transparency and explainability, accountability and human-centricity)", ref:"M2 L2", refName:"Principles of Trustworthy and Responsible AI", page:39 },
+        ]},
+      { id:"I.B", min:5, max:7, desc:"Establish and communicate organizational expectations for AI governance",
+        pis:[
+          { text:"Define roles and responsibilities for AI governance stakeholders", ref:"M3 L2", refName:"Establishing AI Governance", page:63 },
+          { text:"Establish cross-functional collaboration in the AI governance program (e.g., for efficacy and diversity of expertise and perspective)", ref:"M3 L2", refName:"Establishing AI Governance", page:63, fit:true },
+          { text:"Create and deliver a training and awareness program to all stakeholders on AI terminology, strategy and governance", ref:"M3 L2", refName:"Establishing AI Governance", page:63, fit:true },
+          { text:"Differentiate approaches to AI governance based upon company size, maturity, industry, products and services, objectives and risk tolerance", ref:"M3 L2", refName:"Establishing AI Governance", page:63 },
+          { text:"Identify differences among AI developers, deployers and users from a governance perspective (e.g., with respect to responsibilities, opportunities and needs)", ref:"M3 L1", refName:"Establishing AI Strategy", page:50 },
+        ]},
+      { id:"I.C", min:6, max:8, desc:"Establish policies and procedures to apply throughout the AI life cycle",
+        pis:[
+          { text:"Create and implement policies to ensure oversight and accountability across all AI life cycle stages (e.g., use case assessment, risk management, ethics by design, data acquisition and use, model and system development, training and testing, deployment and monitoring, documentation and reporting and incident management)", ref:"M3 L1", refName:"Establishing AI Strategy", page:50 },
+          { text:"Evaluate and update existing policies (e.g., data privacy, security, data governance and intellectual property) for AI", ref:"M7 L1", refName:"Key Considerations in Deployment Planning", page:195 },
+          { text:"Create and implement policies, assessments and contracts to manage third-party risk (e.g., procurement, supply chain and human resources)", ref:"M7 L1", refName:"Key Considerations in Deployment Planning", page:195 },
+        ]},
+    ]},
+  { id:"II", name:"Domain II — Understanding how laws, standards and frameworks apply to AI",
+    min:19, max:23, col:"#6A1B9A", colBg:"#f3e5f5",
+    competencies:[
+      { id:"II.A", min:4, max:6, desc:"Understand how existing data privacy laws apply to AI",
+        pis:[
+          { text:"Understand how notice, choice, consent, and purpose limitation requirements apply to AI", ref:"M5 L1", refName:"Data Privacy Laws & AI", page:129 },
+          { text:"Understand how data minimization and privacy by design requirements apply to AI", ref:"M5 L1", refName:"Data Privacy Laws & AI", page:129 },
+          { text:"Understand how obligations on data controllers apply to AI (e.g., regarding privacy impact assessments, use of third-party processors, cross-border data transfers, data subject rights, automated decision making, incident management, breach notification and record keeping)", ref:"M5 L1", refName:"Data Privacy Laws & AI", page:129 },
+          { text:"Understand the requirements that apply to sensitive or special categories of data (e.g., biometrics)", ref:"M5 L1", refName:"Data Privacy Laws & AI", page:129 },
+        ]},
+      { id:"II.B", min:4, max:6, desc:"Understand how other types of existing laws apply to AI",
+        pis:[
+          { text:"Understand how intellectual property laws apply to AI (e.g., prohibiting or limiting use of data for AI training)", ref:"M5 L2", refName:"Intellectual Property Laws & AI", page:144 },
+          { text:"Understand how non-discrimination laws apply to AI (e.g., in the employment, credit, lending, housing and insurance contexts)", ref:"M5 L3", refName:"Non-Discrimination Laws & AI", page:153 },
+          { text:"Understand how consumer protection laws apply to AI (e.g., prohibiting unfair and deceptive acts or practices)", ref:"M5 L4", refName:"Consumer Protection & Product Liability", page:158 },
+          { text:"Understand how product liability laws apply to AI (e.g., prohibiting design or manufacturing defects)", ref:"M5 L4", refName:"Consumer Protection & Product Liability", page:158 },
+        ]},
+      { id:"II.C", min:5, max:7, desc:"Understand the main elements of the AI-specific laws",
+        pis:[
+          { text:"Understand the risk classification framework for AI (i.e., prohibited AI, high-risk, limited-risk and minimal-risk) and what systems fall into each category", ref:"M4 L2", refName:"EU AI Act — Risk Classification Framework", page:111 },
+          { text:"Understand the key requirements around risk management, data governance, technical documentation, conformity assessment, record keeping, human oversight, transparency and notification, quality management (as applicable)", ref:"M4 L3", refName:"Key Requirements for High-Risk AI", page:119 },
+          { text:"Understand the distinct requirements for general purpose AI models", ref:"M4 L4", refName:"General-Purpose AI (GPAI) Requirements", page:127 },
+          { text:"Understand the enforcement framework and penalties for non-compliance", ref:"M4 L5", refName:"Enforcement & Penalties", page:128 },
+          { text:"Understand the differences in requirements based on organizational context (e.g., providers, deployers, importers, and distributors)", ref:"M4 L3", refName:"Key Requirements for High-Risk AI", page:119 },
+        ]},
+      { id:"II.D", min:4, max:6, desc:"Understand the main industry standards and tools that apply to AI",
+        pis:[
+          { text:"Understand the OECD principles, framework, policies and recommended practices for trustworthy AI", ref:"M2 L2", refName:"Principles of Trustworthy and Responsible AI", page:39 },
+          { text:"Understand the NIST AI Risk Management Framework and Playbook (e.g., the core functions, categories and subcategories)", ref:"M3 L3", refName:"AI Risk Management", page:78 },
+          { text:"Understand the core ISO AI standards (i.e., 22989, 42001 and 42005)", ref:"M3 L2 & L3", refName:"Establishing AI Governance / AI Risk Management", page:63 },
+        ]},
+    ]},
+  { id:"III", name:"Domain III — Understanding how to govern AI development",
+    min:21, max:25, col:"#2E7D32", colBg:"#e8f5e9",
+    competencies:[
+      { id:"III.A", min:6, max:8, desc:"Govern the designing and building of the AI model",
+        pis:[
+          { text:"Define the business context and use case of the AI model", ref:"M6 L1", refName:"Governing Planning & Design", page:164 },
+          { text:"Perform or review an impact assessment on the AI model", ref:"M6 L1", refName:"Governing Planning & Design", page:164 },
+          { text:"Apply the policies, procedures, best practices and ethical considerations to designing and building the AI model (e.g., purpose of AI, requirements gathering, architecture and model selection, human oversight, data analysis, metric and threshold evaluation, stakeholder engagement and feedback and operational controls)", ref:"M6 L1", refName:"Governing Planning & Design", page:164 },
+          { text:"Identify and manage the internal and external risks and contributing factors related to designing and building the AI model and systems (e.g., using probability/severity harms matrix, risk mitigation hierarchy, stakeholder mapping, use case evaluation, benchmarking, pre-deployment pilots and testing)", ref:"M6 L1", refName:"Governing Planning & Design", page:164 },
+          { text:"Document the designing and building process (e.g., to establish compliance and manage risks)", ref:"M6 L1", refName:"Governing Planning & Design", page:164 },
+        ]},
+      { id:"III.B", min:6, max:8, desc:"Govern the collection and use of data in training and testing the AI model",
+        pis:[
+          { text:"Establish and follow the requirements for data governance (e.g., assess and document lawful rights to collect and use data, and to assess data quality, quantity, integrity and fit-for-purpose)", ref:"M6 L2", refName:"Governing Data Collection & Use", page:174 },
+          { text:"Establish and document data lineage and provenance", ref:"M6 L2", refName:"Governing Data Collection & Use", page:174 },
+          { text:"Plan and perform training and testing of the AI model and system (e.g., unit, integration, validation, performance, security, bias and interpretability)", ref:"M6 L3", refName:"Governing AI Development (Model Build)", page:183 },
+          { text:"Identify and manage issues and risks during training and testing of an AI model and system", ref:"M6 L3", refName:"Governing AI Development (Model Build)", page:183 },
+          { text:"Document the training and testing process (e.g., to validate results, establish compliance and manage risks)", ref:"M6 L3", refName:"Governing AI Development (Model Build)", page:183 },
+        ]},
+      { id:"III.C", min:8, max:10, desc:"Govern the release, monitoring and maintenance of the AI model",
+        pis:[
+          { text:"Assess readiness and prepare for release into production (e.g., creating the model card and satisfying conformity requirements)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Conduct continuous monitoring of the AI model and establish a regular schedule for maintenance, updates and retraining", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Conduct periodic activities to assess the AI model's performance, reliability and safety (e.g., audits, red teaming, threat modeling and security testing)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Manage and document incidents, issues and risks", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Collaborate with cross-functional stakeholders to understand why incidents arise from AI models (e.g., brittleness, lack of robustness, lack of quality data, insufficient testing, and model or data drift)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207, fit:true },
+          { text:"Make public disclosures to meet transparency obligations (e.g., technical documentation, instructions for use to deployers, and post-market monitoring plans)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+        ]},
+    ]},
+  { id:"IV", name:"Domain IV — Understanding how to govern AI deployment and use",
+    min:21, max:25, col:"#BF360C", colBg:"#fbe9e7",
+    competencies:[
+      { id:"IV.A", min:6, max:8, desc:"Evaluate key factors and risks relevant to the decision to deploy the AI model",
+        pis:[
+          { text:"Understand the context of the AI use case (e.g., business objectives, performance requirements, data availability, ethical considerations and workforce readiness)", ref:"M6 L1", refName:"Governing Planning & Design", page:164 },
+          { text:"Understand the differences in AI model types (e.g., classic vs generative, proprietary vs open source, small vs large, and language vs multimodal capabilities)", ref:"M1 L2", refName:"Machine Learning and AI Models", page:13 },
+          { text:"Understand the differences in AI deployment options (e.g., cloud vs on-premise vs edge, and using the AI model as-is or with fine-tuning, retrieval augmented generation, agentic architectures or other techniques to improve performance and fit)", ref:"M7 L1", refName:"Key Considerations in Deployment Planning", page:195 },
+        ]},
+      { id:"IV.B", min:5, max:7, desc:"Perform key activities to assess the AI model",
+        pis:[
+          { text:"Perform or review an impact assessment on the selected AI model", ref:"M7 L1", refName:"Key Considerations in Deployment Planning", page:195 },
+          { text:"Identify and evaluate key terms and risks in the vendor or open source agreement", ref:"M7 L1", refName:"Key Considerations in Deployment Planning", page:195 },
+          { text:"Identify and understand the risks and opportunities that are unique to a company deploying its own proprietary AI model (e.g., increased obligations and higher potential liability)", ref:"M7 L1", refName:"Key Considerations in Deployment Planning", page:195 },
+        ]},
+      { id:"IV.C", min:9, max:11, desc:"Govern the deployment and use of the AI model",
+        pis:[
+          { text:"Apply the policies, procedures, best practices and ethical considerations to the deployment of an AI model (e.g., data governance, risk management, issue management, user training)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Conduct continuous monitoring of the AI model and system and establish a regular schedule for maintenance, updates and retraining", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Conduct periodic activities to assess the AI model's/system's performance, reliability and safety (e.g., audits, red teaming, threat modeling and security testing)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Document incidents, issues, risks and post-market monitoring plans", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Forecast and reduce risks of secondary or unintended uses and downstream harms", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+          { text:"Establish external communication plans", ref:"M6 L1", refName:"Governing Planning & Design", page:164, fit:true },
+          { text:"Create and implement a policy and controls to deactivate or localize an AI model as necessary (e.g., due to regulatory requirements or performance issues)", ref:"M7 L2", refName:"Governing Release, Monitoring & Maintenance", page:207 },
+        ]},
+    ]},
+];
+
+/* ══════════════════════════════════════════════════
+   BLUEPRINT RENDER
+══════════════════════════════════════════════════ */
+function bpPI(pi, col){
+  const li=document.createElement('li');
+  const row=document.createElement('div'); row.className='row';
+  const tog=document.createElement('span'); tog.className='tog leaf'; row.appendChild(tog);
+  const body=document.createElement('div');
+  const refBadge=`<span class="refbadge" style="background:${col}">${pi.ref}</span>`;
+  const refNameHtml=`<span class="refname">${pi.refName}</span>`;
+  const fitHtml=pi.fit?`<span class="fit">⚑ Stakeholder</span>`:'';
+  const pageLink=pi.page?pLink(pi.page, col):'';
+  body.innerHTML=`<div class="nm"><span class="pi-text nmtext">${pi.text}</span></div>
+    <div class="pi-meta">${refBadge}${refNameHtml}${fitHtml}${pageLink}</div>`;
+  const nt=body.querySelector('.nmtext'); if(nt) nt.dataset.raw=pi.text;
+  li.dataset.search=(pi.text+' '+pi.ref+' '+pi.refName).toLowerCase();
+  row.appendChild(body); li.appendChild(row); return li;
+}
+function bpComp(comp, domain){
+  const li=document.createElement('li');
+  const row=document.createElement('div'); row.className='row clickable';
+  const tog=document.createElement('span'); tog.className='tog hc'; tog.textContent='▾'; tog.style.color=domain.col;
+  tog.addEventListener('click',e=>{e.stopPropagation();toggleLi(li,tog);});
+  const body=document.createElement('div');
+  const qBadge=`<span class="qrange" style="background:${domain.col}">${comp.min}–${comp.max} Qs</span>`;
+  body.innerHTML=`<div class="nm">
+    <span class="nmtext" style="font-size:13px;font-weight:700;color:${domain.col}">${comp.id}</span>
+    ${qBadge}
+    <span style="font-size:12px;font-weight:400;color:var(--ink)">${comp.desc}</span>
+  </div>`;
+  const nt=body.querySelector('.nmtext'); if(nt) nt.dataset.raw=comp.id+' '+comp.desc;
+  let s=comp.id+' '+comp.desc+' '; (comp.pis||[]).forEach(p=>{s+=p.text+' '+p.ref+' '+p.refName+' ';});
+  li.dataset.search=s.toLowerCase();
+  row.appendChild(tog); row.appendChild(body); row.addEventListener('click',()=>toggleLi(li,tog));
+  li.appendChild(row);
+  const ul=document.createElement('ul');
+  (comp.pis||[]).forEach(p=>ul.appendChild(bpPI(p, domain.col)));
+  li.appendChild(ul); li.classList.add('collapsed'); tog.textContent='▸';
+  return li;
+}
+function bpDomain(domain){
+  const li=document.createElement('li'); li.className='dom'+['I','II','III','IV'].indexOf(domain.id)+1;
+  const row=document.createElement('div'); row.className='row clickable';
+  const tog=document.createElement('span'); tog.className='tog hc'; tog.textContent='▾'; tog.style.color=domain.col;
+  tog.addEventListener('click',e=>{e.stopPropagation();toggleLi(li,tog);});
+  const body=document.createElement('div');
+  const qBadge=`<span class="qrange" style="background:${domain.col}">${domain.min}–${domain.max} Qs total</span>`;
+  body.innerHTML=`<div class="nm"><span class="nmtext">${domain.name}</span>${qBadge}</div>`;
+  const nt=body.querySelector('.nmtext'); if(nt) nt.dataset.raw=domain.name;
+  let s=domain.name.toLowerCase()+' ';
+  domain.competencies.forEach(c=>{s+=c.id+' '+c.desc+' ';(c.pis||[]).forEach(p=>{s+=p.text+' '+p.ref+' '+p.refName+' ';});});
+  li.dataset.search=s.toLowerCase();
+  row.appendChild(tog); row.appendChild(body); row.addEventListener('click',()=>toggleLi(li,tog));
+  li.appendChild(row);
+  const ul=document.createElement('ul');
+  domain.competencies.forEach(c=>ul.appendChild(bpComp(c, domain)));
+  li.appendChild(ul); return li;
+}
+
+const bpRoot=document.getElementById('bpRoot');
+const bpUl=document.createElement('ul'); bpUl.className='tree';
+BLUEPRINT.forEach(d=>bpUl.appendChild(bpDomain(d))); bpRoot.appendChild(bpUl);
+
+function bpCollapseAll(){ eachExpandable(bpUl,li=>{li.classList.add('collapsed');setTog(li,false);}); }
+function bpExpandAll(){ eachExpandable(bpUl,li=>{li.classList.remove('collapsed');setTog(li,true);}); }
+document.getElementById('bpExpandAll').onclick=()=>{bpExpandAll();bpSearchBox.value='';bpSearchInfo.textContent='';clearBpMarks();showAll(bpUl);};
+document.getElementById('bpCollapseAll').onclick=()=>{bpCollapseAll();bpSearchBox.value='';bpSearchInfo.textContent='';clearBpMarks();showAll(bpUl);};
+
+const bpSearchBox=document.getElementById('bpSearchBox');
+const bpSearchInfo=document.getElementById('bpSearchInfo');
+function clearBpMarks(){bpUl.querySelectorAll('.nmtext').forEach(s=>{if(s.dataset.raw!==undefined) s.innerHTML=s.dataset.raw;});}
+
+let bpMatchCount=0;
+function bpWalk(li,kw){
+  const txt=li.dataset.search||''; const self=txt.indexOf(kw)>=0; let child=false;
+  li.querySelectorAll(':scope>ul>li').forEach(c=>{if(bpWalk(c,kw)) child=true;});
+  const vis=self||child; li.style.display=vis?'':'none';
+  if(child){li.classList.remove('collapsed');setTog(li,true);}
+  else{li.classList.add('collapsed');setTog(li,false);}
+  const nt=li.querySelector(':scope>.row .nmtext');
+  if(nt&&nt.dataset.raw!==undefined){if(self&&nt.dataset.raw.toLowerCase().indexOf(kw)>=0) markName(nt,kw); else nt.innerHTML=nt.dataset.raw;}
+  if(self&&li.querySelector(':scope>.row .tog.leaf')) bpMatchCount++;
+  return vis;
+}
+bpSearchBox.addEventListener('input',e=>{
+  const kw=e.target.value.trim().toLowerCase(); clearBpMarks(); showAll(bpUl);
+  if(!kw){bpSearchInfo.textContent=''; bpCollapseAll(); return;}
+  bpMatchCount=0;
+  bpUl.querySelectorAll(':scope>li').forEach(li=>bpWalk(li,kw));
+  bpSearchInfo.textContent=bpMatchCount?(bpMatchCount+' match'+(bpMatchCount>1?'es':'')):'no matches';
+});
+bpCollapseAll();
+
+/* ══════════════════════════════════════════════════
+   LIFECYCLE TAB
+══════════════════════════════════════════════════ */
+const M_COL={1:'#1565C0',2:'#00695C',3:'#4527A0',4:'#B71C1C',5:'#E65100',6:'#2E7D32',7:'#283593'};
+const LC_CELL_CLS={gov:'lc-gov',data:'lc-data',risk:'lc-risk',party:'lc-party'};
+
+const LC_PHASES=[
+  {n:1,cls:'lc-p1',phase:'Plan &amp; Design',sub:'Scope · Strategy · Policy',cells:[
+    {type:'gov',title:'Governance Framework',desc:'Establish AI policy, accountability structures, board oversight, governance charter.',
+     chips:[{m:3,l:1,p:50,lbl:'AI Governance Framework'},{m:6,l:1,p:164,lbl:'AI Strategy &amp; Policy'},{m:3,l:2,p:63,lbl:'Org Roles &amp; Accountability'}]},
+    {type:'data',title:'Data Strategy',desc:'Map data needs, consent basis, PDPA obligations, data lineage plan.',
+     chips:[{m:5,l:1,p:130,lbl:'Data Ethics Foundations'},{m:6,l:2,p:174,lbl:'Data Governance'},{m:6,l:2,p:176,lbl:'PDPA &amp; Consent Mapping'}]},
+    {type:'risk',title:'Risk Assessment',desc:'Classify AI risk level, scope threat landscape, initial bias assessment.',
+     chips:[{m:3,l:3,p:83,lbl:'Risk Framework'},{m:3,l:3,p:81,lbl:'Risk Classification'},{m:6,l:1,p:170,lbl:'Risk-based Approach'}]},
+    {type:'party',title:'Roles &amp; Responsibilities',desc:'Define AI owner, developer, data steward; engage DPO early.',
+     chips:[{m:3,l:1,p:51,lbl:'AI Ownership'},{m:3,l:2,p:66,lbl:'Roles Framework'},{m:3,l:2,p:68,lbl:'DPO &amp; Stakeholders'}]},
+  ]},
+  {n:2,cls:'lc-p2',phase:'Build &amp; Develop',sub:'Design · Train · Document',cells:[
+    {type:'gov',title:'Responsible AI Design',desc:'Embed fairness, transparency, explainability; set documentation standards.',
+     chips:[{m:6,l:3,p:183,lbl:'Responsible AI Principles'},{m:6,l:3,p:192,lbl:'Explainability &amp; Fairness'},{m:3,l:2,p:71,lbl:'Documentation Standards'}]},
+    {type:'data',title:'Data Quality &amp; Bias',desc:'Training data governance, quality checks, bias detection, lineage tracking.',
+     chips:[{m:6,l:2,p:177,lbl:'Training Data Governance'},{m:6,l:2,p:175,lbl:'Data Quality'},{m:6,l:2,p:180,lbl:'Bias Detection'},{m:6,l:2,p:181,lbl:'Data Lineage'}]},
+    {type:'risk',title:'Testing &amp; Validation',desc:'Model validation methodology, adversarial testing, fairness metrics.',
+     chips:[{m:6,l:3,p:187,lbl:'Model Validation'},{m:6,l:3,p:188,lbl:'Adversarial Testing'},{m:6,l:3,p:189,lbl:'Fairness Metrics'}]},
+    {type:'party',title:'Internal Review',desc:'Ethics committee, Legal, Privacy, Security sign-off before release.',
+     chips:[{m:6,l:3,p:184,lbl:'Ethics Review'},{m:6,l:3,p:190,lbl:'Multi-team Sign-off'}]},
+  ]},
+  {n:3,cls:'lc-p3',phase:'Pre-deployment',sub:'Audit · Approve · Clear',cells:[
+    {type:'gov',title:'Compliance Checks',desc:'Regulatory conformity — PDPA DPIA, EU AI Act, Singapore IMDA guidelines.',
+     chips:[{m:4,l:3,p:120,lbl:'Compliance Framework'},{m:4,l:3,p:121,lbl:'DPIA Process'},{m:4,l:3,p:124,lbl:'Regulatory Clearance'},{m:7,l:1,p:205,lbl:'Approval Gate'}]},
+    {type:'data',title:'Final Data Audit',desc:'Data lineage sign-off, retention policies confirmed, deletion rights verified.',
+     chips:[{m:4,l:3,p:120,lbl:'Data Audit'},{m:4,l:4,p:127,lbl:'Retention &amp; Deletion'}]},
+    {type:'risk',title:'Risk Sign-off',desc:'Final risk register, residual risk acceptance, incident playbooks ready.',
+     chips:[{m:4,l:3,p:122,lbl:'Risk Register'},{m:4,l:3,p:123,lbl:'Residual Risk Acceptance'},{m:7,l:2,p:207,lbl:'Incident Playbooks'},{m:6,l:1,p:170,lbl:'Risk Thresholds'}]},
+    {type:'party',title:'Deployment Approval',desc:'C-suite approval, Legal clearance, DPO final sign-off.',
+     chips:[{m:4,l:4,p:125,lbl:'Deployment Authority'},{m:7,l:1,p:203,lbl:'C-suite Sign-off'},{m:7,l:1,p:205,lbl:'DPO Clearance'}]},
+  ]},
+  {n:4,cls:'lc-p4',phase:'Deploy &amp; Operate',sub:'Launch · Govern · Respond',cells:[
+    {type:'gov',title:'Operational Governance',desc:'SLAs, user communications, terms of use, accountability in production.',
+     chips:[{m:7,l:1,p:197,lbl:'Operational SLAs'},{m:7,l:1,p:200,lbl:'User Communication'},{m:7,l:2,p:215,lbl:'Accountability in Production'}]},
+    {type:'data',title:'Operational Data Controls',desc:'Access controls, operational PDPA compliance, data minimisation.',
+     chips:[{m:7,l:2,p:212,lbl:'Operational Data Access'},{m:5,l:1,p:129,lbl:'Data Minimisation'}]},
+    {type:'risk',title:'Operational Risk',desc:'Real-time incident detection, feedback loops, complaint handling.',
+     chips:[{m:4,l:3,p:122,lbl:'Incident Response'},{m:7,l:2,p:210,lbl:'Feedback Loops'},{m:7,l:2,p:216,lbl:'Complaint Handling'}]},
+    {type:'party',title:'Operational Accountability',desc:'Operators, DPO, frontline staff responsibilities post-launch.',
+     chips:[{m:4,l:4,p:125,lbl:'Operator Roles'},{m:7,l:1,p:202,lbl:'DPO in Operations'},{m:7,l:2,p:207,lbl:'Frontline Accountability'}]},
+  ]},
+  {n:5,cls:'lc-p5',phase:'Monitor &amp; Maintain',sub:'Review · Retrain · Report',cells:[
+    {type:'gov',title:'Continuous Governance',desc:'Policy reviews, KPI tracking, regulatory change management.',
+     chips:[{m:7,l:2,p:217,lbl:'Governance Reviews'},{m:7,l:2,p:214,lbl:'KPI &amp; Performance'},{m:6,l:4,p:193,lbl:'Regulatory Updates'}]},
+    {type:'data',title:'Data Refresh &amp; Lifecycle',desc:'Retraining triggers, data expiry, archival, consent renewal.',
+     chips:[{m:7,l:2,p:213,lbl:'Retraining Triggers'},{m:7,l:2,p:212,lbl:'Data Lifecycle'}]},
+    {type:'risk',title:'Post-deployment Risk',desc:'Drift detection, bias re-evaluation, incident post-mortems.',
+     chips:[{m:7,l:2,p:208,lbl:'Drift Detection'},{m:7,l:2,p:210,lbl:'Bias Re-evaluation'},{m:7,l:2,p:216,lbl:'Incident Post-mortems'}]},
+    {type:'party',title:'Ongoing Accountability',desc:'Audit duties, external reporting, board accountability.',
+     chips:[{m:3,l:3,p:86,lbl:'Audit Responsibilities'},{m:6,l:3,p:191,lbl:'External Reporting'},{m:7,l:2,p:207,lbl:'Board Accountability'}]},
+  ]},
+];
+
+function buildLifecycle(){
+  let h=`<p class="lc-intro">Maps the AI system lifecycle to the Cookbook (Straits Interactive, Apr 2026). Click a chip to open the PDF at that page.</p>
+<div class="lc-scroll"><table class="lc-table">
+<thead><tr>
+  <th class="lc-th-phase"></th>
+  <th class="lc-th-gov">Governance Obligations</th>
+  <th class="lc-th-data">Data Governance</th>
+  <th class="lc-th-risk">Risk Controls</th>
+  <th class="lc-th-party">Responsible Parties</th>
+</tr></thead><tbody>`;
+
+  LC_PHASES.forEach(ph=>{
+    h+=`<tr><td class="lc-phase ${ph.cls}">
+      <div class="lc-pnum">Phase ${ph.n}</div>
+      <div class="lc-ptitle">${ph.phase}</div>
+      <div class="lc-psub">${ph.sub}</div>
+    </td>`;
+    ph.cells.forEach(c=>{
+      const chips=c.chips.map(ch=>{
+        const col=M_COL[ch.m];
+        return `<a class="lc-chip" href="${PDF}#page=${ch.p}" target="_blank" onclick="event.stopPropagation()" style="background:${col}18;border-color:${col}55;color:${col}"><strong>M${ch.m}·L${ch.l}</strong> p.${ch.p} — ${ch.lbl}</a>`;
+      }).join('');
+      h+=`<td class="lc-cell ${LC_CELL_CLS[c.type]}">
+        <div class="lc-cttl">${c.title}</div>
+        <div class="lc-cdesc">${c.desc}</div>
+        <div class="lc-chips">${chips}</div>
+      </td>`;
+    });
+    h+=`</tr>`;
+  });
+
+  h+=`</tbody></table></div>`;
+
+  // NIST RMF crosswalk — 6 columns: label + 5 phase slots
+  const nistEmpty=`<div style="background:transparent;border:none"></div>`;
+  h+=`<div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:5px;letter-spacing:.03em">NIST AI RMF CROSSWALK</div>
+<div class="lc-nist">
+  <div class="lc-nist-lbl">GOVERN</div>
+  <div class="lc-nist-cell lc-nc1"><strong>Ph 1</strong><span>Plan &amp; Design</span></div>
+  <div class="lc-nist-cell lc-nc1"><strong>Ph 2</strong><span>Build &amp; Develop</span></div>
+  <div class="lc-nist-cell lc-nc1"><strong>Ph 3</strong><span>Pre-deployment</span></div>
+  <div class="lc-nist-cell lc-nc1"><strong>Ph 4</strong><span>Deploy &amp; Operate</span></div>
+  <div class="lc-nist-cell lc-nc1"><strong>Ph 5</strong><span>Monitor &amp; Maintain</span></div>
+</div>
+<div class="lc-nist">
+  <div class="lc-nist-lbl">MAP</div>
+  <div class="lc-nist-cell lc-nc2"><strong>Ph 1</strong><span>Plan &amp; Design</span></div>
+  <div class="lc-nist-cell lc-nc2"><strong>Ph 2</strong><span>Build &amp; Develop</span></div>
+  <div class="lc-nist-cell lc-nc2"><strong>Ph 3</strong><span>Pre-deployment</span></div>
+  ${nistEmpty}${nistEmpty}
+</div>
+<div class="lc-nist">
+  <div class="lc-nist-lbl">MEASURE</div>
+  ${nistEmpty}
+  <div class="lc-nist-cell lc-nc3"><strong>Ph 2</strong><span>Build &amp; Develop</span></div>
+  <div class="lc-nist-cell lc-nc3"><strong>Ph 3</strong><span>Pre-deployment</span></div>
+  <div class="lc-nist-cell lc-nc3"><strong>Ph 4</strong><span>Deploy &amp; Operate</span></div>
+  ${nistEmpty}
+</div>
+<div class="lc-nist">
+  <div class="lc-nist-lbl">MANAGE</div>
+  ${nistEmpty}${nistEmpty}${nistEmpty}
+  <div class="lc-nist-cell lc-nc4"><strong>Ph 4</strong><span>Deploy &amp; Operate</span></div>
+  <div class="lc-nist-cell lc-nc4"><strong>Ph 5</strong><span>Monitor &amp; Maintain</span></div>
+</div>
+<div class="lc-tags" style="margin-top:12px">
+  <span class="lc-tag lc-tbok">AIGP BoK v2.1</span>
+  <span class="lc-tag lc-tsg">SG Model AI Gov Framework</span>
+  <span class="lc-tag lc-tnist">NIST AI RMF</span>
+  <span class="lc-tag lc-teu">EU AI Act</span>
+  <span class="lc-tag lc-tiso">ISO 42001</span>
+</div>`;
+
+  document.getElementById('lcRoot').innerHTML=h;
+}
+buildLifecycle();
+</script>
+</body>
+</html>
