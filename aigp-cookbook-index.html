@@ -6,7 +6,7 @@
 <title>AIGP Study Navigator — Cookbook Index & Exam Blueprint</title>
 <style>
   :root{
-    --ink:#1a1a2e;--muted:#6b6880;--line:#ddd4f0;--hair:#ede8f5;
+    --ink:#1a1a2e;--muted:#6b6880;--line:#ddd4f0;--hair:#ede8f5;--bg:#fff;--accent:#5c35c5;
     --lilac:#f5f0fc;--lilac2:#faf8fe;
     --match:#fff3d6;--matchbd:#e8c766;
     /* Cookbook module colours */
@@ -118,6 +118,52 @@
   .pi-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;align-items:center}
 
   footer{font-size:10.5px;color:var(--muted);margin-top:24px;border-top:1px solid var(--hair);padding-top:8px}
+  /* ── FLASHCARD TAB ── */
+  .fc-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}
+  .fc-mode-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--hair);background:var(--bg);color:var(--muted);font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s}
+  .fc-mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .fc-mod-btn,.fc-typ-btn{padding:4px 10px;border-radius:14px;border:1px solid var(--hair);background:var(--bg);color:var(--muted);font-size:11px;cursor:pointer;transition:.15s}
+  .fc-mod-btn.active,.fc-typ-btn.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .fc-prog-wrap{margin:6px 0 10px}
+  .fc-prog-bar{height:4px;background:var(--hair);border-radius:2px;overflow:hidden;margin-bottom:3px}
+  .fc-prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
+  .fc-prog-text{font-size:10.5px;color:var(--muted);text-align:right}
+  .fc-card-wrap{perspective:1200px;margin-bottom:10px;min-height:240px}
+  .fc-card{width:100%;min-height:240px;cursor:pointer}
+  .fc-card-inner{width:100%;min-height:240px;position:relative;transform-style:preserve-3d;transition:transform .38s cubic-bezier(.4,0,.2,1)}
+  .fc-card-inner.flipped{transform:rotateY(180deg)}
+  .fc-card-front,.fc-card-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;min-height:240px;box-sizing:border-box}
+  .fc-card-front{background:var(--bg);border:1.5px solid var(--hair)}
+  .fc-card-back{background:#f0f7ff;border:1.5px solid #b5d4f4;transform:rotateY(180deg)}
+  .fc-hdr{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .fc-body{flex:1;font-size:14.5px;line-height:1.65;color:var(--ink)}
+  .fc-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+  .fc-due-lbl{font-size:10px;color:var(--muted);margin-top:6px}
+  .fc-badge{font-size:9.5px;padding:2px 7px;border-radius:10px;font-weight:700;white-space:nowrap}
+  .fc-b-cloze{background:#ddeaf8;color:#1565C0}
+  .fc-b-def{background:#d5ede3;color:#2E7D32}
+  .fc-b-bidir{background:#fef9c3;color:#7c6b00}
+  .fc-b-scenario{background:#fce8e6;color:#B71C1C}
+  .fc-mod-lbl{font-size:9.5px;padding:2px 7px;border-radius:10px;background:var(--hair);color:var(--muted);font-weight:700}
+  .fc-counter{font-size:10px;color:var(--muted);margin-left:auto}
+  .fc-plink{font-size:10.5px;padding:2px 8px;border-radius:8px;background:#ddeaf8;color:#1565C0;text-decoration:none;border:0.5px solid #b5d4f4;font-weight:600;margin-left:auto;white-space:nowrap}
+  .fc-rating{display:flex;gap:7px;margin-bottom:8px}
+  .fc-rate{flex:1;padding:12px 4px;border-radius:12px;border:none;font-size:12px;font-weight:700;cursor:pointer;transition:.12s;line-height:1.4;text-align:center}
+  .fc-rate:active{transform:scale(.95)}
+  .fc-again{background:#fce8e6;color:#B71C1C}
+  .fc-hard{background:#fef9c3;color:#7c6b00}
+  .fc-good{background:#d5ede3;color:#2E7D32}
+  .fc-easy{background:#ddeaf8;color:#1565C0}
+  .fc-summary{text-align:center;padding:36px 20px;border-radius:14px;background:var(--bg);border:1.5px solid var(--hair)}
+  .fc-sum-icon{font-size:44px;margin-bottom:12px}
+  .fc-sum-title{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:10px}
+  .fc-sum-stat{font-size:12.5px;color:var(--muted);margin-bottom:4px}
+  .fc-restart{margin-top:18px;padding:10px 24px;border-radius:20px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+  @media(max-width:640px){
+    .fc-card-front,.fc-card-back,.fc-card,.fc-card-inner,.fc-card-wrap{min-height:260px}
+    .fc-body{font-size:13.5px}
+    .fc-rate{padding:13px 3px;font-size:11px}
+  }
 
   /* ── LIFECYCLE TAB ── */
   .lc-intro{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5}
@@ -216,6 +262,7 @@
   <button class="tab active" id="tab-cookbook" onclick="switchTab('cookbook')">📚 Cookbook Index</button>
   <button class="tab" id="tab-blueprint" onclick="switchTab('blueprint')">🎯 Exam Blueprint → Cookbook</button>
   <button class="tab" id="tab-lifecycle" onclick="switchTab('lifecycle')">🔄 AI Lifecycle → Cookbook</button>
+  <button class="tab" id="tab-flashcard" onclick="switchTab('flashcard')">🃏 Flashcards</button>
 </div>
 
 <!-- ══════════════════════════════════════════════════
@@ -266,6 +313,60 @@
   <div id="lcRoot"></div>
 </div>
 
+<!-- ══════════════════════════════════════════════════
+     SECTION 4: FLASHCARDS
+══════════════════════════════════════════════════ -->
+<div id="sec-flashcard" style="display:none">
+  <!-- Mode buttons -->
+  <div class="fc-row">
+    <button class="fc-mode-btn active" data-m="random" onclick="fcSetMode('random')">🎲 Random</button>
+    <button class="fc-mode-btn" data-m="module" onclick="fcSetMode('module')">📚 Module order</button>
+    <button class="fc-mode-btn" data-m="page" onclick="fcSetMode('page')">📄 Page order</button>
+    <button class="fc-mode-btn" data-m="due" onclick="fcSetMode('due')">🕐 Due today</button>
+  </div>
+  <!-- Module filter -->
+  <div class="fc-row">
+    <button class="fc-mod-btn active" data-v="all" onclick="fcSetMod('all')">All modules</button>
+    <button class="fc-mod-btn" data-v="1" onclick="fcSetMod('1')">M1</button>
+    <button class="fc-mod-btn" data-v="2" onclick="fcSetMod('2')">M2</button>
+    <button class="fc-mod-btn" data-v="3" onclick="fcSetMod('3')">M3</button>
+    <button class="fc-mod-btn" data-v="4" onclick="fcSetMod('4')">M4</button>
+    <button class="fc-mod-btn" data-v="5" onclick="fcSetMod('5')">M5</button>
+    <button class="fc-mod-btn" data-v="6" onclick="fcSetMod('6')">M6</button>
+    <button class="fc-mod-btn" data-v="7" onclick="fcSetMod('7')">M7</button>
+  </div>
+  <!-- Type filter -->
+  <div class="fc-row">
+    <button class="fc-typ-btn active" data-v="all" onclick="fcSetTyp('all')">All types</button>
+    <button class="fc-typ-btn" data-v="cloze" onclick="fcSetTyp('cloze')">🔵 Cloze</button>
+    <button class="fc-typ-btn" data-v="def" onclick="fcSetTyp('def')">🟢 Definition</button>
+    <button class="fc-typ-btn" data-v="bidir" onclick="fcSetTyp('bidir')">🟡 Bidirectional</button>
+    <button class="fc-typ-btn" data-v="scenario" onclick="fcSetTyp('scenario')">🔴 Scenario</button>
+  </div>
+  <!-- Progress bar -->
+  <div class="fc-prog-wrap">
+    <div class="fc-prog-bar"><div class="fc-prog-fill" id="fcFill"></div></div>
+    <div class="fc-prog-text" id="fcPText">0 / 142</div>
+  </div>
+  <!-- Card area (JS populates) -->
+  <div class="fc-card-wrap" id="fcCardArea">
+    <div class="fc-card" id="fcCard" onclick="fcFlip()">
+      <div class="fc-card-inner" id="fcInner">
+        <div class="fc-card-front" id="fcFront"></div>
+        <div class="fc-card-back" id="fcBack"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Rating buttons -->
+  <div class="fc-rating" id="fcRating" style="display:none">
+    <button class="fc-rate fc-again" onclick="fcRate(0)">🔴<br>Again</button>
+    <button class="fc-rate fc-hard" onclick="fcRate(2)">🟡<br>Hard</button>
+    <button class="fc-rate fc-good" onclick="fcRate(4)">🟢<br>Good</button>
+    <button class="fc-rate fc-easy" onclick="fcRate(5)">⚡<br>Easy</button>
+  </div>
+  <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:6px">Progress saved on this device · 142 cards · SM-2 spaced repetition · <button onclick="fcResetAll()" style="font-size:10px;color:#B71C1C;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline">Reset all progress</button></div>
+</div>
+
 <footer>AIGP BoK v2.1 effective 2 Feb 2026 · 100 questions (85 scored, 15 pilot) · 3 hrs · Passing = 300/500 scaled · Cookbook page numbers are approximate (±2 pages)</footer>
 
 <script>
@@ -273,10 +374,11 @@
    TAB SWITCHING
 ══════════════════════════════════════════════════ */
 function switchTab(t){
-  ['cookbook','blueprint','lifecycle'].forEach(id=>{
+  ['cookbook','blueprint','lifecycle','flashcard'].forEach(id=>{
     document.getElementById('sec-'+id).style.display = t===id?'':'none';
     document.getElementById('tab-'+id).classList.toggle('active', t===id);
   });
+  if(t==='flashcard' && !window._fcInitDone){window._fcInitDone=true;fcBuild();}
 }
 
 /* ══════════════════════════════════════════════════
@@ -869,6 +971,287 @@ function buildLifecycle(){
   document.getElementById('lcRoot').innerHTML=h;
 }
 buildLifecycle();
+
+/* ══════════════════════════════════════════════════
+   FLASHCARD TAB — SM-2 SPACED REPETITION
+   142 cards | 4 types | localStorage per-device
+══════════════════════════════════════════════════ */
+
+/* ── Card data ── */
+const CARDS=[
+// CLOZE (C1–C26)
+{id:'C1',type:'cloze',m:6,p:178,front:'Data preparation accounts for approximately <strong>___</strong>% of the AI development lifecycle.',back:'<strong>80%</strong> — Data wrangling is the most time-consuming step in the AI lifecycle.'},
+{id:'C2',type:'cloze',m:4,p:101,front:'EU AI Act max penalty for <em>prohibited AI</em>: up to €<strong>___</strong> or <strong>___</strong>% of global annual turnover.',back:'€<strong>35,000,000</strong> or <strong>7%</strong> of global annual turnover.'},
+{id:'C3',type:'cloze',m:4,p:101,front:'EU AI Act penalty for other non-compliance: up to €<strong>___</strong> or <strong>___</strong>% of global turnover.',back:'€<strong>15,000,000</strong> or <strong>3%</strong> of global annual turnover.'},
+{id:'C4',type:'cloze',m:4,p:120,front:'EU AI Act minimum log retention for deployers of high-risk AI: <strong>___</strong> months.',back:'<strong>6 months</strong> minimum retention for logs from high-risk AI systems.'},
+{id:'C5',type:'cloze',m:2,p:38,front:'Training large AI models can emit over <strong>___</strong> lbs of CO₂ — equivalent to <strong>___</strong>× an American car\'s lifetime emissions.',back:'<strong>626,000 lbs</strong> of CO₂ — equivalent to <strong>5×</strong> the lifetime emissions of an American car.'},
+{id:'C6',type:'cloze',m:3,p:88,front:'NIST AI RMF has <strong>___</strong> core functions: <strong>___</strong>, <strong>___</strong>, <strong>___</strong>, <strong>___</strong>.',back:'<strong>4</strong> functions: <strong>GOVERN</strong>, <strong>MAP</strong>, <strong>MEASURE</strong>, <strong>MANAGE</strong>'},
+{id:'C7',type:'cloze',m:4,p:99,front:'South Korea AI Basic Act enacted <strong>___</strong> January <strong>___</strong> and came into effect <strong>___</strong> 2026.',back:'Enacted <strong>22 January 2025</strong>, came into effect <strong>January 2026</strong>.'},
+{id:'C8',type:'cloze',m:4,p:104,front:'California TFAIA (SB 53) effective date: <strong>___</strong> January <strong>___</strong>.',back:'<strong>1 January 2026</strong>. Applies to frontier AI developers (Claude, Gemini, GPT-4.1, DALL-E 3).'},
+{id:'C9',type:'cloze',m:5,p:160,front:'EU Revised Product Liability Directive (2024/2853) takes effect: <strong>___</strong> 2026.',back:'<strong>December 2026</strong>. Expands liability to standalone software, AI-enabled systems, cloud AI.'},
+{id:'C10',type:'cloze',m:5,p:135,front:'GDPR Article <strong>___</strong> — right not to be subject to solely automated decisions.',back:'GDPR Article <strong>22</strong> — includes right to human intervention, right to contest, transparency about logic.'},
+{id:'C11',type:'cloze',m:5,p:135,front:'GDPR Article <strong>___</strong> — mandates DPIAs for high-risk processing activities.',back:'GDPR Article <strong>35</strong> — mandates Data Protection Impact Assessments.'},
+{id:'C12',type:'cloze',m:3,p:72,front:'EU AI Act Article <strong>___</strong> requires providers and deployers to ensure sufficient AI literacy.',back:'EU AI Act Article <strong>4</strong> — AI literacy obligation for all provider/deployer staff.'},
+{id:'C13',type:'cloze',m:3,p:76,front:'ISO/IEC <strong>___</strong>:<strong>___</strong> is the AI Management System (AIMS) standard.',back:'ISO/IEC <strong>42001:2023</strong> — the AI Management System standard.'},
+{id:'C14',type:'cloze',m:3,p:72,front:'ISO/IEC <strong>___</strong>:2022 defines over 100 key AI concepts and terminology.',back:'ISO/IEC <strong>22989</strong>:2022 — AI concepts and terminology standard.'},
+{id:'C15',type:'cloze',m:6,p:189,front:'The "<strong>___</strong>" rule is the U.S. employment law benchmark for unacceptable disparate impact in AI bias testing.',back:'The <strong>4/5s rule</strong> — if a protected group\'s selection rate is less than 4/5 of the highest group, it indicates disparate impact.'},
+{id:'C16',type:'cloze',m:4,p:117,front:'Colorado SB 24-205: Algorithmic Impact Assessments must be reviewed at least <strong>___</strong>.',back:'At least <strong>annually</strong>. Must also be provided to the AG within 90 days of request.'},
+{id:'C17',type:'cloze',m:4,p:119,front:'Colorado SB 24-205: Developers must disclose newly discovered discrimination risks to the AG within <strong>___</strong> days.',back:'Within <strong>90 days</strong> of discovery — must notify both the AG and deployers.'},
+{id:'C18',type:'cloze',m:4,p:98,front:'EU AI Act Digital Omnibus: extended high-risk AI compliance deadline to no later than <strong>___</strong>.',back:'No later than <strong>2 December 2027</strong> (original deadline was August 2026).'},
+{id:'C19',type:'cloze',m:4,p:98,front:'EU AI Act Digital Omnibus: public sector high-risk AI compliance extended to <strong>___</strong>.',back:'Extended to <strong>August 2030</strong> for public-sector high-risk AI uses.'},
+{id:'C20',type:'cloze',m:7,p:218,front:'Singapore AI Verify validates AI systems against <strong>___</strong> ethics principles.',back:'<strong>11</strong> ethics principles. Toolkit developed by IMDA.'},
+{id:'C21',type:'cloze',m:5,p:150,front:'Thaler v. Vidal (Fed. Cir. 2022): only <strong>___</strong> can be named as patent inventors in the U.S.',back:'Only <strong>humans</strong>. Australia initially allowed AI inventors but reversed. South Africa recognised AI inventors.'},
+{id:'C22',type:'cloze',m:5,p:140,front:'For a trained AI model to be truly anonymous (EDPB): <strong>___</strong> conditions must BOTH be met.',back:'<strong>2 conditions</strong>: (1) Personal data cannot be extracted from the model; (2) Outputs cannot be linked back to training data subjects.'},
+{id:'C23',type:'cloze',m:4,p:96,front:'A deployer becomes a provider when they make a <strong>___</strong> modification to a high-risk AI system.',back:'A <strong>substantial</strong> modification — or any modification that transforms a non-high-risk system into a high-risk one.'},
+{id:'C24',type:'cloze',m:4,p:122,front:'GPAI models with systemic risk must additionally: conduct <strong>___</strong>, report <strong>___</strong>, disclose <strong>___</strong>.',back:'Conduct <strong>risk assessments &amp; mitigation</strong>; report <strong>serious incidents</strong>; disclose <strong>energy consumption</strong>. Plus red-teaming and cybersecurity.'},
+{id:'C25',type:'cloze',m:6,p:186,front:'Three Lines of Defence: 1st = <strong>___</strong>; 2nd = <strong>___</strong>; 3rd = <strong>___</strong>.',back:'1st: <strong>Management/process owners</strong>; 2nd: <strong>Compliance &amp; oversight</strong>; 3rd: <strong>Internal audit</strong>.'},
+{id:'C26',type:'cloze',m:4,p:108,front:'Singapore Model AI Governance Framework for Generative AI (2024) is based on <strong>___</strong> dimensions.',back:'<strong>9 dimensions</strong> for creating a trusted environment enabling safe Gen AI deployment.'},
+// DEFINITION (D1–D65)
+{id:'D1',type:'def',m:1,p:5,front:'What is Artificial Narrow Intelligence (ANI)?',back:'AI designed for <strong>one specific task</strong> at high proficiency; cannot transfer knowledge to other domains. Also called <strong>weak AI</strong>. Examples: Siri, spam filters.'},
+{id:'D2',type:'def',m:1,p:6,front:'What is Artificial General Intelligence (AGI)?',back:'Human-level AI capable of reasoning across <strong>many domains</strong>. Also called <strong>strong/deep/full AI</strong>. <strong>Does NOT yet exist.</strong>'},
+{id:'D3',type:'def',m:1,p:6,front:'What is Artificial Super Intelligence (ASI)?',back:'Hypothetical AI <strong>surpassing human intelligence</strong> in all domains including creativity, wisdom and social skills. <strong>Does NOT yet exist.</strong>'},
+{id:'D4',type:'def',m:1,p:6,front:'What is Broad AI?',back:'Between ANI and AGI — relies on <strong>groups of AI systems working together</strong>. Examples: AI agents, autonomous vehicles. An intermediate step toward AGI.'},
+{id:'D5',type:'def',m:1,p:15,front:'What is Agentic AI?',back:'Goal-oriented AI that <strong>autonomously makes decisions, plans and executes multi-step tasks</strong> with minimal human guidance. Limited human oversight.'},
+{id:'D6',type:'def',m:1,p:21,front:'What is a Transformer model?',back:'Deep learning model tracking relationships in sequential data <strong>mathematically</strong>; processes inputs <strong>in parallel</strong>. Foundation of modern NLP and multimodal models.'},
+{id:'D7',type:'def',m:1,p:22,front:'What is RAG (Retrieval-Augmented Generation)?',back:'Technique allowing Gen AI to <strong>incorporate external information</strong> into responses, increasing accuracy. Optimises LLM output beyond its training data cutoff.'},
+{id:'D8',type:'def',m:1,p:18,front:'What is Reinforcement Learning?',back:'Agent learns by <strong>trial and error</strong> — rewards for desired actions, penalties for undesired ones. <strong>NOT told what actions to take</strong>; learns from interaction with environment.'},
+{id:'D9',type:'def',m:1,p:19,front:'What is Semi-supervised Learning? Key real-world example?',back:'Combines <strong>small labeled + large unlabeled data</strong>. <strong>LLMs like ChatGPT</strong> rely on semi-supervised learning. Also: DALL-E, image and speech analysis.'},
+{id:'D10',type:'def',m:1,p:21,front:'CNN vs RNN — what is each used for?',back:'<strong>CNN</strong> (Convolutional Neural Network): spatial/grid data — <strong>images and video</strong>.<br><strong>RNN</strong> (Recurrent Neural Network): sequential data — <strong>text, speech, time-series</strong>.'},
+{id:'D11',type:'def',m:6,p:181,front:'What is Federated Learning?',back:'ML method where local sites train on <strong>their own data</strong> and send only <strong>model updates</strong> (not raw data) to a central server. Protects data privacy.'},
+{id:'D12',type:'def',m:6,p:181,front:'What is Differential Privacy?',back:'Privacy technique that <strong>blurs data using an algorithm</strong> — keeps data meaningful but makes <strong>individuals unidentifiable</strong>. Data is still usable for analysis.'},
+{id:'D13',type:'def',m:2,p:32,front:'Overfitting vs Underfitting — what is the difference?',back:'<strong>Overfitting</strong>: learns noise from training data, poor performance on new data.<br><strong>Underfitting</strong>: too simple, fails to capture patterns, poor performance everywhere.'},
+{id:'D14',type:'def',m:2,p:32,front:'What is Temporal Bias in AI?',back:'Model trained on current data <strong>fails to adapt to future changes</strong> — works well at training time but <strong>degrades over time</strong> as the world changes.'},
+{id:'D15',type:'def',m:2,p:32,front:'What is Sampling Bias in AI?',back:'Training data <strong>skews toward a subset of the population</strong> — favours specific groups, creates unfair or inaccurate outcomes.'},
+{id:'D16',type:'def',m:2,p:37,front:'Disinformation vs Misinformation — key distinction?',back:'<strong>Disinformation</strong>: intentionally manipulated/created to <strong>cause harm</strong>.<br><strong>Misinformation</strong>: <strong>unintentionally misleading</strong> — false but spread without harmful intent.'},
+{id:'D17',type:'def',m:3,p:62,front:'Distinguish AI governance <em>principles</em> from an AI governance <em>framework</em>.',back:'<strong>Principles</strong> = a set of values.<br><strong>Framework</strong> = the means to <strong>operationalise</strong> those values.'},
+{id:'D18',type:'def',m:3,p:67,front:'What are the 3 types of AI governance models?',back:'<strong>Centralised</strong>: one team/person for all AI decisions.<br><strong>Decentralised</strong>: delegates to local levels.<br><strong>Hybrid</strong>: central body sets policy; local entities implement.'},
+{id:'D19',type:'def',m:3,p:72,front:'What is AI Literacy? (EU AI Act Article 4)',back:'Skills and understanding to engage with AI in an <strong>informed, responsible and effective</strong> manner. Article 4 requires this for all provider/deployer staff.'},
+{id:'D20',type:'def',m:3,p:79,front:'What is data poisoning?',back:'<strong>False or misleading data deliberately introduced</strong> into training data to corrupt model behaviour. Can also occur when data lacks proper access management controls.'},
+{id:'D21',type:'def',m:4,p:95,front:'Who is a Provider under the EU AI Act?',back:'Entity that <strong>develops and puts AI on the market</strong> under its name/trademark. Has the most extensive lifecycle obligations including conformity assessment and CE marking.'},
+{id:'D22',type:'def',m:4,p:96,front:'Who is a Deployer under the EU AI Act?',back:'Entity <strong>using an AI system under its authority</strong> in professional activities. Must ensure human oversight, monitor operations, report incidents, maintain 6-month logs.'},
+{id:'D23',type:'def',m:4,p:96,front:'Who is an Importer under the EU AI Act?',back:'EU-established entity <strong>bringing AI from a third country</strong> into the EU market. Must verify compliance and confirm conformity assessment before making available.'},
+{id:'D24',type:'def',m:4,p:117,front:'What is a Conformity Assessment (EU AI Act)?',back:'Process verifying a high-risk AI system meets requirements — examines <strong>development process, dataset, AI behaviour and potential impacts</strong>. Required for high-risk AI.'},
+{id:'D25',type:'def',m:4,p:120,front:'What is a FRIA?',back:'<strong>Fundamental Rights Impact Assessment</strong> — required for <strong>public bodies</strong> deploying high-risk AI. Must be conducted <strong>before first use</strong> and updated on significant change.'},
+{id:'D26',type:'def',m:4,p:106,front:'What is Japan\'s AI Promotion Act regulatory approach?',back:'<strong>Innovation-first, soft law</strong> — nonbinding guidance framework. Regulation by guidance, not enforcement. <strong>No penalties for non-compliance.</strong>'},
+{id:'D27',type:'def',m:4,p:100,front:'What is "high-impact AI" under South Korea\'s AI Basic Act?',back:'AI with significant risk to <strong>human life, physical safety or basic rights</strong>. 11 specific categories including healthcare, nuclear materials, drinking water production.'},
+{id:'D28',type:'def',m:5,p:143,front:'What are GDPR special categories of personal data? (Name any 4)',back:'Racial/ethnic origin; political views; religious/philosophical beliefs; trade union membership; <strong>genetic data; biometric data for ID; health data; sex life/sexual orientation</strong>.'},
+{id:'D29',type:'def',m:5,p:140,front:'What is the EDPB 3-step Legitimate Interest test?',back:'(1) Is there a <strong>lawful legitimate interest</strong>?<br>(2) Is processing <strong>necessary</strong> for it?<br>(3) <strong>Balancing test</strong>: do individual rights override the interest?'},
+{id:'D30',type:'def',m:5,p:158,front:'Fault liability vs Strict liability — key distinction?',back:'<strong>Fault</strong>: must prove negligence caused harm.<br><strong>Strict</strong>: victim only proves product was <strong>defective and caused harm</strong> — no need to prove intent or negligence.'},
+{id:'D31',type:'def',m:6,p:189,front:'What is the Adverse Impact Ratio (AIR)?',back:'Metric evaluating whether an AI system <strong>operates fairly across user subsets</strong> based on minority characteristics. Used in bias testing.'},
+{id:'D32',type:'def',m:6,p:193,front:'What are Model Cards?',back:'Documentation recording key model features — <strong>training data, versions, bias/explainability reports, intended use and performance metrics</strong> across conditions and demographics.'},
+{id:'D33',type:'def',m:7,p:209,front:'What is Red Teaming in AI?',back:'Simulating <strong>adversarial attacks</strong> to expose security vulnerabilities, flaws, biases and misinformation. Findings shared with developers for remediation.'},
+{id:'D34',type:'def',m:7,p:210,front:'What is a Challenger Model?',back:'New model tested against the existing production model ("<strong>champion</strong>") to determine if it can improve performance on the same dataset.'},
+{id:'D35',type:'def',m:6,p:191,front:'What is Brittleness in AI?',back:'<strong>Performing successfully in one instance yet failing in another</strong>. A key cause of AI incidents. Governance response: test for robustness across varied conditions.'},
+{id:'D36',type:'def',m:6,p:191,front:'What is AI Hallucination?',back:'Gen AI producing content that <strong>contradicts its source</strong> or is <strong>factually incorrect</strong> but presented with apparent confidence.'},
+{id:'D37',type:'def',m:7,p:212,front:'What is Model Drift?',back:'Input-output relationship <strong>changes over time</strong> as training conditions no longer apply — performance declines. Example: spam filter failing as spam tactics evolve.'},
+{id:'D38',type:'def',m:7,p:198,front:'What is Containerisation in AI deployment?',back:'Packaging a model and <strong>all its dependencies into a self-contained unit</strong> — reduces compatibility issues across different deployment environments.'},
+{id:'D39',type:'def',m:7,p:211,front:'What is Automation Bias?',back:'<strong>Over-reliance on AI decisions</strong> — assuming AI is always correct. Human interpretation and oversight must not be crowded out by AI output. A key governance risk.'},
+{id:'D40',type:'def',m:6,p:176,front:'Data Lineage vs Data Provenance — distinction?',back:'<strong>Lineage</strong>: tracks the <em>flow</em> of data throughout its lifecycle (origin → changes → destination).<br><strong>Provenance</strong>: focuses on the <em>origin/source</em> — first instance and creation history.'},
+{id:'D41',type:'def',m:6,p:177,front:'Structured vs Unstructured vs Semi-structured data?',back:'<strong>Structured</strong>: rows/columns (databases).<br><strong>Unstructured</strong>: no fixed format (images, video, social media).<br><strong>Semi-structured</strong>: flexible schema with tags (XML, email).'},
+{id:'D42',type:'def',m:7,p:199,front:'What is the Three-Tiered Guardrail Framework for Agentic AI?',back:'<strong>Tier 1</strong>: Foundational guardrails.<br><strong>Tier 2</strong>: Risk-based guardrails.<br><strong>Tier 3</strong>: Societal guardrails.<br>Scales governance with use case risk and societal impact.'},
+{id:'D43',type:'def',m:7,p:203,front:'What unique governance risk arises when an org is BOTH Provider AND Deployer?',back:'<strong>Dual-role liability</strong> — must manage provider obligations (conformity, CE marking, documentation) AND deployer obligations (monitoring, incidents, user transparency) simultaneously.'},
+{id:'D44',type:'def',m:6,p:178,front:'What are the Five V\'s of data?',back:'<strong>Volume</strong> (how much), <strong>Velocity</strong> (how often updated), <strong>Variety</strong> (what types), <strong>Veracity</strong> (accuracy/trustworthiness), <strong>Value</strong> (usefulness for AI goals).'},
+{id:'D45',type:'def',m:2,p:42,front:'What are the 5 OECD AI Principles?',back:'(1) Inclusive growth &amp; well-being<br>(2) Human rights &amp; democratic values<br>(3) Transparency &amp; explainability<br>(4) Robustness, security &amp; safety<br>(5) Accountability'},
+{id:'D46',type:'def',m:4,p:110,front:'EU AI Act Prohibited AI — name 3 examples.',back:'Social scoring by governments; emotion recognition in workplaces/schools; untargeted facial image scraping; <strong>real-time biometric surveillance in public spaces; predictive policing without individual assessment</strong>.'},
+{id:'D47',type:'def',m:2,p:41,front:'What are the 8 OECD Fair Information Practices (FIPs, 1980)?',back:'Collection limitation; Use limitation; Security safeguards; Notice/openness; Access/participation; Accountability; Purpose specification; Data quality &amp; relevance.'},
+{id:'D48',type:'def',m:5,p:131,front:'What is GDPR Purpose Limitation as applied to AI?',back:'AI should use personal data only for its <strong>specified purpose</strong>. CNIL: learning and production phases have <strong>distinct purposes</strong> — each must be determined, legitimate and clear.'},
+{id:'D49',type:'def',m:1,p:5,front:'What are the 7 unique AI characteristics requiring governance?',back:'Complexity; <strong>Opacity</strong>; Autonomy; Speed &amp; scale; Potential for harm/misuse; Data dependency; <strong>Probabilistic vs deterministic outputs</strong>.'},
+{id:'D50',type:'def',m:5,p:156,front:'What does the EU Digital Services Act (DSA) require for recommender systems?',back:'Platforms must <strong>inform users how recommender systems affect information display</strong>. Users can access the parameters that determined why ads were shown.'},
+{id:'D51',type:'def',m:7,p:218,front:'What is Singapore AI Verify?',back:'IMDA toolkit <strong>validating AI against 11 ethics principles</strong>. Helps systems meet governance and performance benchmarks. A testing framework for responsible AI.'},
+{id:'D52',type:'def',m:3,p:88,front:'What are the 7 NIST AI RMF trustworthy AI characteristics?',back:'Valid &amp; reliable; Safe; Secure &amp; resilient; Explainable &amp; interpretable; Privacy-enhanced; <strong>Fair with bias mitigated; Accountable &amp; transparent</strong>.'},
+{id:'D53',type:'def',m:3,p:78,front:'What are the 4 categories of AI risk?',back:'<strong>Operational, Legal, Security, Privacy</strong>.'},
+{id:'D54',type:'def',m:3,p:87,front:'What is ISO/IEC 42005:2025?',back:'Standard providing structured guidance for <strong>AI System Impact Assessments (AIIA)</strong> — helps organisations identify, evaluate and document potential impacts throughout the AI lifecycle.'},
+{id:'D55',type:'def',m:6,p:193,front:'What are the 4 AI-specific security attack types?',back:'<strong>Model inversion</strong> (reconstruct training data); <strong>Extraction</strong> (steal model); <strong>Poisoning</strong> (corrupt training data); <strong>Evasion</strong> (trick model into misclassification).'},
+{id:'D56',type:'def',m:3,p:77,front:'What is the Council of Europe HUDERIA framework?',back:'8 AI ethics principles: Human dignity; Human freedom &amp; autonomy; Prevention of harm; Fairness/non-discrimination; Data protection &amp; privacy; Democracy; Rule of law; Social &amp; economic rights.'},
+{id:'D57',type:'def',m:3,p:76,front:'What is ISO/IEC 42001 Annex A?',back:'Controls for <strong>AI-specific risks</strong> — analogous to ISO 27001 Annex A for information security. Part of the AIMS standard.'},
+{id:'D58',type:'def',m:3,p:89,front:'What is NIST ARIA?',back:'<strong>Assessing Risks and Impacts of AI</strong> — evaluates LLMs via predefined scenarios, red-teaming and real-world field testing. Initial focus: Gen AI risks.'},
+{id:'D59',type:'def',m:4,p:92,front:'What is the primary regulatory approach shared by most global AI laws?',back:'<strong>Risk-based approach</strong> — higher-risk systems face stricter obligations; low-risk systems are lightly regulated. Common DNA: risk classification, role-based responsibilities, transparency.'},
+{id:'D60',type:'def',m:2,p:29,front:'What is a harms taxonomy?',back:'Ontological map breaking down <strong>negative consequences of data/AI misuse</strong>. Example: Citron &amp; Solove — physical, reputational, economic, discrimination, psychological, autonomy harms.'},
+{id:'D61',type:'def',m:4,p:105,front:'What is China\'s generative AI oversight approach?',back:'Overseen by <strong>Cyberspace Administration of China (CAC)</strong>. Interim Measures (July 2023) require security reviews and <strong>algorithm registration</strong> if system can influence public opinion.'},
+{id:'D62',type:'def',m:5,p:149,front:'What is "fair use" in the AI copyright context?',back:'Doctrine allowing unlicensed use of copyright works in certain circumstances. <strong>Some US AI providers use this as a copyright infringement defence</strong>. Courts assess case-by-case.'},
+{id:'D63',type:'def',m:6,p:171,front:'What are the 6 risk assessment strategies in AI development (in order)?',back:'(1) Use case evaluation; (2) Stakeholder mapping; (3) Probability/severity harms matrix; (4) Risk mitigation hierarchy; (5) Benchmarking; (6) Pre-deployment pilots.'},
+{id:'D64',type:'def',m:3,p:62,front:'What is AI Governance?',back:'Organisation\'s use of <strong>laws, policies, frameworks and processes</strong> to manage, oversee and regulate AI development, deployment and use to align with objectives and comply with requirements.'},
+{id:'D65',type:'def',m:5,p:135,front:'What does GDPR Recital 26 say about pseudonymised data?',back:'Emphasises anonymisation techniques. <strong>Pseudonymised data is STILL personal data</strong> — GDPR applies. Anonymised data is NOT subject to GDPR, but the anonymisation threshold is high.'},
+// BIDIRECTIONAL (B1F/B1R … B13F/B13R)
+{id:'B1F',type:'bidir',m:4,p:95,front:'"Develops and puts AI on the market under its own name/trademark." — Which EU AI Act role?',back:'<strong>Provider</strong> — has the most extensive lifecycle obligations including conformity assessment, CE marking and technical documentation.'},
+{id:'B1R',type:'bidir',m:4,p:95,front:'A company builds an AI model and sells it to businesses under its own brand. What is their EU AI Act role?',back:'<strong>Provider</strong> — they develop and put AI on the market under their name. Full provider obligations apply.'},
+{id:'B2F',type:'bidir',m:4,p:96,front:'"Uses an AI system under its authority in professional activities." — Which EU AI Act role?',back:'<strong>Deployer</strong> — must ensure human oversight, monitor operations, report incidents, maintain 6-month logs.'},
+{id:'B2R',type:'bidir',m:4,p:96,front:'A hospital purchases an AI diagnostic tool and uses it to assist doctors. What is the hospital\'s EU AI Act role?',back:'<strong>Deployer</strong> — using AI in professional activities under its authority. The tool vendor is the Provider.'},
+{id:'B3F',type:'bidir',m:3,p:88,front:'Which NIST AI RMF function spans ALL lifecycle phases?',back:'<strong>GOVERN</strong> — establishes org-wide AI risk management policies, processes and culture.'},
+{id:'B3R',type:'bidir',m:3,p:88,front:'Which NIST AI RMF function establishes org-wide AI risk management policies and culture?',back:'<strong>GOVERN</strong> — the only function that applies across all 5 lifecycle phases.'},
+{id:'B4F',type:'bidir',m:3,p:57,front:'NIST AI RMF: "establishing context, identifying intended purposes, mapping risks" — which function?',back:'<strong>MAP</strong> — applies to Phases 1–3 (Plan, Build, Pre-deployment).'},
+{id:'B4R',type:'bidir',m:3,p:57,front:'NIST AI RMF MAP function — which lifecycle phases does it cover?',back:'<strong>Phases 1–3</strong>: Plan &amp; Design, Build &amp; Develop, Pre-deployment.'},
+{id:'B5F',type:'bidir',m:3,p:57,front:'NIST AI RMF: "quantifying and analysing identified risks" — which function?',back:'<strong>MEASURE</strong> — applies to Phases 2–4 (Build, Pre-deployment, Deploy).'},
+{id:'B5R',type:'bidir',m:3,p:57,front:'NIST AI RMF MEASURE function — which lifecycle phases does it cover?',back:'<strong>Phases 2–4</strong>: Build &amp; Develop, Pre-deployment, Deploy &amp; Operate.'},
+{id:'B6F',type:'bidir',m:3,p:58,front:'NIST AI RMF: "prioritising and acting on identified risks" — which function?',back:'<strong>MANAGE</strong> — applies to Phases 4–5 (Deploy, Monitor).'},
+{id:'B6R',type:'bidir',m:3,p:58,front:'NIST AI RMF MANAGE function — which lifecycle phases does it cover?',back:'<strong>Phases 4–5</strong>: Deploy &amp; Operate, Monitor &amp; Maintain.'},
+{id:'B7F',type:'bidir',m:5,p:135,front:'GDPR Article 22 covers what right?',back:'Right <strong>not to be subject to solely automated decisions</strong> with legal or similarly significant effects. Includes right to human intervention, contestation and explanation of logic.'},
+{id:'B7R',type:'bidir',m:5,p:135,front:'An employee\'s loan was denied by an AI system with no human review. Which GDPR article applies?',back:'<strong>GDPR Article 22</strong> — right to human intervention, to contest the decision and to receive explanation of the logic.'},
+{id:'B8F',type:'bidir',m:5,p:135,front:'GDPR Article 35 covers what?',back:'Mandates <strong>DPIAs (Data Protection Impact Assessments)</strong> for processing likely to result in high risk to individuals.'},
+{id:'B8R',type:'bidir',m:5,p:135,front:'When is a DPIA legally required under GDPR?',back:'When processing is likely to result in <strong>high risk</strong>: systematic profiling, large-scale sensitive data, or public surveillance — per <strong>GDPR Article 35</strong>.'},
+{id:'B9F',type:'bidir',m:0,p:0,front:'Human-in-the-loop — what does it mean?',back:'Human must <strong>approve EACH AI decision</strong> before it takes effect. Highest level of per-decision human involvement.'},
+{id:'B9R',type:'bidir',m:0,p:0,front:'Human-on-the-loop — what does it mean?',back:'Human <strong>monitors and can intervene</strong> but does NOT approve each decision individually. AI acts autonomously; human can override.'},
+{id:'B10F',type:'bidir',m:4,p:96,front:'When does a Deployer become a Provider under the EU AI Act?',back:'When they make a <strong>substantial modification</strong> to a high-risk AI system, or any modification that transforms a non-high-risk system into high-risk.'},
+{id:'B10R',type:'bidir',m:4,p:96,front:'Company A buys a high-risk AI tool and significantly modifies it before deploying. What happens to their regulatory status?',back:'They become a <strong>Provider</strong> — takes on full provider obligations including conformity assessment, CE marking and technical documentation.'},
+{id:'B11F',type:'bidir',m:3,p:76,front:'Which international standard provides requirements for establishing an AI Management System?',back:'<strong>ISO/IEC 42001:2023</strong> — the AI Management System (AIMS) standard.'},
+{id:'B11R',type:'bidir',m:3,p:76,front:'What does AIMS stand for and which standard governs it?',back:'<strong>AI Management System</strong> — governed by <strong>ISO/IEC 42001:2023</strong>.'},
+{id:'B12F',type:'bidir',m:5,p:140,front:'What 2 conditions (EDPB) must BOTH be met for a trained AI model to be truly anonymous?',back:'(1) Personal data <strong>cannot be extracted</strong> from the model; AND (2) Outputs <strong>cannot be linked</strong> to training data subjects. Both required simultaneously.'},
+{id:'B12R',type:'bidir',m:5,p:140,front:'A vendor claims their trained AI model fully anonymises personal data. What 2 questions do you ask to verify (EDPB)?',back:'(1) Can personal data be extracted from the model? (2) Can model outputs be linked to training data subjects? <strong>Both must fail</strong> for the anonymity claim to hold.'},
+{id:'B13F',type:'bidir',m:6,p:181,front:'What does Federated Learning protect against?',back:'Raw training data leaving local sites — <strong>only model updates are shared centrally</strong>. The actual sensitive data never leaves the local environment.'},
+{id:'B13R',type:'bidir',m:6,p:181,front:'5 hospitals want to train a shared AI model without sharing patient records. What technique enables this?',back:'<strong>Federated Learning</strong> — each hospital trains locally; only model updates are sent to a central aggregation server.'},
+// SCENARIO (S1–S25)
+{id:'S1',type:'scenario',m:4,p:92,front:'A US-based AI company sells a high-risk AI system to EU businesses. Do EU AI Act obligations apply?',back:'<strong>YES</strong> — EU AI Act has <strong>extra-territorial application</strong>. Any provider placing AI on the EU market or whose output affects EU persons must comply, regardless of location.'},
+{id:'S2',type:'scenario',m:5,p:135,front:'A company is building AI to process health records at scale. What must happen before training begins?',back:'Conduct a <strong>DPIA</strong> (GDPR Article 35) — large-scale sensitive data processing triggers this. Assess: purpose limitation, consent basis, data governance and data minimisation.'},
+{id:'S3',type:'scenario',m:4,p:115,front:'An AI hiring tool in New York City is suspected of bias against certain ethnic groups. What specific legal requirement applies?',back:'<strong>NYC Local Law 144</strong> — requires bias audits of AI-enabled employment tools. Developer must notify affected individuals of bias findings.'},
+{id:'S4',type:'scenario',m:7,p:212,front:'A bank\'s AI credit model is now approving fewer applicants from a demographic it previously approved. What is happening and what should be done?',back:'<strong>Model drift</strong> — input-output relationship has changed. Actions: (1) investigate for bias; (2) conduct AIR/4/5s audit; (3) retrain or adjust model; (4) document and report findings.'},
+{id:'S5',type:'scenario',m:5,p:131,front:'A company wants to reuse customer service data to train a new AI marketing model. Is this allowed under GDPR?',back:'Not without re-evaluation. <strong>Purpose Limitation</strong> (GDPR/CNIL): learning and production phases have distinct purposes. Must establish new legal basis or obtain new consent.'},
+{id:'S6',type:'scenario',m:5,p:135,front:'An employee was denied a promotion by an AI system and demands an explanation. What right applies under GDPR?',back:'<strong>GDPR Article 22</strong> — right to (1) <strong>human intervention</strong>; (2) <strong>contest</strong> the decision; and (3) <strong>transparency about the logic</strong> of the automated decision.'},
+{id:'S7',type:'scenario',m:7,p:203,front:'An organisation is both the developer and the deployer of its own AI product. What unique risk arises?',back:'<strong>Dual-role liability</strong> — must simultaneously manage provider obligations (conformity, CE marking, documentation) AND deployer obligations (monitoring, incident reporting, user transparency).'},
+{id:'S8',type:'scenario',m:4,p:122,front:'A GPAI model exceeds the EU AI Act systemic risk compute threshold. What additional obligations apply?',back:'(1) Risk assessments &amp; mitigation; (2) serious incident reporting; (3) red-teaming/adversarial testing; (4) robust cybersecurity; (5) <strong>energy consumption disclosure</strong>.'},
+{id:'S9',type:'scenario',m:4,p:120,front:'A public body plans to deploy a high-risk AI for welfare benefit assessments in the EU. What specific assessment is required?',back:'A <strong>FRIA (Fundamental Rights Impact Assessment)</strong> — required for public bodies deploying high-risk AI. Must be completed before first use and updated on significant change.'},
+{id:'S10',type:'scenario',m:4,p:117,front:'A Colorado company deploys AI making consequential hiring decisions. What ongoing compliance obligation applies?',back:'<strong>Colorado SB 24-205</strong>: (1) conduct Algorithmic Impact Assessment (AIA); (2) review AIA at least annually; (3) provide AIA to AG within 90 days if requested.'},
+{id:'S11',type:'scenario',m:6,p:181,front:'5 hospitals across different countries want to train a shared AI model without patient data crossing any borders. What solution?',back:'<strong>Federated Learning</strong> — each hospital trains locally on its own data; only model updates (not raw patient data) are sent to a central server for aggregation.'},
+{id:'S12',type:'scenario',m:4,p:119,front:'A company in Colorado discovers their AI has been discriminating against a protected group. What notification obligations apply?',back:'Disclose known risks of algorithmic discrimination to the <strong>AG and to deployers within 90 days</strong> of discovery (Colorado SB 24-205).'},
+{id:'S13',type:'scenario',m:7,p:215,front:'A bank deploys an AI chatbot to provide financial advice to customers. What transparency obligations apply?',back:'<strong>Bi-directional disclosure</strong>: (1) inform users they are interacting with AI; (2) report incidents to the provider. Disclosure is a global threshold requirement for any AI engagement.'},
+{id:'S14',type:'scenario',m:7,p:213,front:'Your AI model is producing errors in production. Walk through the incident response steps.',back:'(1) Invoke <strong>incident response plan</strong>; (2) identify issue, notify internally and externally; (3) notify third-party vendors whose tools integrate; (4) enable <strong>remote human shutdown</strong> if required.'},
+{id:'S15',type:'scenario',m:5,p:140,front:'A vendor claims their trained AI model fully anonymises all personal data used in training. How do you verify?',back:'Apply <strong>EDPB 2-condition test</strong>: (1) Can personal data be extracted from the model? (2) Can outputs be linked to training data subjects? <strong>Both must fail</strong> for the claim to hold.'},
+{id:'S16',type:'scenario',m:7,p:207,front:'Your organisation is evaluating a third-party AI vendor for procurement. What must the vendor agreement cover?',back:'Data rights; security/safety &amp; incident response; bias metrics/testing; type of product; technical specs; model performance/monitoring; <strong>terms of use (fine-tuning rights, IP for generated content)</strong>.'},
+{id:'S17',type:'scenario',m:4,p:122,front:'Organisation plans to use a third-party GPAI model to build its own product. What documentation must the GPAI provider supply?',back:'Technical documentation; training-data summaries (respecting IP); <strong>model cards; usage conditions; limitations</strong>. If provider is outside EU: must appoint EU representative.'},
+{id:'S18',type:'scenario',m:6,p:191,front:'AI system performs well on standard test sets but fails when exposed to slightly modified inputs. What is this?',back:'<strong>Brittleness</strong> — performing successfully in one instance yet failing in another. Governance action: test for robustness across varied conditions, not just standard benchmarks.'},
+{id:'S19',type:'scenario',m:7,p:204,front:'Employees are using ChatGPT for work tasks with no policy in place. What governance actions are needed?',back:'Implement third-party AI use policy: (1) acceptable use rules; (2) data sharing restrictions; (3) terms of use review; (4) incident reporting channel; (5) <strong>user AI literacy training</strong>.'},
+{id:'S20',type:'scenario',m:3,p:79,front:'A training dataset contains labels deliberately corrupted by an insider to skew model outputs. What is this and what controls prevent it?',back:'<strong>Data poisoning</strong> — controls: validated data sources; access management (IAM); <strong>data lineage tracking</strong>; regular data audits; separation of duties.'},
+{id:'S21',type:'scenario',m:7,p:218,front:'A Singapore organisation wants to verify its AI system aligns with responsible AI principles. What tool is available?',back:'<strong>Singapore AI Verify</strong> — IMDA toolkit validating AI against 11 ethics principles. Available for organisations to use to meet governance and performance benchmarks.'},
+{id:'S22',type:'scenario',m:1,p:5,front:'A company claims their deep neural network is "transparent." It\'s highly accurate but cannot explain its decisions. Is the claim valid?',back:'<strong>Weak claim</strong> — transparency requires stakeholders to understand how/why decisions are made. Accuracy ≠ transparency. <strong>Opacity</strong> is one of the 7 unique AI governance characteristics.'},
+{id:'S23',type:'scenario',m:6,p:193,front:'Logs show someone is repeatedly querying an AI model in patterns that suggest they are reconstructing its training data. What attack is this?',back:'<strong>Model inversion attack</strong> — one of the 4 AI-specific security risks (inversion, extraction, poisoning, evasion). Response: access controls, query monitoring, rate limiting.'},
+{id:'S24',type:'scenario',m:4,p:96,front:'Company A develops a risk assessment AI. Company B buys it, rebrands it, and sells it under Company B\'s name. What is Company B\'s EU AI Act role?',back:'<strong>Provider</strong> — they are putting AI on the market under their own name/trademark. Full provider obligations apply even though they did not originally develop it.'},
+{id:'S25',type:'scenario',m:5,p:135,front:'An individual applies for a job. An AI screens them out. They receive no explanation. What minimum must the deployer provide under GDPR?',back:'Under <strong>GDPR Article 22</strong>: meaningful information about the <strong>logic involved</strong>, the significance and likely consequences. Plus the right to <strong>human intervention and contestation</strong>.'},
+];
+
+/* ── SM-2 Engine ── */
+const FC_KEY='aigp_fc_v1';
+function fcLoadProg(){try{return JSON.parse(localStorage.getItem(FC_KEY)||'{}')}catch(e){return{}}}
+function fcSaveProg(d){try{localStorage.setItem(FC_KEY,JSON.stringify(d))}catch(e){}}
+function fcSM2(prev,q){
+  let{interval=0,ease=2.5,reps=0}=prev||{};
+  if(q<3){reps=0;interval=1;}
+  else{if(reps===0)interval=1;else if(reps===1)interval=6;else interval=Math.round(interval*ease);reps++;}
+  ease=Math.max(1.3,ease+0.1-(5-q)*(0.08+(5-q)*0.02));
+  const d=new Date();d.setDate(d.getDate()+interval);
+  return{interval,ease,reps,due:d.toISOString().split('T')[0],lastQ:q};
+}
+function fcIsDue(p){if(!p||!p.due)return true;return p.due<=new Date().toISOString().split('T')[0];}
+function fcShuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+
+/* ── State ── */
+let fcQueue=[],fcIdx=0,fcFlipped=false,fcProg={};
+let fcMode='random',fcModF='all',fcTypF='all';
+let fcDone=0,fcTotal=0;
+
+/* ── Build queue ── */
+function fcBuild(){
+  fcProg=fcLoadProg();
+  let cards=CARDS.filter(c=>{
+    if(fcModF!=='all'&&c.m!==parseInt(fcModF))return false;
+    if(fcTypF!=='all'&&c.type!==fcTypF)return false;
+    if(fcMode==='due'&&!fcIsDue(fcProg[c.id]))return false;
+    return true;
+  });
+  if(fcMode==='random')cards=fcShuffle(cards);
+  else if(fcMode==='module')cards.sort((a,b)=>a.m-b.m||a.p-b.p);
+  else if(fcMode==='page')cards.sort((a,b)=>(a.p||999)-(b.p||999));
+  else if(fcMode==='due'){
+    cards=fcShuffle(cards);
+    cards.sort((a,b)=>{
+      const pa=fcProg[a.id],pb=fcProg[b.id];
+      if(!pa&&!pb)return 0;if(!pa)return 1;if(!pb)return -1;
+      return pa.due.localeCompare(pb.due);
+    });
+  }
+  fcQueue=cards;fcIdx=0;fcDone=0;fcTotal=cards.length;
+  const area=document.getElementById('fcCardArea');
+  if(area)area.innerHTML='<div class="fc-card" id="fcCard" onclick="fcFlip()"><div class="fc-card-inner" id="fcInner"><div class="fc-card-front" id="fcFront"></div><div class="fc-card-back" id="fcBack"></div></div></div>';
+  fcShow();
+}
+
+/* ── Display ── */
+const FC_BADGE={
+  cloze:'<span class="fc-badge fc-b-cloze">🔵 Cloze</span>',
+  def:'<span class="fc-badge fc-b-def">🟢 Def</span>',
+  bidir:'<span class="fc-badge fc-b-bidir">🟡 Bidir</span>',
+  scenario:'<span class="fc-badge fc-b-scenario">🔴 Scenario</span>'
+};
+function fcShow(){
+  if(fcIdx>=fcQueue.length){fcSummary();return;}
+  const c=fcQueue[fcIdx];
+  fcFlipped=false;
+  const inner=document.getElementById('fcInner');
+  if(inner)inner.classList.remove('flipped');
+  const rating=document.getElementById('fcRating');
+  if(rating)rating.style.display='none';
+  const prog=fcProg[c.id];
+  const mLbl=c.m?`<span class="fc-mod-lbl">M${c.m}</span>`:'';
+  document.getElementById('fcFront').innerHTML=
+    `<div class="fc-hdr">${FC_BADGE[c.type]}${mLbl}<span class="fc-counter">${fcDone+1}&thinsp;/&thinsp;${fcTotal}</span></div>`+
+    `<div class="fc-body">${c.front}</div>`+
+    `<div class="fc-hint">Tap to reveal →</div>`;
+  const plink=c.p?`<a class="fc-plink" href="${PDF}#page=${c.p}" target="_blank" onclick="event.stopPropagation()">📖 p.${c.p}</a>`:'';
+  const dStr=prog?`Next: ${prog.due}`:'New card';
+  document.getElementById('fcBack').innerHTML=
+    `<div class="fc-hdr">${FC_BADGE[c.type]}${mLbl}${plink}</div>`+
+    `<div class="fc-body">${c.back}</div>`+
+    `<div class="fc-due-lbl">${dStr}</div>`;
+  fcUpdateBar();
+}
+function fcFlip(){
+  if(!fcQueue.length)return;
+  fcFlipped=!fcFlipped;
+  const inner=document.getElementById('fcInner');
+  if(inner)inner.classList.toggle('flipped',fcFlipped);
+  const rating=document.getElementById('fcRating');
+  if(rating)rating.style.display=fcFlipped?'flex':'none';
+}
+function fcRate(q){
+  const c=fcQueue[fcIdx];
+  fcProg[c.id]=fcSM2(fcProg[c.id],q);
+  fcSaveProg(fcProg);
+  fcDone++;fcIdx++;
+  fcUpdateBar();
+  if(fcIdx>=fcQueue.length)fcSummary();else fcShow();
+}
+function fcUpdateBar(){
+  const pct=fcTotal>0?fcDone/fcTotal*100:0;
+  const fill=document.getElementById('fcFill');if(fill)fill.style.width=pct+'%';
+  const txt=document.getElementById('fcPText');if(txt)txt.textContent=fcTotal>0?`${fcDone} / ${fcTotal}`:'No cards';
+}
+function fcSummary(){
+  const known=Object.values(fcProg).filter(p=>p.lastQ>=4).length;
+  const due=CARDS.filter(c=>fcIsDue(fcProg[c.id])).length;
+  const area=document.getElementById('fcCardArea');
+  if(area)area.innerHTML=`<div class="fc-summary"><div class="fc-sum-icon">🎉</div><div class="fc-sum-title">Session complete!</div><div class="fc-sum-stat">${fcDone} cards reviewed this session</div><div class="fc-sum-stat">${known} / ${CARDS.length} total cards marked Good/Easy</div><div class="fc-sum-stat">${due} cards due for review</div><button class="fc-restart" onclick="fcBuild()">🔄 Restart queue</button></div>`;
+  const rating=document.getElementById('fcRating');if(rating)rating.style.display='none';
+}
+
+/* ── Controls ── */
+function fcSetMode(m){
+  fcMode=m;
+  document.querySelectorAll('.fc-mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.m===m));
+  fcBuild();
+}
+function fcSetMod(v){
+  fcModF=v;
+  document.querySelectorAll('.fc-mod-btn').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  fcBuild();
+}
+function fcSetTyp(v){
+  fcTypF=v;
+  document.querySelectorAll('.fc-typ-btn').forEach(b=>b.classList.toggle('active',b.dataset.v===v));
+  fcBuild();
+}
+function fcResetAll(){
+  if(!confirm('Reset all flashcard progress? This clears all SM-2 intervals and due dates.'))return;
+  try{localStorage.removeItem(FC_KEY);}catch(e){}
+  fcBuild();
+}
 </script>
 </body>
 </html>
