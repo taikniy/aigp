@@ -352,6 +352,11 @@
 .lc-notes-jumps{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.lc-notes-jumps a{font-size:12px;padding:7px 10px;border:1px solid var(--border,#cbd5e1);border-radius:8px;color:inherit;text-decoration:none}.lc-notes-jumps a:hover{background:#eef2ff}.lc-note-section{margin:14px 0;scroll-margin-top:12px}.lc-note-section ul{padding-left:20px}.lc-note-section li{margin:9px 0;line-height:1.6}.lc-view-tabs{flex-wrap:wrap}.lc-view-tabs button{white-space:nowrap}
 @media(max-width:600px){.lc-view-tabs{flex-wrap:nowrap}.lc-view-tabs button{flex:1;padding:10px 5px;font-size:12px}}
 .lc-notes-switch{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px}.lc-notes-switch button{padding:9px 12px;border:1px solid #6d5acb;border-radius:8px;background:#f5f3ff;color:#4c359d;font:inherit;font-size:13px;cursor:pointer}.lc-notes-switch button[aria-pressed=true]{background:#4c359d;color:white}.lc-full-page h4{font-size:15px;margin:20px 0 10px}.lc-reading-point{font-size:14px;line-height:1.75;padding-left:16px;border-left:2px solid #ddd6fe;margin:12px 0}.lc-full-caution{padding:10px;background:#fff7ed;border-radius:8px}
+
+.sg-reader-examples{border-left:4px solid #5c35c5;background:#f7f4ff}
+.sg-reader-example{padding:14px 0;border-top:1px solid #ddd4f0}
+.sg-reader-example h4{font-size:16px;margin:0 0 6px}
+.sg-reader-example p{line-height:1.65;margin:8px 0}
 </style>
 </head>
 <body>
@@ -5483,6 +5488,545 @@ function cbResolve(page,title){
  if(!hit)hit=CB_SECTIONS.find(c=>page>=c.start&&page<=c.end);
  return hit?[hit]:[];
 }
+
+const SG_READER_PRODUCTS = {
+  "life": [
+    "LifeSG scheme-finder",
+    "Public sector · hypothetical AI extension",
+    "LifeSG brings citizen services together. Imagine an assistant that explains schemes using approved information; it does not decide eligibility."
+  ],
+  "one": [
+    "OneService report triage",
+    "Public sector · hypothetical AI extension",
+    "OneService lets residents report municipal issues. Imagine AI that classifies a report and proposes routing to the responsible team."
+  ],
+  "health": [
+    "HealthHub information assistant",
+    "Public sector · hypothetical AI extension",
+    "HealthHub provides health information and access to services. Imagine an assistant for appointment preparation and general information, not diagnosis."
+  ],
+  "career": [
+    "MyCareersFuture job matching",
+    "Public sector · hypothetical AI extension",
+    "MyCareersFuture is a job-search service. Imagine a new AI matching feature that recommends roles and explains its suggestions."
+  ],
+  "scam": [
+    "ScamShield-inspired detection",
+    "Public sector · hypothetical study product",
+    "ScamShield helps people address scams. This study scenario imagines a detector and its governance choices; it does not describe the actual service architecture."
+  ],
+  "bank": [
+    "Singapore bank SME lending",
+    "Private sector · fictional product",
+    "A fictional Singapore bank uses a model to recommend SME applications for credit review. A credit officer remains accountable for the decision."
+  ],
+  "mar": [
+    "Martech social sentiment dashboard",
+    "Private sector · fictional product",
+    "A Singapore brand analyses permitted public posts to understand campaign sentiment, including Singlish and code-switching. Aggregate trends are not a representative opinion poll."
+  ],
+  "comms": [
+    "Citizen communications assistant",
+    "Public sector · fictional product",
+    "An agency drafts multilingual replies and public announcements using approved policy sources. Officers approve publication; the assistant cannot announce new policy."
+  ],
+  "retail": [
+    "Retail recommendation assistant",
+    "Private sector · fictional product",
+    "A Singapore retailer recommends products and explains offers. Product suggestions must not invent prices, stock or guarantees."
+  ],
+  "hr": [
+    "Recruitment screening tool",
+    "Private sector · fictional product",
+    "A Singapore employer uses a vendor tool to help review candidates. Hiring staff review recommendations and handle challenges."
+  ],
+  "claims": [
+    "Insurance claims assistant",
+    "Private sector · fictional product",
+    "A Singapore insurer uses AI to flag claims for review. Flags are leads for investigation, not proof of fraud."
+  ]
+};
+const SG_READER_EXAMPLES = {
+  "core": [
+    [
+      "life",
+      "Distinguish a fixed rule, a predictive model and generative AI by what they do, not by the product name.",
+      "A fixed income rule checks a stated threshold; a classifier predicts the relevant service; a language model drafts an explanation. List each component separately in the AI inventory.",
+      "A chatbot interface alone does not tell you the model type or whether a decision is automated."
+    ],
+    [
+      "mar",
+      "AI is data-dependent and probabilistic; speed and scale amplify errors.",
+      "A sentiment model reads Singlish sarcasm as praise and produces a misleading campaign report at scale. Sample uncertain posts, report uncertainty and keep analyst review.",
+      "Opacity, scale and uncertainty require controls beyond ordinary software checks."
+    ]
+  ],
+  "models": [
+    [
+      "mar",
+      "Choose a model based on the task and constraints.",
+      "Compare a small sentiment classifier with a generative summariser. A multimodal model may handle images but adds privacy and testing needs. Evaluate language coverage, latency and cost.",
+      "Larger or generative models are not automatically better; openness does not guarantee transparency."
+    ],
+    [
+      "comms",
+      "Hosting and adaptation choices change control, exposure and operational risk.",
+      "Compare an approved hosted model with on-premise hosting. Use retrieval for current policy sources; restrict agent tools and require approval before publishing. Evaluate fine-tuning separately.",
+      "RAG does not eliminate hallucination or injection; agentic actions require additional permissions and controls."
+    ]
+  ],
+  "cycle": [
+    [
+      "life",
+      "Governance must follow the product from proposal to retirement.",
+      "Use gates for use-case approval, data approval, testing, launch and policy updates. Require reapproval before adding eligibility decisions to an information-only assistant.",
+      "A lifecycle policy needs triggers, evidence and owners, not just a launch checklist."
+    ]
+  ],
+  "harms": [
+    [
+      "career",
+      "AI harms can affect an individual, a group and the wider service ecosystem.",
+      "A matching model repeatedly ranks career-switchers lower. Measure who loses visibility, investigate proxy features and provide a way to challenge recommendations.",
+      "High average accuracy can coexist with serious group-level harm."
+    ],
+    [
+      "mar",
+      "Secondary uses can turn a low-impact insight tool into a harmful decision system.",
+      "Prevent an aggregate sentiment dashboard from becoming a named critic blacklist or employee screening tool. Restrict exports and individual profiling; require review for new purposes.",
+      "Assess foreseeable downstream use and misuse, not only the advertised use case."
+    ]
+  ],
+  "principles": [
+    [
+      "health",
+      "Responsible AI principles become concrete product requirements.",
+      "Require source citations, limits on medical advice, an escalation path and tests across language groups. Assign an owner for each control.",
+      "Name the principle and the operational control that implements it."
+    ],
+    [
+      "one",
+      "OECD principles guide trustworthy AI across wellbeing, rights, transparency, robustness and accountability.",
+      "Explain routing suggestions to officers, allow correction and test accessibility and safety. Use these principles as review questions for the pilot.",
+      "Principles guide decisions; they are not a substitute for applicable law."
+    ]
+  ],
+  "strategy": [
+    [
+      "retail",
+      "Governance intensity should reflect impact and organisational capacity.",
+      "A small retailer can use a concise risk register and manual review of offer claims; a bank needs deeper controls for credit impacts. Both still need accountable owners.",
+      "Proportionality changes the controls, not the obligation to manage risk."
+    ],
+    [
+      "hr",
+      "Developers build, deployers choose the operational context, and users act on outputs.",
+      "A vendor builds the ranking tool, an employer configures it, and recruiters use it. Specify which party validates local suitability and handles candidate complaints.",
+      "Buying a tool does not transfer all deployer responsibilities to its vendor."
+    ],
+    [
+      "life",
+      "Governance must follow the product from proposal to retirement.",
+      "Use gates for use-case approval, data approval, testing, launch and policy updates. Require reapproval before adding eligibility decisions to an information-only assistant.",
+      "A lifecycle policy needs triggers, evidence and owners, not just a launch checklist."
+    ]
+  ],
+  "governance": [
+    [
+      "bank",
+      "Accountability needs named owners, decision rights and escalation paths.",
+      "Assign the product owner the use-case boundary, risk staff the risk review, engineers model controls, and credit officers decision oversight. Record who may stop deployment.",
+      "Human involvement without authority, training and accountability is weak oversight."
+    ],
+    [
+      "one",
+      "Cross-functional review exposes problems one discipline misses.",
+      "Residents, municipal operations, accessibility specialists, security staff and engineers review urgent-report misrouting before a pilot. Resolve disagreements in a decision log.",
+      "Include affected stakeholders, not only model developers."
+    ],
+    [
+      "comms",
+      "Training must fit what each stakeholder actually does.",
+      "Train officers to verify policy citations and reject invented promises; train administrators on incident escalation; train leaders on limitations of sentiment summaries. Test practical understanding.",
+      "Awareness is not enough: users need role-specific skills and escalation procedures."
+    ],
+    [
+      "bank",
+      "ISO standards address different layers of governance.",
+      "Use ISO/IEC 22989 for shared terminology, 42001 for the AI management system and 42005 for AI system impact assessment. Keep local requirements and technical testing in scope.",
+      "A management-system certificate does not prove every model is safe, fair or legally compliant."
+    ]
+  ],
+  "risk": [
+    [
+      "scam",
+      "NIST AI RMF uses GOVERN, MAP, MEASURE and MANAGE to organise risk work.",
+      "GOVERN assigns owners; MAP identifies false-positive harms; MEASURE evaluates missed scams and safe-message flags; MANAGE sets interventions and monitors residual risk.",
+      "The functions interact and repeat across the lifecycle; GOVERN is cross-cutting."
+    ],
+    [
+      "career",
+      "An impact assessment anticipates effects on people and groups, not only organisational benefits.",
+      "Map who may receive fewer job recommendations, barriers for older workers and accessibility needs. Consult affected jobseekers, document mitigations and reassess after a material change.",
+      "Assess severity, likelihood, affected stakeholders and residual risk before approval."
+    ],
+    [
+      "one",
+      "Prioritise risk by likelihood and severity, then reduce it through design and controls.",
+      "An urgent hazard misrouted as routine has severe consequences. Preserve a clear urgent-report channel, send uncertain classifications for officer review and pilot with operations teams.",
+      "A low-frequency severe harm can matter more than a common minor error."
+    ]
+  ],
+  "regulation": [
+    [
+      "health",
+      "Sensitive information raises impact even where legal categories differ.",
+      "Keep health queries out of unnecessary analytics and restrict access. Assess the rules governing the agency and its partners before processing patient information.",
+      "GDPR special-category rules are jurisdiction-specific; Singapore public agencies are generally outside the PDPA data protection provisions and have separate public-sector rules."
+    ],
+    [
+      "hr",
+      "Assess discriminatory outcomes and the employment rules of each market.",
+      "Test screening outcomes for relevant groups and proxy features, consult local employment requirements and fair-employment guidance, and review any EU or US rollout separately.",
+      "Fairness principles, guidance and binding non-discrimination law are different sources of obligations."
+    ]
+  ],
+  "riskclasses": [
+    [
+      "hr",
+      "EU AI Act classification follows the specific use and legal scope, not a Singapore label.",
+      "A Singapore vendor offering candidate-screening AI into the EU assesses whether the use is high-risk and checks exclusions and phased applicability. Compare with a basic retail chatbot.",
+      "Prohibited, high-risk and transparency-triggering uses must be analysed individually; not all chatbots are high-risk."
+    ]
+  ],
+  "highrisk": [
+    [
+      "bank",
+      "High-risk requirements combine technical evidence and organisational controls where the EU AI Act applies.",
+      "For a natural-person creditworthiness product offered in the EU, map risk management, data governance, logging, oversight and conformity duties. Do not automatically classify every SME tool the same way.",
+      "Check scope, use, exceptions, role and effective dates before assigning duties."
+    ],
+    [
+      "retail",
+      "Roles determine duties and can change when a product is rebranded or materially modified.",
+      "A Singapore firm sells an EU supplier’s tool under its own brand. Assess whether it has taken on provider duties rather than assuming it remains only a user.",
+      "Provider, deployer, importer and distributor are legal roles; contract labels alone do not settle them."
+    ]
+  ],
+  "gpai": [
+    [
+      "comms",
+      "General-purpose model obligations differ from duties for the downstream application.",
+      "An agency using a general-purpose model asks the supplier for relevant documentation and evaluates its own communications system. Releasing a general-purpose model creates a different role.",
+      "A GPAI model and a high-risk application are different regulatory objects; additional duties can apply to systemic-risk models."
+    ]
+  ],
+  "enforcement": [
+    [
+      "hr",
+      "Enforcement depends on the violation, responsible party and applicable date.",
+      "A vendor entering the EU keeps a compliance owner, evidence register and escalation route for regulator requests. Assess the relevant penalty category rather than repeating one headline fine.",
+      "Maximum penalties are not an automatic fine for every incident; consult the applicable provision."
+    ]
+  ],
+  "privacy": [
+    [
+      "retail",
+      "State what personal data is used and why; assess the applicable lawful basis and limits.",
+      "Explain recommendations at collection and assess a later proposal to train a model on support chats separately. Offer appropriate choices and do not silently expand the purpose.",
+      "For Singapore private-sector examples consider PDPA obligations and applicable exceptions; do not assume consent is always the only basis."
+    ],
+    [
+      "mar",
+      "Minimise collection and design privacy controls into the workflow.",
+      "Aggregate sentiment, remove unnecessary handles, restrict raw-post access and set retention limits. Assess re-identification risk in tiny audience segments.",
+      "Publicly visible personal data is not automatically free of privacy obligations."
+    ],
+    [
+      "bank",
+      "Governance must cover processors, transfers, rights, breaches and records under the applicable law.",
+      "Map a hosted credit service, verify vendor processing and overseas transfer safeguards, and document response procedures for customer requests and breaches.",
+      "GDPR controller duties and automated-decision rights must not be presented as identical to Singapore PDPA duties."
+    ],
+    [
+      "health",
+      "Sensitive information raises impact even where legal categories differ.",
+      "Keep health queries out of unnecessary analytics and restrict access. Assess the rules governing the agency and its partners before processing patient information.",
+      "GDPR special-category rules are jurisdiction-specific; Singapore public agencies are generally outside the PDPA data protection provisions and have separate public-sector rules."
+    ]
+  ],
+  "ip": [
+    [
+      "comms",
+      "Training data, retrieved content and generated output create different intellectual-property questions.",
+      "License reference materials, record reuse permissions and review generated images or slogans for infringement risks before publication. Do not assume online availability grants training rights.",
+      "A licence for reading or retrieval does not necessarily permit training or redistribution."
+    ]
+  ],
+  "discrimination": [
+    [
+      "hr",
+      "Assess discriminatory outcomes and the employment rules of each market.",
+      "Test screening outcomes for relevant groups and proxy features, consult local employment requirements and fair-employment guidance, and review any EU or US rollout separately.",
+      "Fairness principles, guidance and binding non-discrimination law are different sources of obligations."
+    ],
+    [
+      "career",
+      "AI harms can affect an individual, a group and the wider service ecosystem.",
+      "A matching model repeatedly ranks career-switchers lower. Measure who loses visibility, investigate proxy features and provide a way to challenge recommendations.",
+      "High average accuracy can coexist with serious group-level harm."
+    ]
+  ],
+  "consumer": [
+    [
+      "retail",
+      "AI-generated commercial claims must be accurate and supportable.",
+      "Block invented discount deadlines and unsupported health claims. Review affiliate incentives and misleading recommendations under applicable consumer-protection requirements.",
+      "A disclosure that AI generated a claim does not make a misleading claim acceptable."
+    ],
+    [
+      "health",
+      "Safety and liability depend on intended use, integration and applicable product rules.",
+      "If the assistant evolves into diagnostic recommendations, stop and reassess medical-device status, validation and responsibility for foreseeable harm.",
+      "An information assistant and a regulated diagnostic product can carry very different obligations."
+    ]
+  ],
+  "planning": [
+    [
+      "life",
+      "Define the user problem, intended use, affected people, measurable success and excluded uses before selecting a model.",
+      "Residents need to find relevant schemes. Set targets for source-grounded answers and successful officer handoffs. Exclude eligibility decisions and grant approvals; compare AI with a simpler searchable guide.",
+      "Start with the business context, not a preferred model. Define what the system must never do."
+    ],
+    [
+      "career",
+      "An impact assessment anticipates effects on people and groups, not only organisational benefits.",
+      "Map who may receive fewer job recommendations, barriers for older workers and accessibility needs. Consult affected jobseekers, document mitigations and reassess after a material change.",
+      "Assess severity, likelihood, affected stakeholders and residual risk before approval."
+    ],
+    [
+      "health",
+      "Translate policies and ethical principles into architecture, metrics and operational requirements.",
+      "Use approved health sources, restrict answer scope, test unsafe advice and require escalation. Agree safety thresholds and an accountable clinical reviewer before a pilot.",
+      "Ethics by design means testable controls; a model disclaimer alone is insufficient."
+    ],
+    [
+      "one",
+      "Prioritise risk by likelihood and severity, then reduce it through design and controls.",
+      "An urgent hazard misrouted as routine has severe consequences. Preserve a clear urgent-report channel, send uncertain classifications for officer review and pilot with operations teams.",
+      "A low-frequency severe harm can matter more than a common minor error."
+    ],
+    [
+      "comms",
+      "Document why design choices were made and the evidence supporting them.",
+      "Record approved policy sources, model and prompt versions, language coverage, oversight rules, rejected alternatives and risk acceptance. Trace each launch requirement to evidence.",
+      "Documentation enables accountability, reproducibility and change review."
+    ],
+    [
+      "one",
+      "A deployer must validate the tool in its own operational setting.",
+      "Check routing categories, officer capacity, accessibility and escalation before adopting a vendor classifier. A good result elsewhere may not fit Singapore municipal workflows.",
+      "Developer validation does not remove the deployer’s context assessment."
+    ],
+    [
+      "comms",
+      "External communication plans should be prepared before a failure.",
+      "If the assistant invents a benefits deadline, publish a verified correction through official channels, offer affected residents help and explain the safe fallback. Assign spokesperson and approval responsibilities.",
+      "Transparency requires timely, audience-appropriate communication without exposing unnecessary personal data."
+    ]
+  ],
+  "data": [
+    [
+      "mar",
+      "Training data must be lawful, fit for purpose and representative of the intended task.",
+      "Check platform permissions and collection rights; sample Singlish, sarcasm and multilingual posts. Record annotation rules and gaps instead of treating English-only sentiment labels as universal.",
+      "Volume does not compensate for poor quality, unclear rights or unsuitable coverage."
+    ],
+    [
+      "comms",
+      "Lineage records transformations; provenance records origins and permissions.",
+      "Track each policy document’s issuing agency, date, licence or permission, version and ingestion steps. Remove superseded guidance and trace an answer back to its source.",
+      "A citation is useful only if the underlying source and processing history are trustworthy."
+    ]
+  ],
+  "development": [
+    [
+      "scam",
+      "Test the complete system across performance, security, fairness and operational behaviour.",
+      "Separate training and evaluation data, test emerging scam patterns and benign messages, and check integration with review workflows. Evaluate errors across languages using justified metrics.",
+      "Avoid data leakage; model accuracy alone does not validate an integrated product."
+    ],
+    [
+      "comms",
+      "Adversarial and distribution-shift tests reveal failures normal examples miss.",
+      "Red team fake policy documents, prompt injection in retrieved pages, requests for confidential drafts and misleading translations. Log failures, mitigate and retest before release.",
+      "Red teaming complements validation; it cannot prove the absence of every vulnerability."
+    ],
+    [
+      "bank",
+      "Training and testing records must identify data, versions, methods and limitations.",
+      "Save dataset splits, feature choices, fairness results, model version, test thresholds and review sign-offs. Record unsuccessful tests as well as passes.",
+      "An audit trail must let reviewers connect a reported result to the actual tested model."
+    ]
+  ],
+  "retirement": [
+    [
+      "life",
+      "Define stop conditions and a practical fallback before deployment.",
+      "If scheme guidance becomes unreliable after a policy change, disable generated answers and show approved service links with officer contact options. Revalidate before restoring the feature.",
+      "Localisation, restricted operation and deactivation are different controls; choose one that addresses the specific risk."
+    ]
+  ],
+  "deploy": [
+    [
+      "mar",
+      "Existing policies may miss AI-specific uses and derived information.",
+      "Update data retention and access rules for scraped posts, inferred sentiment and prompts. Check permitted reuse and prevent uploading private customer messages to unapproved tools.",
+      "Permission for one purpose does not automatically cover model training or secondary use."
+    ],
+    [
+      "comms",
+      "Third-party risk includes the model, hosting and the wider supply chain.",
+      "Before procurement, review subcontractors, data use, incident notification, change notices and exit arrangements. Require evidence of testing in the intended languages.",
+      "A contract supports risk management but does not replace technical validation."
+    ],
+    [
+      "mar",
+      "Choose a model based on the task and constraints.",
+      "Compare a small sentiment classifier with a generative summariser. A multimodal model may handle images but adds privacy and testing needs. Evaluate language coverage, latency and cost.",
+      "Larger or generative models are not automatically better; openness does not guarantee transparency."
+    ],
+    [
+      "comms",
+      "Hosting and adaptation choices change control, exposure and operational risk.",
+      "Compare an approved hosted model with on-premise hosting. Use retrieval for current policy sources; restrict agent tools and require approval before publishing. Evaluate fine-tuning separately.",
+      "RAG does not eliminate hallucination or injection; agentic actions require additional permissions and controls."
+    ],
+    [
+      "career",
+      "The deployer’s impact assessment examines actual users, configuration and decisions.",
+      "Before switching on a matching feature, assess jobseeker visibility, recruiter behaviour, appeal channels and feedback from underserved groups. Reassess after changing ranking objectives.",
+      "A vendor assessment is an input, not a substitute for deployment-specific review."
+    ],
+    [
+      "bank",
+      "Vendor and open-source terms can constrain data, use, support and accountability.",
+      "Review retention, training reuse, location of processing, audit evidence, incident notices, IP terms, licence restrictions and exit rights. Verify promises against technical controls.",
+      "Open-source availability does not mean unrestricted use or absence of obligations."
+    ],
+    [
+      "claims",
+      "Owning a model brings control as well as maintenance and assurance responsibilities.",
+      "The insurer can tune fraud flags but must own data quality, evaluation, oversight, security and updates. Budget for specialists and complaints handling before replacing a vendor service.",
+      "Building internally does not avoid liability; it can increase responsibility for the whole lifecycle."
+    ],
+    [
+      "health",
+      "Deployment controls include trained users, bounded access and usable escalation.",
+      "Train service staff to verify answers and handle uncertainty. Limit permitted tasks and sensitive-data access; give residents a straightforward route to human support.",
+      "A human reviewer must have competence, time, information and authority to intervene."
+    ],
+    [
+      "health",
+      "A release gate checks evidence, operational ownership and fallback readiness.",
+      "Publish a model/system card with intended use, limitations, language coverage and evaluation results. Test officer handoff and rollback; address applicable conformity duties before launch.",
+      "A passing model benchmark is not sufficient production readiness."
+    ]
+  ],
+  "operations": [
+    [
+      "mar",
+      "Monitoring must detect both data drift and changing relationships between inputs and outcomes.",
+      "Watch language mix, campaign topics, label quality and analyst corrections. Re-evaluate when slang or a public event changes meaning; validate updates before rollout.",
+      "Retraining on a calendar alone is not a monitoring strategy."
+    ],
+    [
+      "comms",
+      "Periodic assurance should test realistic misuse and security threats.",
+      "Red team attempts to make the assistant announce false grants, impersonate an official or disclose private drafts. Test multilingual attacks and retrieval injection after source or model updates.",
+      "Test safety boundaries with attack evidence and fix verification, not only a list of banned words."
+    ],
+    [
+      "one",
+      "Incident management needs containment, owners, communication and a durable record.",
+      "If reports route to the wrong agency, stop automatic routing, preserve appropriate evidence, reprocess affected cases and assign recovery owners. Log impact and remedial actions.",
+      "Respond to actual harm and root causes; do not merely improve a dashboard metric."
+    ],
+    [
+      "scam",
+      "Root-cause analysis needs product, data, engineering, security and frontline perspectives.",
+      "A rise in missed scams may come from new tactics, stale labels or a broken ingestion pipeline. Compare versions and consult reviewers before deciding retraining is the remedy.",
+      "Diagnose model drift, data quality and integration faults separately."
+    ],
+    [
+      "life",
+      "Transparency must reach the relevant audience and disclose useful limitations.",
+      "Tell residents when they interact with AI, show authoritative sources and how to reach an officer. Give operators instructions and update notices appropriate to applicable obligations.",
+      "Public disclosure, deployer instructions and regulator documentation serve different audiences."
+    ],
+    [
+      "mar",
+      "Monitor system outcomes in addition to model scores.",
+      "Track sentiment errors, reviewer corrections, audience coverage and downstream campaign decisions. Trigger review when confidence or language coverage falls outside approved limits.",
+      "Monitor business impact and harm, not just uptime or latency."
+    ],
+    [
+      "comms",
+      "Assurance continues after launch as sources, models and attackers change.",
+      "Repeat multilingual red teaming after a policy-source update; audit access controls, retrieval injection and approval bypasses. Verify fixes against the attacks that exposed the issue.",
+      "Deployment is the beginning of ongoing assurance, not the end of testing."
+    ],
+    [
+      "scam",
+      "Incident records and monitoring plans must connect evidence to action.",
+      "Record which detector version flagged safe messages, scope affected users, review false positives and document rollback and notification decisions. Protect sensitive evidence.",
+      "A useful log includes impact, ownership, response and follow-up, not just timestamps."
+    ],
+    [
+      "mar",
+      "Secondary uses can turn a low-impact insight tool into a harmful decision system.",
+      "Prevent an aggregate sentiment dashboard from becoming a named critic blacklist or employee screening tool. Restrict exports and individual profiling; require review for new purposes.",
+      "Assess foreseeable downstream use and misuse, not only the advertised use case."
+    ],
+    [
+      "comms",
+      "External communication plans should be prepared before a failure.",
+      "If the assistant invents a benefits deadline, publish a verified correction through official channels, offer affected residents help and explain the safe fallback. Assign spokesperson and approval responsibilities.",
+      "Transparency requires timely, audience-appropriate communication without exposing unnecessary personal data."
+    ],
+    [
+      "life",
+      "Define stop conditions and a practical fallback before deployment.",
+      "If scheme guidance becomes unreliable after a policy change, disable generated answers and show approved service links with officer contact options. Revalidate before restoring the feature.",
+      "Localisation, restricted operation and deactivation are different controls; choose one that addresses the specific risk."
+    ]
+  ]
+};
+
+function cbAddSingaporeExamples(groups,dialog){
+ for(const paneId of ['lcNotesBrief','lcNotesFull']){
+  const pane=dialog.querySelector('#'+paneId);if(!pane)continue;
+  for(const group of groups){
+   const section=document.createElement('section');section.className='lc-card sg-reader-examples';
+   const heading=document.createElement('h3');heading.textContent='Singapore product examples · '+group.title;section.append(heading);
+   const scope=document.createElement('p');scope.className='lc-source';scope.textContent='Added learning examples, separate from the original Cookbook. Public-service AI extensions are hypothetical; private-sector products are fictional. Local context does not replace jurisdiction-specific exam requirements.';section.append(scope);
+   for(const [key,concept,action,takeaway] of SG_READER_EXAMPLES[group.id]){
+    const [name,kind,context]=SG_READER_PRODUCTS[key];
+    const article=document.createElement('article');article.className='sg-reader-example';
+    const title=document.createElement('h4');title.textContent=name;article.append(title);
+    const label=document.createElement('p');label.className='lc-source';label.textContent=kind;article.append(label);
+    for(const [caption,text] of [['The product',context],['Connect to this section',concept],['Decision in practice',action],['Exam takeaway',takeaway]]){
+     const paragraph=document.createElement('p');const strong=document.createElement('strong');strong.textContent=caption+': ';paragraph.append(strong,document.createTextNode(text));article.append(paragraph);
+    }
+    section.append(article);
+   }
+   // Keep source pages/notes in their existing order; examples follow the section's source content.
+   const lastSource=paneId==='lcNotesFull'?pane.querySelector('#cbPage'+group.end):null;
+   if(lastSource)lastSource.after(section);else pane.append(section);
+  }
+ }
+}
+
 function cbOpenReading(link){
  const page=Number(link.dataset.readPage),title=link.dataset.readTitle||'Cookbook notes',scope=link.dataset.readSection||title;
  const groups=cbResolve(page,scope);if(!groups.length)return;
@@ -5492,6 +6036,7 @@ function cbOpenReading(link){
  const context=link.closest('li')?.querySelector('.pi-text')?.textContent;
  const dlg=document.getElementById('lcLesson');
  dlg.innerHTML=`<header class="lc-dialog-head"><div class="lc-lesson-head"><div><small>📖 Cookbook reader</small><h2 id="lcLessonTitle" tabindex="-1">${lcEscape(title)}</h2><p class="lc-source">Straits Interactive · Apr 2026 · source pp. ${pages[0]}–${pages[pages.length-1]}</p></div><button type="button" class="lc-close" aria-label="Close reading notes">Close ×</button></div></header><div class="lc-dialog-scroll"><div class="lc-notes-switch"><strong>Cookbook notes</strong><button type="button" id="lcNotesToggle" aria-controls="lcNotesBrief lcNotesFull" aria-pressed="false">TL;DR: on · Show full section</button></div>${context?`<details><summary>Exam Blueprint focus</summary><p>${lcEscape(context)}</p></details>`:''}<p class="lc-source">Relevant section: ${groups.map(c=>lcEscape(c.title)).join('; ')}. Index page labels are approximate; these source ranges follow the Cookbook headings.</p><div id="lcNotesBrief"><p class="lc-source">Organised study summary · paraphrased source concepts. Clarifications are labelled.</p>${notes.map(n=>`<section class="lc-card lc-note-section"><h3>${lcEscape(n.title)}</h3><p class="lc-source">Cookbook · pp. ${lcEscape(n.pages)}</p><ul>${n.points.map(v=>`<li>${lcEscape(v)}</li>`).join('')}</ul></section>`).join('')}</div><div id="lcNotesFull" hidden><p class="lc-source">Relevant source text, divided into headings and shorter reading points. Original explanations are retained. This reading view preserves the source text, with extracted numbering repaired; original diagrams and page layout remain in the PDF.</p><details class="lc-source"><summary>Accuracy clarifications and source scope</summary><ul><li>Course-material legal dates and status reflect the source, not a current legal update. Match jurisdiction, role and system category.</li><li>EU AI Act transparency duties: Article 50, not the source’s Article 52 reference.</li><li>NIST GOVERN / MAP / MEASURE / MANAGE are overlapping functions, not fixed lifecycle steps.</li><li>Privacy-enhancing technologies do not guarantee anonymity or eliminate all privacy risks.</li><li>Directive (EU) 2024/2853 is the Product Liability Directive.</li></ul></details><nav class="lc-notes-jumps" aria-label="Cookbook pages">${pages.map(n=>`<a href="#cbPage${n}">p. ${n}</a>`).join('')}</nav>${pages.map(n=>`<section class="lc-card lc-note-section lc-full-page" id="cbPage${n}"><h3>Cookbook · page ${n}</h3>${(LC_COOKBOOK_FULL[n]||[]).map(b=>b.kind==='heading'?`<h4>${lcEscape(b.text)}</h4>`:`<p class="lc-reading-point">${lcEscape(b.text)}</p>`).join('')}</section>`).join('')}</div><p class="lc-source">Registered-participant study copy · Keep local.</p></div>`;
+ cbAddSingaporeExamples(groups,dlg);
  dlg.querySelector('.lc-close').addEventListener('click',lcCloseLesson);
  document.getElementById('lcNotesToggle').addEventListener('click',()=>lcSetNotesMode(lcNotesMode==='tldr'?'full':'tldr'));
  lcSetNotesMode(lcNotesMode);dlg.showModal();document.getElementById('lcLessonTitle').focus({preventScroll:true});
