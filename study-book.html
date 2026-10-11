@@ -12,10 +12,14 @@
 .practice-provenance{font-size:14px}.option-reasons li{margin:10px 0}.feedback h4{font-size:15px;margin:14px 0 4px}.practice-set{padding-top:20px;border-top:1px solid var(--line)}
 
 .clear-memory{font:inherit;font-size:13px;color:#864125;background:transparent;border:1px solid var(--line);padding:8px 12px;border-radius:5px}.question-memory{font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--line)}#memoryNotice:empty{display:none}
+
+.menu-toggle{position:fixed;top:10px;left:14px;z-index:12;background:var(--green);color:white;border:1px solid var(--green);border-radius:6px;padding:9px 14px;font-size:14px;box-shadow:0 2px 8px #172d3420}.top{padding-left:175px;min-height:62px}.tabs{top:58px}.rail{top:62px;max-height:calc(100dvh - 78px)}.menu-hidden .rail{display:none}.menu-hidden .layout{grid-template-columns:minmax(0,1fr);max-width:1390px}.menu-hidden main{max-width:1100px;width:100%;margin:auto}.menu-backdrop{display:none}
+@media(max-width:800px){.rail{position:fixed;inset:58px auto 0 0;width:min(360px,92vw);max-height:none;overflow:auto;padding:20px;background:var(--paper);z-index:11;overscroll-behavior:contain;box-shadow:4px 0 20px #172d3420}.menu-backdrop:not([hidden]){display:block;position:fixed;inset:58px 0 0;background:#172d3460;z-index:10}.menu-open{overflow:hidden}.rail #toc{max-height:none;overflow:visible}.top{padding-top:62px;padding-left:20px}.menu-hidden main{max-width:810px}.tabs{top:58px}}
+@media print{.menu-toggle,.menu-backdrop{display:none}.menu-hidden main{max-width:none}}
 </style></head><body>
 <a class="skip" href="#chapter">Skip to lesson</a>
 <header class="top"><a class="brand" href="study-book.html">AIGP / GUIDED STUDY BOOK</a><a href="aigp-cookbook-index.html">Original cookbook navigator ↗</a></header>
-<div class="layout"><aside class="rail" aria-label="Book navigation"><p class="eyebrow">Your study edition</p><p class="book-intro">Four domains. 57 lessons.<br>Understand → practise → review.</p><p class="book-progress" id="progressText" aria-live="polite"></p><p class="book-progress" id="questionProgress" aria-live="polite"></p><button type="button" id="clearStudyMemory" class="clear-memory">Clear study memory</button><p class="small" id="memoryNotice" role="status"></p><div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+<button type="button" class="menu-toggle" id="menuToggle" aria-controls="bookMenu" aria-expanded="true">☰ Hide topics</button><div class="menu-backdrop" id="menuBackdrop" hidden></div><div class="layout"><aside id="bookMenu" class="rail" aria-label="Book navigation"><p class="eyebrow">Your study edition</p><p class="book-intro">Four domains. 57 lessons.<br>Understand → practise → review.</p><p class="book-progress" id="progressText" aria-live="polite"></p><p class="book-progress" id="questionProgress" aria-live="polite"></p><button type="button" id="clearStudyMemory" class="clear-memory">Clear study memory</button><p class="small" id="memoryNotice" role="status"></p><div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
 <details class="contents" id="contents" open><summary>Chapters & learning objectives</summary><label class="small" for="bookSearch">Search lessons, products or concepts</label><input id="bookSearch" type="search" placeholder="Try LifeSG, fairness, red team…" autocomplete="off"><p class="small" id="searchCount" role="status"></p><nav id="toc" aria-label="Learning objectives"></nav></details><p class="book-note">Original explanations and practice questions. Singapore cases illustrate the syllabus; hypothetical public-service AI features are labelled. This is a study companion, not official IAPP material or legal advice.</p></aside>
 <main id="chapter" tabindex="-1"><header class="chapter-head"><p class="eyebrow" id="lessonLabel"></p><h1 id="lessonTitle"></h1><p class="deck" id="lessonDeck"></p><div class="metadata" id="lessonMeta"></div></header>
 <div class="goal"><p class="eyebrow">By the end of this lesson</p><p id="lessonGoal"></p></div>
@@ -6153,7 +6157,7 @@ function setStage(stage,moveFocus=false,writeHash=true){
 }
 function goToLesson(index,moveFocus=false,writeHash=true){
  if(index<0||index>=LESSONS.length)return;currentIndex=index;openLessonGroups();renderLesson();setStage('learn',false,false);if(writeHash)location.hash=LESSONS[index].id+'/learn';
- if(moveFocus){if(innerWidth<=800)document.getElementById('contents').open=false;document.getElementById('chapter').focus({preventScroll:true});document.getElementById('chapter').scrollIntoView({block:'start'});}
+ if(moveFocus){if(innerWidth<=800)setMenuOpen(false);document.getElementById('chapter').focus({preventScroll:true});document.getElementById('chapter').scrollIntoView({block:'start'});}
 }
 function readLocation(){let [id,stage]=location.hash.slice(1).split('/');const index=LESSONS.findIndex(l=>l.id===id);if(index!==-1&&index!==currentIndex){currentIndex=index;openLessonGroups();renderLesson();}setStage(STAGES.includes(stage)?stage:'learn',false,false);}
 STAGES.forEach((id,i)=>{const tab=document.getElementById('tab-'+id);tab.addEventListener('click',()=>setStage(id,true));tab.addEventListener('keydown',e=>{let index;if(e.key==='ArrowRight')index=(i+1)%3;else if(e.key==='ArrowLeft')index=(i+2)%3;else if(e.key==='Home')index=0;else if(e.key==='End')index=2;else return;e.preventDefault();setStage(STAGES[index],true);document.getElementById('tab-'+STAGES[index]).focus();});});
@@ -6167,5 +6171,21 @@ document.getElementById('clearStudyMemory').addEventListener('click',()=>{
  document.getElementById('memoryNotice').textContent=cleared?'Study memory cleared. You can start again.':'Session memory cleared, but browser storage could not be cleared. Previously saved progress may return after a reload.';
 });
 window.addEventListener('storage',event=>{if(event.key===STORAGE_KEY||event.key===QUESTION_STORAGE_KEY||event.key===null){const stage=currentStage;readStudyMemory();renderLesson();setStage(stage,false,false);}});
-const initialLesson=LESSONS.findIndex(l=>l.id===location.hash.slice(1).split('/')[0]);if(initialLesson!==-1)currentIndex=initialLesson;openLessonGroups();if(innerWidth<=800)document.getElementById('contents').open=false;renderLesson();readLocation();window.addEventListener('hashchange',readLocation);
+const menuToggle=document.getElementById('menuToggle'),bookMenu=document.getElementById('bookMenu'),menuBackdrop=document.getElementById('menuBackdrop');
+const mobileMenu=matchMedia('(max-width:800px)');let menuIsOpen=!mobileMenu.matches;
+function setMenuOpen(open,focusMenu=false){
+ menuIsOpen=open;document.body.classList.toggle('menu-hidden',!open);document.body.classList.toggle('menu-open',open&&mobileMenu.matches);
+ menuToggle.setAttribute('aria-expanded',String(open));menuToggle.textContent=open?'× Hide topics':'☰ Show topics';bookMenu.inert=!open;menuBackdrop.hidden=!(open&&mobileMenu.matches);
+ document.getElementById('chapter').inert=open&&mobileMenu.matches;document.querySelector('.top').inert=open&&mobileMenu.matches;
+ if(open&&mobileMenu.matches){document.getElementById('contents').open=true;if(focusMenu)document.getElementById('bookSearch').focus({preventScroll:true});}
+}
+menuToggle.addEventListener('click',()=>setMenuOpen(!menuIsOpen,true));
+menuBackdrop.addEventListener('click',()=>{setMenuOpen(false);menuToggle.focus({preventScroll:true});});
+document.addEventListener('keydown',e=>{
+ if(!menuIsOpen)return;
+ if(e.key==='Escape'){setMenuOpen(false);menuToggle.focus({preventScroll:true});}
+ if(e.key==='Tab'&&mobileMenu.matches){const items=[menuToggle,...bookMenu.querySelectorAll('button,input,summary,a[href]')].filter(el=>el.getClientRects().length&&!el.disabled);const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+});
+mobileMenu.addEventListener('change',()=>setMenuOpen(!mobileMenu.matches));setMenuOpen(menuIsOpen);
+const initialLesson=LESSONS.findIndex(l=>l.id===location.hash.slice(1).split('/')[0]);if(initialLesson!==-1)currentIndex=initialLesson;openLessonGroups();renderLesson();readLocation();window.addEventListener('hashchange',readLocation);
 </script></body></html>
