@@ -8,6 +8,8 @@
 .depth-section{padding:10px 0 18px;border-bottom:1px solid var(--line);margin:24px 0}.depth-section p{max-width:72ch}
 
 .concept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.concept-grid article{background:var(--wash);border-radius:6px;padding:18px}.concept-grid h3{font-size:16px;margin:0 0 12px}.concept-grid p{font-size:15px;margin:0}@media(max-width:800px){.concept-grid{grid-template-columns:1fr}}
+
+.practice-provenance{font-size:14px}.option-reasons li{margin:10px 0}.feedback h4{font-size:15px;margin:14px 0 4px}.practice-set{padding-top:20px;border-top:1px solid var(--line)}
 </style></head><body>
 <a class="skip" href="#chapter">Skip to lesson</a>
 <header class="top"><a class="brand" href="study-book.html">AIGP / GUIDED STUDY BOOK</a><a href="aigp-cookbook-index.html">Original cookbook navigator ↗</a></header>
@@ -67,6 +69,62 @@
         "term": "Prediction vs generation vs action",
         "meaning": "A score, a drafted answer and a tool-executed change have different consequences. Identify which component creates each output or action."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.A.1-practice-1",
+        "stem": "A retailer combines fixed discount rules, a model predicting customer churn and an assistant drafting messages. Which inventory approach MOST accurately supports governance?",
+        "options": [
+          {
+            "text": "Classify the whole product as deterministic because discounts follow fixed conditions",
+            "rationale": "Fixed discounts do not make learned predictions or generated messages deterministic.",
+            "correct": false
+          },
+          {
+            "text": "Inventory only the component trained internally because purchased components remain the vendor’s responsibility",
+            "rationale": "Purchased components still need suitability and integration review by the deployer.",
+            "correct": false
+          },
+          {
+            "text": "Record each component’s task, method and outputs, then assess their combined use",
+            "rationale": "The components have distinct behaviours and risks, and integration can create additional consequences.",
+            "correct": true
+          },
+          {
+            "text": "Classify all three as language models because the messages are delivered through chat",
+            "rationale": "The interface does not establish the methods used by the rule or prediction components.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "I.A.1-practice-2",
+        "stem": "A team describes its scheme-finder as artificial general intelligence because it can discuss many schemes fluently. Which observation BEST challenges that description?",
+        "options": [
+          {
+            "text": "It must be deterministic if its source documents are official",
+            "rationale": "Authoritative inputs do not make generated outputs deterministic or necessarily correct.",
+            "correct": false
+          },
+          {
+            "text": "It performs bounded information tasks; fluency across those tasks does not establish general-purpose human-level competence",
+            "rationale": "Scope and demonstrated capability matter more than conversational appearance.",
+            "correct": true
+          },
+          {
+            "text": "It cannot be AI because it does not update its weights during every conversation",
+            "rationale": "Learning in development and adaptation in operation are different; inference can use a fixed trained model.",
+            "correct": false
+          },
+          {
+            "text": "It must be superintelligent if its answers are faster than an officer’s",
+            "rationale": "Response speed does not establish the breadth or level of intelligence.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -115,6 +173,62 @@
       {
         "term": "Societal and organisational harm",
         "meaning": "Misinformation, environmental burden, loss of trust and operational failures can extend beyond direct users. Include downstream effects."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.A.2-practice-1",
+        "stem": "A job-matching pilot has strong overall relevance scores. Career-switchers receive fewer suitable recommendations, and the training feedback then contains fewer interactions from them. What is the MOST relevant governance concern?",
+        "options": [
+          {
+            "text": "The issue is solely a model-speed problem because fewer interactions produce less data",
+            "rationale": "Speed does not explain or address the causal pathway described.",
+            "correct": false
+          },
+          {
+            "text": "A feedback loop may reinforce concentrated disadvantage despite strong aggregate performance",
+            "rationale": "Reduced exposure can affect both opportunities and the data used for future learning.",
+            "correct": true
+          },
+          {
+            "text": "Only the current average relevance score matters because it includes every user",
+            "rationale": "An aggregate can conceal a persistent group-level pattern.",
+            "correct": false
+          },
+          {
+            "text": "The lower interaction count proves that career-switchers are less interested in work",
+            "rationale": "Reduced exposure is an alternative explanation that requires investigation.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "I.A.2-practice-2",
+        "stem": "A synthetic public announcement is shared widely before correction, reducing trust even among people who never used the assistant. Which harm analysis is MOST appropriate?",
+        "options": [
+          {
+            "text": "Consider wider societal and institutional consequences as well as direct user effects",
+            "rationale": "The reach and trust consequences extend beyond individual interactions.",
+            "correct": true
+          },
+          {
+            "text": "Limit the analysis to people whose personal data appeared in the announcement",
+            "rationale": "Privacy harms are not the full AI harm landscape.",
+            "correct": false
+          },
+          {
+            "text": "Treat the event only as a financial loss to the model vendor",
+            "rationale": "Vendor loss omits the public and institutional impacts.",
+            "correct": false
+          },
+          {
+            "text": "Count only wrong answers submitted through the assistant’s interface",
+            "rationale": "Distribution and downstream reliance can amplify effects outside that interface.",
+            "correct": false
+          }
+        ],
+        "answer": 0
       }
     ]
   },
@@ -165,6 +279,62 @@
         "term": "Autonomy, speed and scale",
         "meaning": "Automation can multiply harm before detection. Bound actions, monitor effects and provide practical intervention."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.A.3-practice-1",
+        "stem": "A campaign summary is automatically used to adjust thousands of messages. The sentiment model is highly confident but misreads local sarcasm. Which control MOST directly addresses the described exposure?",
+        "options": [
+          {
+            "text": "Validate local error patterns and require appropriate checks before high-impact automated message changes",
+            "rationale": "It targets both the model’s contextual weakness and the point where output becomes large-scale action.",
+            "correct": true
+          },
+          {
+            "text": "Increase daily processing volume to improve the completeness of the report",
+            "rationale": "More volume can amplify the same uncorrected error.",
+            "correct": false
+          },
+          {
+            "text": "Display confidence percentages while leaving every message change automatic",
+            "rationale": "Confidence is not independent evidence of correctness and does not bound the action.",
+            "correct": false
+          },
+          {
+            "text": "Retain only the final campaign result and delete the model’s error-review evidence",
+            "rationale": "That removes diagnostic evidence without reducing the exposure.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "I.A.3-practice-2",
+        "stem": "A system’s inputs have changed, but its parameter file has not. The owner claims its behaviour cannot deteriorate because the model is unchanged. What is the BEST response?",
+        "options": [
+          {
+            "text": "Accept the claim because only retraining can change prediction quality",
+            "rationale": "Input distributions and interpretation can affect outcomes without a weight update.",
+            "correct": false
+          },
+          {
+            "text": "Require a larger parameter file as the standard remedy for any changed input",
+            "rationale": "Model size does not diagnose the failure mechanism.",
+            "correct": false
+          },
+          {
+            "text": "Replace monitoring with the original evaluation report",
+            "rationale": "Past evidence may not cover the new conditions.",
+            "correct": false
+          },
+          {
+            "text": "Evaluate whether changed inputs or context invalidate the previous performance evidence",
+            "rationale": "Stable weights do not guarantee stable fitness under distribution or context change.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -214,6 +384,62 @@
         "term": "Transparency and accountability",
         "meaning": "Give people useful information and assign answerable owners. Disclosure and ownership are complementary controls."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.A.4-practice-1",
+        "stem": "A health assistant offers source links, but several do not support its answer and the support button reaches no staffed team. Which assessment BEST reflects responsible AI principles?",
+        "options": [
+          {
+            "text": "The product satisfies transparency because every answer has a hyperlink",
+            "rationale": "A hyperlink alone does not substantiate the claim.",
+            "correct": false
+          },
+          {
+            "text": "The support button establishes human oversight even if no one receives requests",
+            "rationale": "A non-operational handoff is not usable oversight.",
+            "correct": false
+          },
+          {
+            "text": "The limitations are irrelevant if users rate the assistant positively",
+            "rationale": "Satisfaction does not establish safety or truthfulness.",
+            "correct": false
+          },
+          {
+            "text": "The controls must be evaluated for meaningful source support and usable escalation, not just visible presence",
+            "rationale": "Transparency and human-centricity require functioning information and assistance.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "I.A.4-practice-2",
+        "stem": "A design option uses more personal information to improve tailoring. Which approach BEST handles the tension between usefulness and privacy?",
+        "options": [
+          {
+            "text": "Select the option with the longest privacy notice",
+            "rationale": "Notice length does not establish necessity or proportionality.",
+            "correct": false
+          },
+          {
+            "text": "Let the model decide what information it should request without approved limits",
+            "rationale": "That delegates a governance boundary without a justified decision.",
+            "correct": false
+          },
+          {
+            "text": "Compare the benefit, data necessity and less intrusive alternatives, then document the accepted design and controls",
+            "rationale": "The trade-off requires evidence and a reasoned decision.",
+            "correct": true
+          },
+          {
+            "text": "Maximise personal-data collection whenever accuracy improves",
+            "rationale": "Accuracy improvement alone does not justify unlimited collection.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -262,6 +488,62 @@
       {
         "term": "Decision and escalation rights",
         "meaning": "Specify who may approve, reject, override or stop the product, and where unresolved disagreement goes."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.B.1-practice-1",
+        "stem": "A credit model’s risk review is complete, but the product owner and risk team disagree about residual risk. Nobody is authorised to resolve the disagreement. What should the governance programme establish FIRST?",
+        "options": [
+          {
+            "text": "A supplier statement that its model is responsible",
+            "rationale": "The supplier cannot settle the bank’s own acceptance authority.",
+            "correct": false
+          },
+          {
+            "text": "A policy assigning shared accountability to everyone in the meeting",
+            "rationale": "Shared wording without decision rights can preserve the ambiguity.",
+            "correct": false
+          },
+          {
+            "text": "A defined escalation and decision-authority route for risk acceptance and release",
+            "rationale": "The immediate gap concerns accountable decision rights.",
+            "correct": true
+          },
+          {
+            "text": "Another general model benchmark without resolving authority",
+            "rationale": "More evidence may help, but it does not create a decision route.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "I.B.1-practice-2",
+        "stem": "During an incident, an operations lead can detect unsafe outputs but cannot restrict the system. Which change MOST improves accountability?",
+        "options": [
+          {
+            "text": "Treat the model’s automatic confidence score as the release authority",
+            "rationale": "A score cannot hold organisational decision responsibility.",
+            "correct": false
+          },
+          {
+            "text": "Assign and communicate appropriate intervention authority with a tested escalation process",
+            "rationale": "Detection must connect to someone able to act.",
+            "correct": true
+          },
+          {
+            "text": "Require the lead to write longer weekly reports",
+            "rationale": "Reporting alone does not enable timely intervention.",
+            "correct": false
+          },
+          {
+            "text": "Remove operations from the governance process",
+            "rationale": "That discards relevant frontline knowledge.",
+            "correct": false
+          }
+        ],
+        "answer": 1
       }
     ]
   },
@@ -313,6 +595,62 @@
         "term": "Decision process",
         "meaning": "Consultation needs a recorded response and escalation route. Participation is not the same as transferring accountability."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.B.2-practice-1",
+        "stem": "A municipal triage pilot is technically accurate, but residents struggle to indicate urgency and officers receive unmanageable queues. What is the BEST next review approach?",
+        "options": [
+          {
+            "text": "Resolve the disagreement by excluding frontline feedback from the review",
+            "rationale": "That hides evidence needed for a suitable deployment decision.",
+            "correct": false
+          },
+          {
+            "text": "Bring affected residents and operations together with technical and relevant specialist reviewers",
+            "rationale": "The problems cross user, workflow and technical perspectives.",
+            "correct": true
+          },
+          {
+            "text": "Have developers repeat the same isolated classification test",
+            "rationale": "That does not evaluate the reported interface and capacity issues.",
+            "correct": false
+          },
+          {
+            "text": "Ask only the hosting supplier to approve the pilot",
+            "rationale": "Hosting expertise does not cover all local consequences.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "I.B.2-practice-2",
+        "stem": "A consultation identifies a serious accessibility issue. The final design log says only that consultation occurred. What evidence is MOST important to add?",
+        "options": [
+          {
+            "text": "How the concern was assessed, what action was taken and who accepted any remaining limitation",
+            "rationale": "Participation should be connected to a reasoned decision.",
+            "correct": true
+          },
+          {
+            "text": "A larger count of meeting attendees",
+            "rationale": "Headcount does not establish a response to the issue.",
+            "correct": false
+          },
+          {
+            "text": "A statement that participants now share all product accountability",
+            "rationale": "Consultation does not transfer organisational responsibility.",
+            "correct": false
+          },
+          {
+            "text": "The reviewers’ job titles without the issue or outcome",
+            "rationale": "Titles do not explain how the concern influenced design.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -363,6 +701,62 @@
         "term": "Training effectiveness",
         "meaning": "Use realistic exercises and remediation. Completion rates measure participation rather than ability to act correctly."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.B.3-practice-1",
+        "stem": "A training programme records full attendance, but officers cannot distinguish verified scheme guidance from invented policy. Which measure BEST evaluates improvement?",
+        "options": [
+          {
+            "text": "A realistic verification-and-escalation exercise with results and remediation",
+            "rationale": "It tests the operational behaviour the role requires.",
+            "correct": true
+          },
+          {
+            "text": "The number of terminology slides presented",
+            "rationale": "Presentation volume does not measure practical competence.",
+            "correct": false
+          },
+          {
+            "text": "The model’s response latency during training",
+            "rationale": "Latency is not the officers’ verification ability.",
+            "correct": false
+          },
+          {
+            "text": "The proportion of staff who opened the invitation",
+            "rationale": "Invitation engagement is weaker than task performance.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "I.B.3-practice-2",
+        "stem": "A communications tool receives a major source and workflow update. Which training action is MOST appropriate?",
+        "options": [
+          {
+            "text": "Repeat only the original introductory definition of AI",
+            "rationale": "That may omit the new duties and failure modes.",
+            "correct": false
+          },
+          {
+            "text": "Train only the vendor because it supplied the update",
+            "rationale": "Local users and operators still perform important tasks.",
+            "correct": false
+          },
+          {
+            "text": "Assume prior attendance covers every future workflow",
+            "rationale": "Past participation does not establish competence with changed operation.",
+            "correct": false
+          },
+          {
+            "text": "Refresh role-specific guidance and test the changed verification and escalation tasks",
+            "rationale": "Training needs to reflect material operational changes.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -411,6 +805,62 @@
       {
         "term": "Risk tolerance",
         "meaning": "Define which risks may be accepted and by whom. A business preference cannot override applicable requirements."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.B.4-practice-1",
+        "stem": "A small company uses AI to reject insurance claims automatically. Which governance approach BEST reflects proportionality?",
+        "options": [
+          {
+            "text": "Apply no formal review until the company reaches a large headcount",
+            "rationale": "Size does not eliminate impact or obligations.",
+            "correct": false
+          },
+          {
+            "text": "Use only a low-impact advertising checklist because the team is small",
+            "rationale": "The checklist may not fit claim-decision consequences.",
+            "correct": false
+          },
+          {
+            "text": "Require identical controls for claim rejection and decorative image generation",
+            "rationale": "Uniformity ignores important differences in impact.",
+            "correct": false
+          },
+          {
+            "text": "Assess decision impact and operating capability, retaining appropriate assurance and accountability despite company size",
+            "rationale": "Consequential use can require substantial controls in a small organisation.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "I.B.4-practice-2",
+        "stem": "Two products share a model: a retail description assistant and a credit decision tool. What is the MOST appropriate basis for different controls?",
+        "options": [
+          {
+            "text": "Only the number of parameters",
+            "rationale": "Model size does not determine decision consequence.",
+            "correct": false
+          },
+          {
+            "text": "The supplier’s preference to use one universal approval",
+            "rationale": "Supplier convenience does not establish proportionate governance.",
+            "correct": false
+          },
+          {
+            "text": "Differences in intended use, consequences, affected people and operating context",
+            "rationale": "The same model can enter very different risk settings.",
+            "correct": true
+          },
+          {
+            "text": "Only the fact that one interface uses chat",
+            "rationale": "Interface appearance is not the full risk context.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   },
@@ -461,6 +911,62 @@
         "term": "User",
         "meaning": "Interprets or acts on outputs within instructions. Users need competence and a route to challenge or escalate."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.B.5-practice-1",
+        "stem": "A vendor validates its screening model on its own population. An employer plans to use it with a different applicant population and workflow. Who should lead assessment of local suitability?",
+        "options": [
+          {
+            "text": "No additional party, because supplier testing transfers all risk",
+            "rationale": "Supplier evidence may not cover the new setting.",
+            "correct": false
+          },
+          {
+            "text": "Only the cloud host, because it runs inference",
+            "rationale": "Hosting does not establish suitability for hiring decisions.",
+            "correct": false
+          },
+          {
+            "text": "The deployer, using relevant vendor evidence and local validation",
+            "rationale": "Local context is a deployer responsibility even when model development is external.",
+            "correct": true
+          },
+          {
+            "text": "The candidates, because they know their own qualifications",
+            "rationale": "Affected people can inform assessment but do not own the employer’s assurance duties.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "I.B.5-practice-2",
+        "stem": "An organisation both builds a model and uses it in its own service. What is the BEST way to allocate governance work?",
+        "options": [
+          {
+            "text": "Classify every internal team as a distributor",
+            "rationale": "Role classification follows activity and applicable definitions.",
+            "correct": false
+          },
+          {
+            "text": "Map development and deployment activities and applicable roles, rather than assume a single label covers everything",
+            "rationale": "One organisation can perform multiple relevant activities.",
+            "correct": true
+          },
+          {
+            "text": "Assign all duties to users because no outside vendor exists",
+            "rationale": "Internal ownership does not transfer assurance to end users.",
+            "correct": false
+          },
+          {
+            "text": "Treat deployment review as unnecessary because development was internal",
+            "rationale": "Internal development still needs operational suitability review.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -509,6 +1015,62 @@
       {
         "term": "Retirement",
         "meaning": "Decommissioning includes dependencies, data, communication and residual responsibilities, not merely turning off an interface."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.C.1-practice-1",
+        "stem": "A scheme assistant approved for explanation is given a feature that submits applications. Which policy mechanism is MOST directly relevant before rollout?",
+        "options": [
+          {
+            "text": "The original approval automatically, because the interface is unchanged",
+            "rationale": "Scope can change without an interface redesign.",
+            "correct": false
+          },
+          {
+            "text": "A retrospective user survey after unrestricted launch",
+            "rationale": "Feedback is not a substitute for prior change assessment.",
+            "correct": false
+          },
+          {
+            "text": "Change control addressing the new action authority, purpose and associated risks",
+            "rationale": "The new function can exceed the approved information-only scope.",
+            "correct": true
+          },
+          {
+            "text": "The existing annual uptime report",
+            "rationale": "Availability does not approve a new consequential action.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "I.C.1-practice-2",
+        "stem": "A launch checklist has no requirements after deployment. Which addition BEST creates lifecycle governance?",
+        "options": [
+          {
+            "text": "A promise that the supplier will handle every future problem",
+            "rationale": "Local ownership and operational response are still needed.",
+            "correct": false
+          },
+          {
+            "text": "Defined monitoring, incident, change and retirement duties with owners and review triggers",
+            "rationale": "It extends governance beyond the release decision.",
+            "correct": true
+          },
+          {
+            "text": "More screenshots of the launch interface",
+            "rationale": "Screenshots do not establish recurring duties.",
+            "correct": false
+          },
+          {
+            "text": "A rule that prior approval can never be revisited",
+            "rationale": "That prevents response to changed risks.",
+            "correct": false
+          }
+        ],
+        "answer": 1
       }
     ]
   },
@@ -559,6 +1121,62 @@
         "term": "Policy enforcement",
         "meaning": "Approved tools, access settings and workflow controls make policy executable; written prohibitions alone may not."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.C.2-practice-1",
+        "stem": "A marketing assistant sends customer chat logs to an external model, but the policy covers only database access. What should be reviewed FIRST?",
+        "options": [
+          {
+            "text": "Only the database password length",
+            "rationale": "That covers one security control rather than the external processing.",
+            "correct": false
+          },
+          {
+            "text": "The AI-related flow, processing purposes, retention, reuse and approved-tool controls",
+            "rationale": "The unassessed flow is the immediate policy gap.",
+            "correct": true
+          },
+          {
+            "text": "Whether generated responses have attractive formatting",
+            "rationale": "Formatting does not address personal-data processing.",
+            "correct": false
+          },
+          {
+            "text": "The model’s ability to provide longer answers",
+            "rationale": "Capability does not authorise the flow.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "I.C.2-practice-2",
+        "stem": "A team proposes indefinite prompt retention solely because logs may someday help debugging. Which response BEST reflects appropriate policy?",
+        "options": [
+          {
+            "text": "Define justified evidence needs, retention, access and deletion, assessing the data’s risks",
+            "rationale": "Useful logging should have purpose and limits.",
+            "correct": true
+          },
+          {
+            "text": "Retain everything because incident investigation is always possible",
+            "rationale": "Potential usefulness does not justify unlimited collection.",
+            "correct": false
+          },
+          {
+            "text": "Delete all logs immediately regardless of operational duties",
+            "rationale": "That can prevent necessary response and evidence.",
+            "correct": false
+          },
+          {
+            "text": "Publish every log to make the system transparent",
+            "rationale": "Transparency does not justify exposing user data.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -607,6 +1225,62 @@
       {
         "term": "Exit readiness",
         "meaning": "Plan how data, integrations and operations can migrate or stop while preserving justified records."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "I.C.3-practice-1",
+        "stem": "A supplier changes the underlying model and adds a subprocessor after procurement approval. Which process should address this MOST directly?",
+        "options": [
+          {
+            "text": "Ongoing third-party assurance with change notices and review of relevant effects",
+            "rationale": "Supplier risk continues after selection.",
+            "correct": true
+          },
+          {
+            "text": "The original price negotiation only",
+            "rationale": "Commercial price review does not assess changed operation.",
+            "correct": false
+          },
+          {
+            "text": "A rule that procurement approval remains valid for all configurations",
+            "rationale": "That ignores potentially material changes.",
+            "correct": false
+          },
+          {
+            "text": "User training alone without assessing the supplier change",
+            "rationale": "Training cannot establish whether the new arrangement is acceptable.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "I.C.3-practice-2",
+        "stem": "An agency cannot obtain adequate language-test evidence from a prospective supplier for a consequential service. What is the BEST response?",
+        "options": [
+          {
+            "text": "Treat the contractual safety promise as a completed local evaluation",
+            "rationale": "A promise is not demonstrated performance.",
+            "correct": false
+          },
+          {
+            "text": "Remove language coverage from the requirements to finish procurement",
+            "rationale": "That conceals rather than resolves the affected need.",
+            "correct": false
+          },
+          {
+            "text": "Shift validation responsibility entirely to residents",
+            "rationale": "Residents cannot assume the agency’s assurance responsibility.",
+            "correct": false
+          },
+          {
+            "text": "Assess alternative evidence and residual risk, restricting scope or selecting another arrangement if the gap remains unacceptable",
+            "rationale": "Evidence limitations require a reasoned deployment decision.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -657,6 +1331,62 @@
         "term": "Lawful basis and choice",
         "meaning": "Use the basis, permissions and rights of the applicable regime. Consent is not the only possible basis under every law."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.A.1-practice-1",
+        "stem": "A retailer collected chats for support and now wants to use them for unrelated customer profiling. What is the MOST appropriate initial review?",
+        "options": [
+          {
+            "text": "Review only whether storage capacity is adequate",
+            "rationale": "Capacity does not establish authority to process.",
+            "correct": false
+          },
+          {
+            "text": "Assess the new purpose and applicable basis, notice, choice and other requirements",
+            "rationale": "A changed purpose can require separate legal and governance assessment.",
+            "correct": true
+          },
+          {
+            "text": "Assume the first collection notice permits every later use",
+            "rationale": "Initial collection does not establish universal permission.",
+            "correct": false
+          },
+          {
+            "text": "Ask the model whether the reuse is lawful",
+            "rationale": "Legal assessment cannot be delegated to a model’s unsupported conclusion.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "II.A.1-practice-2",
+        "stem": "A team argues consent is the only possible basis for every AI personal-data use in every country. Which response is MOST accurate?",
+        "options": [
+          {
+            "text": "Identify the applicable regime and relevant bases, permissions, exceptions and rights for the actual purpose",
+            "rationale": "Privacy requirements are jurisdiction- and context-specific.",
+            "correct": true
+          },
+          {
+            "text": "Accept the claim because AI creates one universal privacy rule",
+            "rationale": "There is no universal AI-specific consent rule covering all regimes.",
+            "correct": false
+          },
+          {
+            "text": "Ignore notice whenever another basis may be available",
+            "rationale": "Other obligations can apply alongside a basis.",
+            "correct": false
+          },
+          {
+            "text": "Treat vendor approval as the legal basis",
+            "rationale": "Supplier permission does not settle all organisational requirements.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -705,6 +1435,62 @@
       {
         "term": "Identification risk",
         "meaning": "Removing names or aggregating data does not always prevent singling out or re-identification."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.A.2-practice-1",
+        "stem": "A campaign dashboard needs aggregate trends, but its default pipeline retains handles and detailed histories indefinitely. Which design change MOST directly supports minimisation?",
+        "options": [
+          {
+            "text": "Limit identifying detail and retention to justified needs, with appropriate aggregation and access controls",
+            "rationale": "It targets unnecessary collection and storage.",
+            "correct": true
+          },
+          {
+            "text": "Add a privacy icon without changing the pipeline",
+            "rationale": "A visible symbol does not reduce exposure.",
+            "correct": false
+          },
+          {
+            "text": "Collect more attributes to compensate for missing sentiment labels",
+            "rationale": "That is not a demonstrated minimisation response.",
+            "correct": false
+          },
+          {
+            "text": "Move the same unlimited data to another dashboard",
+            "rationale": "Changing display does not resolve collection or retention.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "II.A.2-practice-2",
+        "stem": "A report removes names but includes tiny audience segments that can be joined with a customer list. What should the privacy review conclude?",
+        "options": [
+          {
+            "text": "The report is anonymous in every context because names are absent",
+            "rationale": "Other information can enable singling out or linkage.",
+            "correct": false
+          },
+          {
+            "text": "No controls are relevant because the output is a chart",
+            "rationale": "Format does not determine identification risk.",
+            "correct": false
+          },
+          {
+            "text": "Every aggregate is automatically prohibited",
+            "rationale": "Risk assessment is needed rather than a universal prohibition.",
+            "correct": false
+          },
+          {
+            "text": "Identification risk remains and the joins, segment size and safeguards need assessment",
+            "rationale": "Removing direct names is not a guarantee of anonymity.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -755,6 +1541,62 @@
         "term": "Rights and incidents",
         "meaning": "Assign operational procedures for applicable requests, breaches and records; contractual promises need workable execution."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.A.3-practice-1",
+        "stem": "A locally hosted interface uses an overseas provider for model processing and support logs. Which evidence BEST supports privacy review?",
+        "options": [
+          {
+            "text": "The interface’s local domain name",
+            "rationale": "That does not establish where data is processed.",
+            "correct": false
+          },
+          {
+            "text": "Only the model’s accuracy report",
+            "rationale": "Accuracy does not describe processing obligations.",
+            "correct": false
+          },
+          {
+            "text": "A promise that no user will inspect the support logs",
+            "rationale": "Restricted inspection does not settle processing or transfer requirements.",
+            "correct": false
+          },
+          {
+            "text": "A full data-flow and role map including processing, support, transfers, retention and relevant arrangements",
+            "rationale": "The visible interface is only part of the processing chain.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "II.A.3-practice-2",
+        "stem": "A provider contract includes deletion support, but nobody has tested how a customer request reaches it. What is the MOST relevant next action?",
+        "options": [
+          {
+            "text": "Remove the clause because requests are inconvenient",
+            "rationale": "That does not address applicable responsibilities.",
+            "correct": false
+          },
+          {
+            "text": "Ask customers to contact every subprocessor themselves",
+            "rationale": "The organisation still needs appropriate role-based procedures.",
+            "correct": false
+          },
+          {
+            "text": "Assign and verify an operational request-handling procedure with the provider",
+            "rationale": "Contractual capabilities must connect to a workable process.",
+            "correct": true
+          },
+          {
+            "text": "Treat the contract clause as proof of execution",
+            "rationale": "A written term does not establish the workflow.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -803,6 +1645,62 @@
       {
         "term": "Public and private roles",
         "meaning": "Singapore agencies and private partners may operate under different regimes. Assess each processing role and flow."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.A.4-practice-1",
+        "stem": "A public-sector information assistant proposes collecting detailed medical histories for all general questions. What is the BEST initial response?",
+        "options": [
+          {
+            "text": "Collect the histories because public agencies have no data-governance duties",
+            "rationale": "Different legal coverage does not mean absence of governance.",
+            "correct": false
+          },
+          {
+            "text": "Treat sensitivity as irrelevant when the model does not diagnose",
+            "rationale": "Collection and misuse can still create serious harm.",
+            "correct": false
+          },
+          {
+            "text": "Assess necessity, sensitivity and applicable agency and partner requirements, seeking a less intrusive information-only design",
+            "rationale": "General information may not require detailed records.",
+            "correct": true
+          },
+          {
+            "text": "Assume GDPR special-category rules apply identically to every Singapore actor",
+            "rationale": "Legal regimes and roles require contextual analysis.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "II.A.4-practice-2",
+        "stem": "A Singapore agency and a private contractor process health queries in different systems. Which analysis is MOST appropriate?",
+        "options": [
+          {
+            "text": "Assess only the tone of the generated answers",
+            "rationale": "Answer tone does not resolve sensitive-data processing.",
+            "correct": false
+          },
+          {
+            "text": "Map each actor’s processing and assess the requirements relevant to its role and data flow",
+            "rationale": "Agency and partner arrangements can have different legal implications.",
+            "correct": true
+          },
+          {
+            "text": "Apply one role label to both without reviewing their activities",
+            "rationale": "That can miss differing responsibilities.",
+            "correct": false
+          },
+          {
+            "text": "Assume the contractor has no duties because the customer is public sector",
+            "rationale": "A public-sector relationship does not automatically remove private-party duties.",
+            "correct": false
+          }
+        ],
+        "answer": 1
       }
     ]
   },
@@ -853,6 +1751,62 @@
         "term": "Output risk",
         "meaning": "Generated text, images or code can still raise infringement or other rights issues. Review relevant outputs and supplier terms."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.B.1-practice-1",
+        "stem": "A company has a licence to retrieve documents for staff searches and wants to train a model on them. What should be assessed FIRST?",
+        "options": [
+          {
+            "text": "Whether employees can currently read the documents",
+            "rationale": "Read access alone does not settle training rights.",
+            "correct": false
+          },
+          {
+            "text": "Whether the licence and applicable rights permit the specific training activity",
+            "rationale": "Different uses can require different rights analysis.",
+            "correct": true
+          },
+          {
+            "text": "Whether the files are in a convenient format",
+            "rationale": "Format does not establish permission.",
+            "correct": false
+          },
+          {
+            "text": "Whether a model can memorise the documents accurately",
+            "rationale": "Technical capability does not establish authorised use.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "II.B.1-practice-2",
+        "stem": "A communications assistant generates an image resembling a protected campaign asset. Which review is MOST appropriate before publication?",
+        "options": [
+          {
+            "text": "Assess relevant output rights, source and supplier terms, and infringement risk",
+            "rationale": "Generation does not remove potential rights issues.",
+            "correct": true
+          },
+          {
+            "text": "Publish automatically because AI output is always unrestricted",
+            "rationale": "That is an unjustified universal claim.",
+            "correct": false
+          },
+          {
+            "text": "Review only inference cost",
+            "rationale": "Cost does not address output rights.",
+            "correct": false
+          },
+          {
+            "text": "Assume an AI label gives permission to reproduce protected expression",
+            "rationale": "Disclosure is not a licence.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -901,6 +1855,62 @@
       {
         "term": "Jurisdictional rules",
         "meaning": "Fairness metrics, employment guidance and binding non-discrimination requirements are different sources of assurance."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.B.2-practice-1",
+        "stem": "A hiring model has equal average scores across groups but repeatedly rejects suitable candidates from one group. Which assessment is MOST appropriate?",
+        "options": [
+          {
+            "text": "Investigate relevant error outcomes, features, context and applicable employment requirements",
+            "rationale": "Average scores can conceal consequential differences.",
+            "correct": true
+          },
+          {
+            "text": "Declare full compliance because one metric is equal",
+            "rationale": "One metric does not establish every fairness or legal condition.",
+            "correct": false
+          },
+          {
+            "text": "Remove candidate challenges to preserve consistent scoring",
+            "rationale": "That removes useful correction without addressing the harm.",
+            "correct": false
+          },
+          {
+            "text": "Assess only whether the training set is large",
+            "rationale": "Size does not establish fair outcomes.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "II.B.2-practice-2",
+        "stem": "A Singapore screening supplier plans an overseas rollout after meeting a local fairness target. What should be reviewed NEXT?",
+        "options": [
+          {
+            "text": "Treat the local target as universal legal certification",
+            "rationale": "A metric is not global legal approval.",
+            "correct": false
+          },
+          {
+            "text": "Assume the model’s parameter count determines employment-law scope",
+            "rationale": "Scope is not established by model size.",
+            "correct": false
+          },
+          {
+            "text": "Review only whether the logo is translated",
+            "rationale": "Brand localisation does not address screening impacts.",
+            "correct": false
+          },
+          {
+            "text": "The new jurisdiction’s requirements and local context alongside technical fairness evidence",
+            "rationale": "Compliance and impact can change across markets.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -951,6 +1961,62 @@
         "term": "Correction and responsibility",
         "meaning": "Assign prevention, publication review and correction ownership for generated claims across channels."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.B.3-practice-1",
+        "stem": "A sales assistant creates unsupported claims about stock and discounts. Which control MOST directly addresses the failure?",
+        "options": [
+          {
+            "text": "Add a more prominent AI label only",
+            "rationale": "Disclosure does not make the assertions accurate.",
+            "correct": false
+          },
+          {
+            "text": "Increase the number of recommendations per customer",
+            "rationale": "That can amplify the same failure.",
+            "correct": false
+          },
+          {
+            "text": "Retain the claims whenever customers click them",
+            "rationale": "Engagement is not factual support.",
+            "correct": false
+          },
+          {
+            "text": "Use verified offer sources and appropriate claim/publication checks, with correction ownership",
+            "rationale": "It constrains the commercial assertions at issue.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "II.B.3-practice-2",
+        "stem": "A customer acted on a generated guarantee that the business never authorised. What is the BEST governance response?",
+        "options": [
+          {
+            "text": "Delete all evidence of the interaction",
+            "rationale": "That can undermine investigation and recovery.",
+            "correct": false
+          },
+          {
+            "text": "Treat every generated statement as non-commercial",
+            "rationale": "The statement influenced a customer’s commercial decision.",
+            "correct": false
+          },
+          {
+            "text": "Correct the claim, assess impact and applicable obligations, and investigate the control failure",
+            "rationale": "The response must address reliance and recurrence.",
+            "correct": true
+          },
+          {
+            "text": "Explain that AI generated it and make no further assessment",
+            "rationale": "Method disclosure does not settle responsibility or harm.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -999,6 +2065,62 @@
       {
         "term": "Responsibility chain",
         "meaning": "Suppliers, integrators and operators can have different duties; identify them rather than assuming software has no liability."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.B.4-practice-1",
+        "stem": "A health assistant previously provided general information but now recommends treatment. Which change is MOST material to product review?",
+        "options": [
+          {
+            "text": "Only the number of supported document formats",
+            "rationale": "Formats do not capture the new clinical function.",
+            "correct": false
+          },
+          {
+            "text": "Only the hosting renewal date",
+            "rationale": "Commercial timing does not determine the product’s intended use.",
+            "correct": false
+          },
+          {
+            "text": "The intended function and associated safety, classification and responsibility requirements",
+            "rationale": "The output’s consequence has changed even if the interface has not.",
+            "correct": true
+          },
+          {
+            "text": "The colour of the answer panel",
+            "rationale": "Appearance is not the consequential change.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "II.B.4-practice-2",
+        "stem": "A supplier claims software cannot create product-liability risk because it is not a physical device. Which response is MOST appropriate?",
+        "options": [
+          {
+            "text": "Use the model’s confidence score as the liability determination",
+            "rationale": "Confidence cannot settle legal responsibility.",
+            "correct": false
+          },
+          {
+            "text": "Assess the applicable product regime, actual function, integration and foreseeable harm",
+            "rationale": "Liability analysis depends on the rules and product context.",
+            "correct": true
+          },
+          {
+            "text": "Accept the claim for every jurisdiction",
+            "rationale": "That is an unsupported universal exclusion.",
+            "correct": false
+          },
+          {
+            "text": "Treat all software as legally identical to every medical device",
+            "rationale": "Classification still requires a specific analysis.",
+            "correct": false
+          }
+        ],
+        "answer": 1
       }
     ]
   },
@@ -1049,6 +2171,62 @@
         "term": "Transparency and GPAI duties",
         "meaning": "Specified transparency obligations and model-level duties require separate analysis; they are not all a single risk ladder."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.C.1-practice-1",
+        "stem": "A Singapore vendor offers an AI recruitment screening product into the EU. What should it do FIRST to analyse AI Act duties?",
+        "options": [
+          {
+            "text": "Use the vendor’s preferred category in its brochure",
+            "rationale": "Marketing labels do not determine legal duties.",
+            "correct": false
+          },
+          {
+            "text": "Identify scope, intended use, relevant provisions, exceptions, role and applicable dates",
+            "rationale": "These facts determine classification and requirements.",
+            "correct": true
+          },
+          {
+            "text": "Assume the AI Act cannot apply outside an EU headquarters",
+            "rationale": "Location alone does not settle scope.",
+            "correct": false
+          },
+          {
+            "text": "Classify the product solely by whether it uses generative AI",
+            "rationale": "Technology alone does not establish the legal category.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "II.C.1-practice-2",
+        "stem": "A retail chatbot and a recruitment tool use the same foundation model. Which conclusion is MOST accurate?",
+        "options": [
+          {
+            "text": "Their system-level classifications can differ because intended uses and relevant provisions differ",
+            "rationale": "The underlying model does not assign one category to every application.",
+            "correct": true
+          },
+          {
+            "text": "They must have identical high-risk obligations",
+            "rationale": "Use-specific scope can differ.",
+            "correct": false
+          },
+          {
+            "text": "Both are prohibited because the model generates text",
+            "rationale": "Generation is not an automatic prohibition.",
+            "correct": false
+          },
+          {
+            "text": "Neither needs any assessment because the model is general purpose",
+            "rationale": "Model-level and application-level analysis are distinct.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -1097,6 +2275,62 @@
       {
         "term": "Conformity and actor duties",
         "meaning": "Check applicable assessment, registration and role-specific requirements and their relevant dates."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.C.2-practice-1",
+        "stem": "An in-scope high-risk system has strong accuracy evidence but incomplete oversight and logging records. What is the BEST release-review conclusion?",
+        "options": [
+          {
+            "text": "Accuracy does not resolve the separate applicable control and evidence gaps",
+            "rationale": "Different requirements need appropriately scoped evidence.",
+            "correct": true
+          },
+          {
+            "text": "Approve because accuracy is the only meaningful assurance measure",
+            "rationale": "It is not the complete set of duties.",
+            "correct": false
+          },
+          {
+            "text": "Replace missing records with a responsible-AI statement",
+            "rationale": "A statement does not demonstrate controls.",
+            "correct": false
+          },
+          {
+            "text": "Treat the gaps as irrelevant if the model is proprietary",
+            "rationale": "Ownership does not remove applicable requirements.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "II.C.2-practice-2",
+        "stem": "A compliance team wants one test to prove risk management, cybersecurity, transparency and conformity. What is the MOST appropriate response?",
+        "options": [
+          {
+            "text": "Select the highest aggregate score and mark every duty complete",
+            "rationale": "A score cannot prove unrelated processes.",
+            "correct": false
+          },
+          {
+            "text": "Use a supplier’s logo as evidence of conformity",
+            "rationale": "Brand recognition is not the required evidence.",
+            "correct": false
+          },
+          {
+            "text": "Choose one duty and assume the others follow automatically",
+            "rationale": "The requirements address different concerns.",
+            "correct": false
+          },
+          {
+            "text": "Build a requirement-to-control-and-evidence matrix and identify what each test actually supports",
+            "rationale": "Evidence should be scoped to the relevant requirement.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -1147,6 +2381,62 @@
         "term": "Systemic-risk obligations",
         "meaning": "Additional model-level duties can apply under defined conditions; do not assume they apply to every model or user."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.C.3-practice-1",
+        "stem": "An agency uses a GPAI model with supplier documentation to draft announcements. What evidence remains MOST directly relevant to its application?",
+        "options": [
+          {
+            "text": "No evidence, because the model supports many tasks",
+            "rationale": "Broad capability does not establish local fitness.",
+            "correct": false
+          },
+          {
+            "text": "Only the supplier’s model training expense",
+            "rationale": "Cost does not demonstrate application controls.",
+            "correct": false
+          },
+          {
+            "text": "Automatic adoption of every model-provider duty without role analysis",
+            "rationale": "Duties depend on actual roles and provisions.",
+            "correct": false
+          },
+          {
+            "text": "Evaluation and controls for policy fidelity, languages, users and publication authority in the deployed system",
+            "rationale": "Provider evidence does not validate the agency’s integrated use.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "II.C.3-practice-2",
+        "stem": "A team assumes every general-purpose model has the same systemic-risk obligations. Which response is BEST?",
+        "options": [
+          {
+            "text": "Ignore model-level duties because an application is being built",
+            "rationale": "Those duties can still matter in the supply chain.",
+            "correct": false
+          },
+          {
+            "text": "Use the application’s interface language to determine systemic risk",
+            "rationale": "Interface language is not the governing condition.",
+            "correct": false
+          },
+          {
+            "text": "Check the defined conditions and provider role rather than infer duties solely from broad capability",
+            "rationale": "Additional model-level obligations have specific scope.",
+            "correct": true
+          },
+          {
+            "text": "Apply every duty to every user of a chatbot",
+            "rationale": "Users do not automatically take on every provider obligation.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -1195,6 +2485,62 @@
       {
         "term": "Timing and evidence",
         "meaning": "Check effective dates and preserve appropriate evidence for requests, investigations and corrective action."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.C.4-practice-1",
+        "stem": "A team cites one maximum penalty for every AI Act failure. What is the MOST important correction?",
+        "options": [
+          {
+            "text": "Replace legal analysis with model validation scores",
+            "rationale": "Scores do not determine violation categories.",
+            "correct": false
+          },
+          {
+            "text": "Assume all breaches always result in the statutory maximum",
+            "rationale": "Maximums are not automatic outcomes.",
+            "correct": false
+          },
+          {
+            "text": "Identify the applicable duty, violation, actor, dates and penalty conditions",
+            "rationale": "Consequences are provision-specific.",
+            "correct": true
+          },
+          {
+            "text": "Use the largest number mentioned in any presentation",
+            "rationale": "Conservatism does not fix an incorrect legal mapping.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "II.C.4-practice-2",
+        "stem": "An authority requests evidence about a deployed system. Which preparation MOST directly supports an appropriate response?",
+        "options": [
+          {
+            "text": "Sending all user data without a relevance or disclosure assessment",
+            "rationale": "Evidence handling still needs scope and protection.",
+            "correct": false
+          },
+          {
+            "text": "Versioned relevant records, a request owner and an authorised review and disclosure process",
+            "rationale": "It connects evidence to accountable handling.",
+            "correct": true
+          },
+          {
+            "text": "An unverified summary of the newest model only",
+            "rationale": "The request may concern a different version or period.",
+            "correct": false
+          },
+          {
+            "text": "Deleting prior records before responding",
+            "rationale": "That may undermine a justified investigation or retention duty.",
+            "correct": false
+          }
+        ],
+        "answer": 1
       }
     ]
   },
@@ -1245,6 +2591,62 @@
         "term": "Role-changing conduct",
         "meaning": "Rebranding, modification or changed purpose may affect duties. Examine the actual conditions rather than the contract label."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.C.5-practice-1",
+        "stem": "A company rebrands a supplier’s system and markets it under its own name. What should its governance lead assess FIRST?",
+        "options": [
+          {
+            "text": "Whether users can see the original supplier’s logo somewhere",
+            "rationale": "A residual logo does not complete the role analysis.",
+            "correct": false
+          },
+          {
+            "text": "Whether its actual activity changes its legal role and associated duties",
+            "rationale": "Rebranding can be relevant to provider analysis.",
+            "correct": true
+          },
+          {
+            "text": "Whether it trained any weights personally, as the sole test",
+            "rationale": "Direct training is not the only relevant fact.",
+            "correct": false
+          },
+          {
+            "text": "Whether the contract calls it a customer, as the final conclusion",
+            "rationale": "Contract labels alone do not settle statutory roles.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "II.C.5-practice-2",
+        "stem": "A distributor substantially modifies a system’s intended purpose before selling it. Which approach BEST supports role analysis?",
+        "options": [
+          {
+            "text": "Review the modification, purpose and applicable definitions and duties",
+            "rationale": "Actual conduct can affect role and responsibility.",
+            "correct": true
+          },
+          {
+            "text": "Retain its former role automatically for every future version",
+            "rationale": "Roles can change under relevant conditions.",
+            "correct": false
+          },
+          {
+            "text": "Classify it only by its company size",
+            "rationale": "Size does not establish the activity’s legal role.",
+            "correct": false
+          },
+          {
+            "text": "Ask the model to choose the company’s role without evidence",
+            "rationale": "Role analysis requires facts and relevant provisions.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -1293,6 +2695,62 @@
       {
         "term": "Principles vs law",
         "meaning": "Principles guide decisions; applicable legislation and regulations still require a separate compliance assessment."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.D.1-practice-1",
+        "stem": "A team maps OECD principles to a municipal pilot. Which evidence BEST shows the principles influenced design?",
+        "options": [
+          {
+            "text": "Only a faster classification benchmark",
+            "rationale": "Speed does not cover the broader principles.",
+            "correct": false
+          },
+          {
+            "text": "Documented accessible reporting, routing explanations, correction routes and accountable owners",
+            "rationale": "These are operational choices tied to the principles.",
+            "correct": true
+          },
+          {
+            "text": "A slide listing the principle names",
+            "rationale": "Listing does not establish implementation.",
+            "correct": false
+          },
+          {
+            "text": "A claim that voluntary principles replace all applicable laws",
+            "rationale": "Principles do not supersede binding requirements.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "II.D.1-practice-2",
+        "stem": "A transparency review gives residents a highly technical model report they cannot understand. What is the BEST improvement?",
+        "options": [
+          {
+            "text": "Provide layered, audience-appropriate explanations and help while retaining necessary technical records",
+            "rationale": "Transparency should meet the audience’s actual needs.",
+            "correct": true
+          },
+          {
+            "text": "Remove all technical documentation",
+            "rationale": "Other audiences and duties may still need it.",
+            "correct": false
+          },
+          {
+            "text": "Make the report longer without checking comprehension",
+            "rationale": "Length does not establish usability.",
+            "correct": false
+          },
+          {
+            "text": "Treat transparency as satisfied because the report is public",
+            "rationale": "Publication alone does not show meaningful communication.",
+            "correct": false
+          }
+        ],
+        "answer": 0
       }
     ]
   },
@@ -1343,6 +2801,62 @@
         "term": "MANAGE",
         "meaning": "Prioritise and implement responses, monitor their effectiveness and decide on residual risk within governance."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.D.2-practice-1",
+        "stem": "A NIST AI RMF programme treats MAP and MEASURE as completed forever after release. A new scam pattern appears. What is the BEST action?",
+        "options": [
+          {
+            "text": "Revisit context, evidence and management responses under ongoing governance",
+            "rationale": "The functions overlap and recur as conditions change.",
+            "correct": true
+          },
+          {
+            "text": "Use the old risk register without assessing the new pattern",
+            "rationale": "Past mapping may not cover changed risk.",
+            "correct": false
+          },
+          {
+            "text": "Replace every function with uptime monitoring",
+            "rationale": "Availability does not cover contextual harms and response.",
+            "correct": false
+          },
+          {
+            "text": "Wait until the next programme is created from scratch",
+            "rationale": "The current programme can and should handle change.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "II.D.2-practice-2",
+        "stem": "A team has measured an important failure but no owner can decide a response. Which RMF relationship MOST needs strengthening?",
+        "options": [
+          {
+            "text": "Treat more measurement as a substitute for authority",
+            "rationale": "More data alone does not establish who can act.",
+            "correct": false
+          },
+          {
+            "text": "Archive the result because MAP already finished",
+            "rationale": "Functions are not launch-only boxes.",
+            "correct": false
+          },
+          {
+            "text": "Define GOVERN as only model training",
+            "rationale": "Governance concerns organisational risk structures and decision processes.",
+            "correct": false
+          },
+          {
+            "text": "Connect measurement to management decisions and governance authority",
+            "rationale": "Evidence must support accountable risk treatment.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -1391,6 +2905,62 @@
       {
         "term": "ISO/IEC 42005",
         "meaning": "Guides AI system impact assessment. Its purpose is distinct from management-system certification and technical validation."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "II.D.3-practice-1",
+        "stem": "A bank wants a shared vocabulary, management processes and system impact assessment. Which mapping is MOST accurate?",
+        "options": [
+          {
+            "text": "Use 22989 as proof of every model’s safety",
+            "rationale": "Terminology does not certify product outcomes.",
+            "correct": false
+          },
+          {
+            "text": "Use 42001 to replace every technical test",
+            "rationale": "Management-system processes do not establish all model behaviour.",
+            "correct": false
+          },
+          {
+            "text": "Use 42005 only to count model parameters",
+            "rationale": "Its focus is system impact assessment, not parameter counting.",
+            "correct": false
+          },
+          {
+            "text": "ISO/IEC 22989 for terminology, 42001 for an AI management system and 42005 for impact assessment",
+            "rationale": "The standards address different layers.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "II.D.3-practice-2",
+        "stem": "An organisation has an AI management-system certificate. Which claim is LEAST supported by that fact alone?",
+        "options": [
+          {
+            "text": "Relevant management processes were assessed within that scope",
+            "rationale": "That is consistent with management-system certification.",
+            "correct": false
+          },
+          {
+            "text": "Separate product evaluations may still be needed",
+            "rationale": "Certification does not remove those evidence needs.",
+            "correct": false
+          },
+          {
+            "text": "Every deployed model is safe, fair and compliant in all jurisdictions",
+            "rationale": "The certificate does not establish universal product or legal outcomes.",
+            "correct": true
+          },
+          {
+            "text": "The certificate has a defined assessed scope",
+            "rationale": "Scope is a necessary part of interpreting certification.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   },
@@ -1446,6 +3016,62 @@
         "term": "Authority and success criteria",
         "meaning": "Specify who decides and what evidence shows usefulness and acceptable operation. Latency or satisfaction alone is insufficient."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.A.1-practice-1",
+        "stem": "A citizen-service team proposes an assistant but cannot say whether it explains criteria or approves applications. Which activity should precede model selection?",
+        "options": [
+          {
+            "text": "Define the user problem, intended task, affected people, authority and excluded uses",
+            "rationale": "The scope determines design and assurance requirements.",
+            "correct": true
+          },
+          {
+            "text": "Select the model with the most parameters",
+            "rationale": "Capability does not define authorised purpose.",
+            "correct": false
+          },
+          {
+            "text": "Set a low latency target as the complete business case",
+            "rationale": "Latency is one performance consideration, not the full use case.",
+            "correct": false
+          },
+          {
+            "text": "Adopt the supplier’s default action permissions",
+            "rationale": "Defaults may exceed the intended authority.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "III.A.1-practice-2",
+        "stem": "A team measures a scheme-finder only by fewer officer handoffs. Residents receive confident but unsupported eligibility advice. Which revision BEST aligns evaluation with the approved information task?",
+        "options": [
+          {
+            "text": "Keep the handoff measure because automation is always the objective",
+            "rationale": "Reducing handoffs can conflict with necessary escalation.",
+            "correct": false
+          },
+          {
+            "text": "Count longer answers as proof of better support",
+            "rationale": "Length does not establish correctness or task completion.",
+            "correct": false
+          },
+          {
+            "text": "Change the product label to decision support without reassessing scope",
+            "rationale": "A label cannot authorise a changed consequential use.",
+            "correct": false
+          },
+          {
+            "text": "Add source fidelity, successful information-finding and appropriate escalation measures",
+            "rationale": "The measures should reflect usefulness and bounded reliable guidance.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -1494,6 +3120,62 @@
       {
         "term": "Assessment vs testing",
         "meaning": "An impact assessment frames consequences and decisions; technical evaluation supplies some of the evidence it needs."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.A.2-practice-1",
+        "stem": "An impact assessment describes benefits to recruiters but omits jobseekers who never see suitable vacancies. What should be added MOST directly?",
+        "options": [
+          {
+            "text": "Only the supplier’s revenue projection",
+            "rationale": "That omits the affected people.",
+            "correct": false
+          },
+          {
+            "text": "More model parameter details without impact analysis",
+            "rationale": "Architecture detail does not replace the missing consequences.",
+            "correct": false
+          },
+          {
+            "text": "A statement that nobody has complained yet",
+            "rationale": "Absence of complaints does not establish absence of harm.",
+            "correct": false
+          },
+          {
+            "text": "Affected non-users and groups, relevant harms, uncertainty, mitigation and residual-risk decisions",
+            "rationale": "The assessment should follow consequences beyond direct users.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "III.A.2-practice-2",
+        "stem": "A consultation raises conflicting preferences for short rankings and broad opportunity visibility. What is the BEST governance response?",
+        "options": [
+          {
+            "text": "Transfer accountability to the consultation participants",
+            "rationale": "They do not assume the organisation’s decisions.",
+            "correct": false
+          },
+          {
+            "text": "Stop recording dissent once most reviewers agree",
+            "rationale": "Effective challenge can reveal important unresolved risks.",
+            "correct": false
+          },
+          {
+            "text": "Document and evaluate the competing needs and justify the design and residual-risk decision",
+            "rationale": "Conflicting perspectives require an accountable reasoned response.",
+            "correct": true
+          },
+          {
+            "text": "Average the comments and discard the underlying concerns",
+            "rationale": "That can obscure the impact and rationale.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   },
@@ -1544,6 +3226,62 @@
         "term": "Metrics and thresholds",
         "meaning": "Define what is measured and why the threshold is justified. Include severe failures and operational performance."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.A.3-practice-1",
+        "stem": "A health assistant’s requirements say it must be responsible but do not specify unsafe-answer handling. Which addition is MOST useful before a pilot?",
+        "options": [
+          {
+            "text": "Only an answer-length maximum",
+            "rationale": "Length does not target the relevant safety failure.",
+            "correct": false
+          },
+          {
+            "text": "A rule that users must independently diagnose every issue",
+            "rationale": "Users may lack the expertise or capability needed for that control.",
+            "correct": false
+          },
+          {
+            "text": "Defined task limits, safety tests, justified criteria and an operational escalation/fallback path",
+            "rationale": "It makes the broad commitment testable and usable.",
+            "correct": true
+          },
+          {
+            "text": "A larger responsible-AI logo",
+            "rationale": "Branding does not implement behaviour.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "III.A.3-practice-2",
+        "stem": "A design includes a human reviewer, but no staffing or access is provided. What should the release team conclude about this control?",
+        "options": [
+          {
+            "text": "It becomes effective whenever response speed improves",
+            "rationale": "Speed does not supply reviewer capability.",
+            "correct": false
+          },
+          {
+            "text": "It is not yet operational; verify competence, information, capacity and intervention authority",
+            "rationale": "Oversight must actually function.",
+            "correct": true
+          },
+          {
+            "text": "It is complete because the architecture diagram shows a person",
+            "rationale": "A diagram does not establish capacity.",
+            "correct": false
+          },
+          {
+            "text": "It can replace all safety testing once named",
+            "rationale": "Review is one control, not universal validation.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -1592,6 +3330,62 @@
       {
         "term": "Mitigation hierarchy",
         "meaning": "Prefer eliminating or reducing exposure by design where possible, then add prevention, detection and response."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.A.4-practice-1",
+        "stem": "A municipal model rarely misroutes reports, but one error type can delay action on serious hazards. Which risk decision is MOST appropriate?",
+        "options": [
+          {
+            "text": "Accept the error because the overall pass rate is high",
+            "rationale": "An aggregate can hide a significant risk.",
+            "correct": false
+          },
+          {
+            "text": "Assess severity, likelihood and uncertainty, prioritising a control for the credible severe pathway",
+            "rationale": "Low frequency does not erase a serious consequence.",
+            "correct": true
+          },
+          {
+            "text": "Prioritise solely by the number of category errors",
+            "rationale": "Frequency alone misses severity.",
+            "correct": false
+          },
+          {
+            "text": "Treat every routing error as having the same impact",
+            "rationale": "The consequences differ.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "III.A.4-practice-2",
+        "stem": "A risk matrix assigns precise scores with little evidence. What is the BEST improvement?",
+        "options": [
+          {
+            "text": "Document scenarios, evidence and uncertainty, and test mitigation effectiveness",
+            "rationale": "The matrix should support reasoned analysis rather than false precision.",
+            "correct": true
+          },
+          {
+            "text": "Add more decimal places to the scores",
+            "rationale": "Precision of presentation does not create evidence.",
+            "correct": false
+          },
+          {
+            "text": "Use the lowest score from any reviewer as the final value",
+            "rationale": "That is not a justified reconciliation.",
+            "correct": false
+          },
+          {
+            "text": "Delete severe cases because their probability is uncertain",
+            "rationale": "Uncertainty does not make them irrelevant.",
+            "correct": false
+          }
+        ],
+        "answer": 0
       }
     ]
   },
@@ -1642,6 +3436,62 @@
         "term": "Living documentation",
         "meaning": "Record changes and failures without erasing prior decisions. Preserve useful history with appropriate access."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.A.5-practice-1",
+        "stem": "A communications system was approved after comparing several architectures. A later reviewer cannot identify why one was selected. What record is MOST useful?",
+        "options": [
+          {
+            "text": "A versioned decision record linking requirements, alternatives, tests, risks and approval rationale",
+            "rationale": "It explains the decision and supports later review.",
+            "correct": true
+          },
+          {
+            "text": "Only the final interface screenshot",
+            "rationale": "Appearance does not show why the design was accepted.",
+            "correct": false
+          },
+          {
+            "text": "Only the invoice for the chosen model",
+            "rationale": "Purchase evidence does not establish design justification.",
+            "correct": false
+          },
+          {
+            "text": "A generic statement that best practices were followed",
+            "rationale": "That does not link decisions to evidence.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "III.A.5-practice-2",
+        "stem": "A new release overwrites earlier test and acceptance records. Which concern is MOST relevant?",
+        "options": [
+          {
+            "text": "The records now look more concise",
+            "rationale": "Conciseness does not offset missing accountability evidence.",
+            "correct": false
+          },
+          {
+            "text": "The change automatically proves the latest version is safer",
+            "rationale": "Safety requires relevant evaluation.",
+            "correct": false
+          },
+          {
+            "text": "Every past record must instead be publicly published",
+            "rationale": "Preservation and appropriate access do not mean unrestricted disclosure.",
+            "correct": false
+          },
+          {
+            "text": "Loss of traceability for past decisions, incidents and the scope of prior approval",
+            "rationale": "History can be needed to investigate which system was used and why.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -1690,6 +3540,62 @@
       {
         "term": "Representativeness",
         "meaning": "A large dataset can still omit the languages, users or conditions required for deployment."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.B.1-practice-1",
+        "stem": "A sentiment corpus is very large but its labels omit local sarcasm and code-switching. What is the BEST data-governance response?",
+        "options": [
+          {
+            "text": "Assess local fit, annotation rules and coverage, documenting gaps and suitable use limits",
+            "rationale": "Volume does not compensate for task-specific weaknesses.",
+            "correct": true
+          },
+          {
+            "text": "Approve solely because the corpus is larger than alternatives",
+            "rationale": "Size does not establish quality or relevance.",
+            "correct": false
+          },
+          {
+            "text": "Remove local-language cases from final evaluation",
+            "rationale": "That hides a required deployment condition.",
+            "correct": false
+          },
+          {
+            "text": "Infer collection permission from model accuracy",
+            "rationale": "Performance does not establish data rights.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "III.B.1-practice-2",
+        "stem": "A dataset has valid collection permissions but unreliable labels. Which conclusion is MOST accurate?",
+        "options": [
+          {
+            "text": "Valid permissions prove label accuracy",
+            "rationale": "They address another issue.",
+            "correct": false
+          },
+          {
+            "text": "Unreliable labels become acceptable if storage is secure",
+            "rationale": "Security does not correct semantic quality.",
+            "correct": false
+          },
+          {
+            "text": "Only generated data needs label assessment",
+            "rationale": "Observed data can also be mislabeled or unsuitable.",
+            "correct": false
+          },
+          {
+            "text": "Rights and quality are separate requirements; label suitability still needs assessment",
+            "rationale": "Lawful access does not make the data fit for purpose.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -1740,6 +3646,62 @@
         "term": "Versioned reproducibility",
         "meaning": "Identifies the source and processing versions relevant to a result, rather than only today’s dataset."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.B.2-practice-1",
+        "stem": "An assistant gives outdated policy guidance. The team can identify the source URL but not the ingested version or transformations. What is MOST needed?",
+        "options": [
+          {
+            "text": "A bookmark to the current live page only",
+            "rationale": "The current page may differ from the one ingested.",
+            "correct": false
+          },
+          {
+            "text": "A screenshot of the answer without source history",
+            "rationale": "It does not identify how the source reached the system.",
+            "correct": false
+          },
+          {
+            "text": "Removal of all citations",
+            "rationale": "That reduces transparency without fixing traceability.",
+            "correct": false
+          },
+          {
+            "text": "Versioned provenance and lineage through the retrieval pipeline",
+            "rationale": "The investigation needs both origin and processing history.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "III.B.2-practice-2",
+        "stem": "A team records source owners and permissions but not filtering, joins or label changes. Which distinction BEST describes the gap?",
+        "options": [
+          {
+            "text": "It has no need for version identifiers once rights are verified",
+            "rationale": "Rights do not support all reproducibility needs.",
+            "correct": false
+          },
+          {
+            "text": "It has established model fairness automatically",
+            "rationale": "Traceability alone does not prove acceptable outcomes.",
+            "correct": false
+          },
+          {
+            "text": "It has some provenance evidence but incomplete lineage of transformations",
+            "rationale": "Origins and processing history are complementary.",
+            "correct": true
+          },
+          {
+            "text": "It has complete lineage because the vendor name is recorded",
+            "rationale": "A name does not establish intervening processing.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -1788,6 +3750,62 @@
       {
         "term": "Error consequences",
         "meaning": "False positives and false negatives can have different harms; evaluate them against the intended use."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.B.3-practice-1",
+        "stem": "A detector is evaluated on messages also used extensively to tune it. Its reported score is excellent. Which issue MOST threatens the conclusion?",
+        "options": [
+          {
+            "text": "Only the interface font affects the validity",
+            "rationale": "That is unrelated to the described evaluation problem.",
+            "correct": false
+          },
+          {
+            "text": "Training and test data must always have unrelated tasks",
+            "rationale": "They should reflect the intended task while being appropriately separated.",
+            "correct": false
+          },
+          {
+            "text": "Evaluation contamination or leakage may make the score unrepresentative of unseen cases",
+            "rationale": "Evidence needs suitable separation and review of overlap.",
+            "correct": true
+          },
+          {
+            "text": "The score is necessarily valid because tuning improved it",
+            "rationale": "Improvement on used data does not establish generalisation.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "III.B.3-practice-2",
+        "stem": "A scam model passes classification tests but incorrect flags cannot be corrected in the product workflow. What testing is MOST relevant NEXT?",
+        "options": [
+          {
+            "text": "Replacing review with an accuracy disclaimer",
+            "rationale": "Disclosure does not make the workflow work.",
+            "correct": false
+          },
+          {
+            "text": "Integrated workflow and operational correction testing",
+            "rationale": "The described failure concerns the system around the model.",
+            "correct": true
+          },
+          {
+            "text": "Repeating the same isolated classification benchmark only",
+            "rationale": "That does not test correction handling.",
+            "correct": false
+          },
+          {
+            "text": "Counting model parameters",
+            "rationale": "Size does not establish integration behaviour.",
+            "correct": false
+          }
+        ],
+        "answer": 1
       }
     ]
   },
@@ -1838,6 +3856,62 @@
         "term": "Mitigation validation",
         "meaning": "Retest the failure and legitimate use after a fix; a narrow patch may leave the mechanism exploitable."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.B.4-practice-1",
+        "stem": "A communications assistant follows malicious instructions inside retrieved content. Which test approach MOST directly supports remediation?",
+        "options": [
+          {
+            "text": "Assess only user satisfaction after the patch",
+            "rationale": "Satisfaction does not establish attack resistance.",
+            "correct": false
+          },
+          {
+            "text": "Reproduce the injection, test mitigations and retest variants and legitimate use",
+            "rationale": "It targets the failure mechanism and regression risk.",
+            "correct": true
+          },
+          {
+            "text": "Test only ordinary questions already in the benchmark",
+            "rationale": "Those may not exercise the attack.",
+            "correct": false
+          },
+          {
+            "text": "Block one exact phrase and declare all injection solved",
+            "rationale": "Variants and indirect mechanisms can remain.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "III.B.4-practice-2",
+        "stem": "A patch prevents one unsafe answer but also rejects valid policy questions in another language. Which evaluation is MOST appropriate?",
+        "options": [
+          {
+            "text": "Assess safety and legitimate-use regression across relevant language conditions",
+            "rationale": "A mitigation should be evaluated for both protection and usability.",
+            "correct": true
+          },
+          {
+            "text": "Accept every refusal as a safety improvement",
+            "rationale": "Excessive refusal can undermine the approved service.",
+            "correct": false
+          },
+          {
+            "text": "Remove the language from tests while still offering it",
+            "rationale": "That hides a supported condition.",
+            "correct": false
+          },
+          {
+            "text": "Use the original pre-patch benchmark as proof",
+            "rationale": "It does not evaluate the changed behaviour.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -1886,6 +3960,62 @@
       {
         "term": "Honest outcomes",
         "meaning": "Distinguish passed, failed, untested and uncertain findings; do not hide failures in a summary score."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.B.5-practice-1",
+        "stem": "A release report says testing passed but contains no model, prompt or dataset versions. What is the BEST correction?",
+        "options": [
+          {
+            "text": "Connect results, criteria, limitations and sign-off to the evaluated artefacts and proposed release",
+            "rationale": "Traceability establishes whether evidence supports this system.",
+            "correct": true
+          },
+          {
+            "text": "Add a general responsible-AI statement",
+            "rationale": "That does not identify the tested version.",
+            "correct": false
+          },
+          {
+            "text": "Rename the report as final",
+            "rationale": "A label cannot create the missing link.",
+            "correct": false
+          },
+          {
+            "text": "Include only average accuracy",
+            "rationale": "The score remains unconnected to a specific release.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "III.B.5-practice-2",
+        "stem": "A team omits failed safety tests from its approval pack because fixes are planned. Which approach BEST supports honest evaluation?",
+        "options": [
+          {
+            "text": "Treat planned fixes as passed tests",
+            "rationale": "A plan does not establish the outcome.",
+            "correct": false
+          },
+          {
+            "text": "Remove safety tests from the defined scope",
+            "rationale": "That does not resolve their relevance.",
+            "correct": false
+          },
+          {
+            "text": "Present only the favourable subset without explaining coverage",
+            "rationale": "That can mislead reviewers about readiness.",
+            "correct": false
+          },
+          {
+            "text": "Record failures, planned and verified remediation, remaining limitations and the actual approval status",
+            "rationale": "Future intentions are not completed evidence.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -1936,6 +4066,62 @@
         "term": "Model or system card",
         "meaning": "Communicates relevant purpose, performance and constraints; it is not automatic proof of compliance or safe operation."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.C.1-practice-1",
+        "stem": "A model has good task scores and a completed card, but its officer-handoff path has never worked. What should the readiness review require?",
+        "options": [
+          {
+            "text": "Verification of the operational control and resolution of material gaps before approval",
+            "rationale": "Documentation and performance do not establish working support.",
+            "correct": true
+          },
+          {
+            "text": "Approval because the card mentions escalation",
+            "rationale": "A description is not a successful control test.",
+            "correct": false
+          },
+          {
+            "text": "Only a higher accuracy target",
+            "rationale": "That does not repair handoff.",
+            "correct": false
+          },
+          {
+            "text": "Removal of the support link to make the evidence consistent",
+            "rationale": "That can leave the task without a necessary fallback.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "III.C.1-practice-2",
+        "stem": "A pilot is proposed for a consequential use with unresolved severe failure cases. Which statement is MOST accurate?",
+        "options": [
+          {
+            "text": "Pilots are exempt from all readiness review",
+            "rationale": "Users can still be affected.",
+            "correct": false
+          },
+          {
+            "text": "Calling it experimental transfers responsibility to participants",
+            "rationale": "Disclosure does not settle the organisation’s duties.",
+            "correct": false
+          },
+          {
+            "text": "A supplier’s standard card is sufficient for every pilot setting",
+            "rationale": "Context-specific readiness still matters.",
+            "correct": false
+          },
+          {
+            "text": "A pilot still needs bounded scope, appropriate controls, ownership and justified risk acceptance",
+            "rationale": "Pilot status does not remove governance needs.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -1984,6 +4170,62 @@
       {
         "term": "Maintenance response",
         "meaning": "Source repair, workflow change, restriction or retraining may be appropriate. Diagnose before selecting the remedy."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.C.2-practice-1",
+        "stem": "A sentiment model’s language mix shifts and analyst corrections rise while uptime stays high. What is the BEST next step?",
+        "options": [
+          {
+            "text": "Close the issue because uptime meets the service target",
+            "rationale": "That measures a different property.",
+            "correct": false
+          },
+          {
+            "text": "Automatically retrain without diagnosing the change",
+            "rationale": "The problem may need another remedy.",
+            "correct": false
+          },
+          {
+            "text": "Wait until all users complain",
+            "rationale": "That delays response despite observed evidence.",
+            "correct": false
+          },
+          {
+            "text": "Investigate changed data/context and fitness, then validate an appropriate response",
+            "rationale": "Availability does not resolve deteriorating output quality.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "III.C.2-practice-2",
+        "stem": "A pipeline truncates inputs after an integration update. A team calls this concept drift and retrains. Which approach is MOST appropriate?",
+        "options": [
+          {
+            "text": "Accept retraining as proof the pipeline is repaired",
+            "rationale": "Model training does not repair truncation automatically.",
+            "correct": false
+          },
+          {
+            "text": "Remove the affected messages from monitoring",
+            "rationale": "That hides the failure.",
+            "correct": false
+          },
+          {
+            "text": "Test competing data, model and integration explanations and fix the established cause",
+            "rationale": "The described issue may be a pipeline fault rather than changed relationships.",
+            "correct": true
+          },
+          {
+            "text": "Treat every production decline as concept drift",
+            "rationale": "Symptoms can have multiple causes.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   },
@@ -2034,6 +4276,62 @@
         "term": "Threat modelling",
         "meaning": "Identifies assets, actors, attack paths and controls so testing targets meaningful risks."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.C.3-practice-1",
+        "stem": "A public communications tool gains publishing permissions after its last red-team exercise. Which assurance action is MOST relevant?",
+        "options": [
+          {
+            "text": "Test only whether users enjoy the drafting style",
+            "rationale": "Enjoyment does not establish safe publication.",
+            "correct": false
+          },
+          {
+            "text": "Assume security is complete because publication is faster",
+            "rationale": "Speed is not security evidence.",
+            "correct": false
+          },
+          {
+            "text": "Reassess action authority, threat paths and tests for unauthorised or misleading publication",
+            "rationale": "New permissions change the potential consequence.",
+            "correct": true
+          },
+          {
+            "text": "Rely permanently on the earlier text-only tests",
+            "rationale": "They may not cover the new action boundary.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "III.C.3-practice-2",
+        "stem": "A periodic audit confirms records exist but never checks whether described controls operate. Which limitation is MOST important?",
+        "options": [
+          {
+            "text": "More document pages will automatically close the gap",
+            "rationale": "Volume does not establish operation.",
+            "correct": false
+          },
+          {
+            "text": "Document existence alone does not establish actual control effectiveness",
+            "rationale": "Assurance should examine practice and relevant evidence.",
+            "correct": true
+          },
+          {
+            "text": "The audit necessarily proves every model safe",
+            "rationale": "Its scope cannot support that claim.",
+            "correct": false
+          },
+          {
+            "text": "Only red teaming can ever assess a control",
+            "rationale": "Several assurance methods can be relevant.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -2082,6 +4380,62 @@
       {
         "term": "Learning and follow-up",
         "meaning": "Investigate causes, assign improvements and track recurrence; closing a ticket is not enough."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.C.4-practice-1",
+        "stem": "A routing incident affects residents and creates delays. What response should precede a routine model improvement project?",
+        "options": [
+          {
+            "text": "Change the dashboard label without examining cases",
+            "rationale": "Presentation does not correct affected outcomes.",
+            "correct": false
+          },
+          {
+            "text": "Contain unsafe operation, identify and recover affected cases, assign ownership and preserve relevant evidence",
+            "rationale": "Immediate impact needs managed response.",
+            "correct": true
+          },
+          {
+            "text": "Wait for the next annual model review",
+            "rationale": "That leaves known harm unaddressed.",
+            "correct": false
+          },
+          {
+            "text": "Delete the faulty release and every record",
+            "rationale": "That can prevent investigation and recovery.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "III.C.4-practice-2",
+        "stem": "A team restores service after an incident but records no follow-up owner or verification. What is MOST missing?",
+        "options": [
+          {
+            "text": "Evidence of recovery and accountable corrective follow-up to reduce recurrence",
+            "rationale": "Restoration alone is not a complete response.",
+            "correct": true
+          },
+          {
+            "text": "A new product logo",
+            "rationale": "That has no relevant assurance value.",
+            "correct": false
+          },
+          {
+            "text": "A rule prohibiting further user reports",
+            "rationale": "Reports can reveal unresolved harm.",
+            "correct": false
+          },
+          {
+            "text": "Unlimited retention of every user message",
+            "rationale": "Follow-up needs justified evidence, not indiscriminate collection.",
+            "correct": false
+          }
+        ],
+        "answer": 0
       }
     ]
   },
@@ -2133,6 +4487,62 @@
         "term": "Cross-functional diagnosis",
         "meaning": "Combine technical, operational and affected-user evidence before assigning cause or remedy."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.C.5-practice-1",
+        "stem": "Missed scams increase after both a data-pipeline change and a model update. What is the BEST investigation approach?",
+        "options": [
+          {
+            "text": "Build a timeline and compare model, data, integration and frontline evidence across competing hypotheses",
+            "rationale": "The evidence should distinguish causes before remedy selection.",
+            "correct": true
+          },
+          {
+            "text": "Retrain immediately because every increase is model drift",
+            "rationale": "That assumes the cause without testing it.",
+            "correct": false
+          },
+          {
+            "text": "Blame users because they submit unusual messages",
+            "rationale": "User behaviour is a hypothesis, not established fault.",
+            "correct": false
+          },
+          {
+            "text": "Use the original score to dismiss the increase",
+            "rationale": "Current operational outcomes need investigation.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "III.C.5-practice-2",
+        "stem": "An urgent restriction is applied before the root cause is confirmed. How should the incident record describe it?",
+        "options": [
+          {
+            "text": "Describe the containment decision as proof of root cause",
+            "rationale": "A precaution does not prove a diagnosis.",
+            "correct": false
+          },
+          {
+            "text": "Avoid documenting uncertainty",
+            "rationale": "That can mislead later review.",
+            "correct": false
+          },
+          {
+            "text": "Delay all containment until absolute certainty",
+            "rationale": "That can permit ongoing harm.",
+            "correct": false
+          },
+          {
+            "text": "Separate justified containment from confirmed findings and unresolved hypotheses",
+            "rationale": "Action may be necessary under uncertainty without establishing cause.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -2181,6 +4591,62 @@
       {
         "term": "Required disclosures",
         "meaning": "Assess applicable legal scope, role and audience; public guidance and technical filings are different artefacts."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "III.C.6-practice-1",
+        "stem": "An assistant says only that it uses AI; residents still cannot tell whether it can approve benefits or obtain help. What is the BEST improvement?",
+        "options": [
+          {
+            "text": "Publish only the model’s parameter count",
+            "rationale": "That does not explain the resident’s practical questions.",
+            "correct": false
+          },
+          {
+            "text": "Remove all disclosures to reduce confusion",
+            "rationale": "That discards useful transparency.",
+            "correct": false
+          },
+          {
+            "text": "Provide only confidential technical documentation to the supplier",
+            "rationale": "Residents remain uninformed.",
+            "correct": false
+          },
+          {
+            "text": "Explain meaningful task limits and decision authority, with usable support and relevant sources",
+            "rationale": "The missing information concerns actual use and reliance.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "III.C.6-practice-2",
+        "stem": "A deployment guide contains technical constraints, but user disclosures and operator update notices are absent. Which conclusion is MOST appropriate?",
+        "options": [
+          {
+            "text": "All documentation should be replaced by a one-line slogan",
+            "rationale": "Operators and other actors may need substantive detail.",
+            "correct": false
+          },
+          {
+            "text": "Only developers ever need limitation information",
+            "rationale": "Users and operators rely on it too.",
+            "correct": false
+          },
+          {
+            "text": "Different audiences need appropriate information; one technical artefact may not meet every need or duty",
+            "rationale": "Information should be matched to audience and scope.",
+            "correct": true
+          },
+          {
+            "text": "The longest guide automatically satisfies every transparency need",
+            "rationale": "Length is not audience suitability.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   },
@@ -2231,6 +4697,62 @@
         "term": "Transfer limits",
         "meaning": "Vendor benchmarks can inform local review without proving performance in a different setting."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.A.1-practice-1",
+        "stem": "A city-routing vendor provides strong overseas benchmarks, but the local categories and officer capacity differ. What is the BEST deployment assessment?",
+        "options": [
+          {
+            "text": "Translate the interface and assume all other conditions transfer",
+            "rationale": "Language localisation is not complete context validation.",
+            "correct": false
+          },
+          {
+            "text": "Validate local task fit, operational capacity, affected users and failure handling using relevant vendor evidence",
+            "rationale": "The new context can change fitness and consequence.",
+            "correct": true
+          },
+          {
+            "text": "Adopt the model solely on the overseas score",
+            "rationale": "That may omit local conditions.",
+            "correct": false
+          },
+          {
+            "text": "Assess only whether the contract price is competitive",
+            "rationale": "Price does not establish local suitability.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "IV.A.1-practice-2",
+        "stem": "A pilot classifier improves task accuracy but overwhelms officers with review requests. Which factor MOST directly challenges deployment readiness?",
+        "options": [
+          {
+            "text": "Operational capacity and the usability of the oversight workflow",
+            "rationale": "A model can perform well while the service cannot operate its controls.",
+            "correct": true
+          },
+          {
+            "text": "Only the parameter count",
+            "rationale": "That does not establish officer capacity.",
+            "correct": false
+          },
+          {
+            "text": "The model’s unchanged brand name",
+            "rationale": "Brand continuity is not readiness evidence.",
+            "correct": false
+          },
+          {
+            "text": "The fact that a pilot was conducted",
+            "rationale": "Pilot evidence can reveal rather than resolve a gap.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -2279,6 +4801,62 @@
       {
         "term": "Size and modality",
         "meaning": "More parameters or additional input types can add capability, resource needs and new assurance scope."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.A.2-practice-1",
+        "stem": "A brand needs sentiment labels and short evidence-grounded summaries. Which selection approach is MOST appropriate?",
+        "options": [
+          {
+            "text": "Compare candidate components against task quality, language coverage, resources, assurance and risks",
+            "rationale": "Different functions may need different model choices.",
+            "correct": true
+          },
+          {
+            "text": "Use the largest generative model for every function by default",
+            "rationale": "Size alone is not task fit.",
+            "correct": false
+          },
+          {
+            "text": "Exclude classic classifiers solely because they are older",
+            "rationale": "Age of a category does not determine suitability.",
+            "correct": false
+          },
+          {
+            "text": "Assume open weights guarantee complete interpretability",
+            "rationale": "Practical opacity can remain.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "IV.A.2-practice-2",
+        "stem": "A retailer plans to analyse text, images and videos together. Which consideration BEST supports selection?",
+        "options": [
+          {
+            "text": "Choose a text-only system without considering unsupported inputs",
+            "rationale": "That may not meet the task.",
+            "correct": false
+          },
+          {
+            "text": "Select solely by chat fluency",
+            "rationale": "Fluency does not establish multimodal fitness.",
+            "correct": false
+          },
+          {
+            "text": "Treat additional modalities as cost-free assurance improvements",
+            "rationale": "They add requirements and failure modes.",
+            "correct": false
+          },
+          {
+            "text": "Evaluate multimodal capability and the additional data, quality, privacy and testing scope it introduces",
+            "rationale": "The desired inputs and risks affect suitability.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -2329,6 +4907,62 @@
         "term": "Agentic operation",
         "meaning": "Tool access adds actions and authority. Bound permissions and require review for consequential operations."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.A.3-practice-1",
+        "stem": "An agency proposes RAG plus tools that can publish content. What should governance distinguish MOST carefully?",
+        "options": [
+          {
+            "text": "Assume retrieval makes all tool actions authorised",
+            "rationale": "Sources do not grant action authority.",
+            "correct": false
+          },
+          {
+            "text": "Treat on-premise hosting as proof that injection cannot occur",
+            "rationale": "Local hosting does not remove application attacks.",
+            "correct": false
+          },
+          {
+            "text": "Use fine-tuning as a substitute for current-policy source management",
+            "rationale": "Fine-tuning does not automatically keep facts current.",
+            "correct": false
+          },
+          {
+            "text": "Source quality and retrieval/generation risks from tool permissions and publication authority",
+            "rationale": "Informational grounding and consequential actions need different controls.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "IV.A.3-practice-2",
+        "stem": "A team must choose cloud or on-premise hosting for an assistant. Which comparison is MOST useful?",
+        "options": [
+          {
+            "text": "A rule that cloud always transfers all accountability",
+            "rationale": "The organisation retains relevant responsibilities.",
+            "correct": false
+          },
+          {
+            "text": "Only the visual layout of the response",
+            "rationale": "Layout is not the hosting trade-off.",
+            "correct": false
+          },
+          {
+            "text": "Data flows, control, resources, latency, resilience, support and applicable requirements",
+            "rationale": "The decision concerns the actual operational arrangement.",
+            "correct": true
+          },
+          {
+            "text": "A rule that local hosting always eliminates risk",
+            "rationale": "Risks remain in software, access and operation.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -2377,6 +5011,62 @@
       {
         "term": "Residual-risk acceptance",
         "meaning": "Record mitigations, uncertainty, an accountable decision and conditions for reassessment."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.B.1-practice-1",
+        "stem": "A vendor’s impact assessment covers recommendations, while a deployer configures automatic rejection. What should happen before use?",
+        "options": [
+          {
+            "text": "Review only inference expense",
+            "rationale": "Cost does not address changed consequences.",
+            "correct": false
+          },
+          {
+            "text": "Assess the changed decision context, affected people, controls and residual risks locally",
+            "rationale": "The configured use has different consequences.",
+            "correct": true
+          },
+          {
+            "text": "Accept the supplier report unchanged",
+            "rationale": "It may not cover automatic rejection.",
+            "correct": false
+          },
+          {
+            "text": "Assume the model’s shared weights guarantee identical impact",
+            "rationale": "Workflow and authority affect harm.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "IV.B.1-practice-2",
+        "stem": "An organisation uses a standard assessment template but omits user incentives and appeals. Which improvement is MOST relevant?",
+        "options": [
+          {
+            "text": "Include the actual workflow, behaviour and challenge route in deployment-specific impact analysis",
+            "rationale": "The assessment must reflect real operation.",
+            "correct": true
+          },
+          {
+            "text": "Add more generic policy quotations",
+            "rationale": "That does not fill the context gap.",
+            "correct": false
+          },
+          {
+            "text": "Remove local validation because a template was used",
+            "rationale": "A template is not evidence of fitness.",
+            "correct": false
+          },
+          {
+            "text": "Ask affected people to accept all future outcomes",
+            "rationale": "That does not establish proper risk treatment.",
+            "correct": false
+          }
+        ],
+        "answer": 0
       }
     ]
   },
@@ -2427,6 +5117,62 @@
         "term": "Exit and continuity",
         "meaning": "Assess data deletion/export, migration, dependency replacement and a workable stop route."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.B.2-practice-1",
+        "stem": "A vendor contract offers a no-training setting, but the deployed configuration uses another setting. What is the BEST review response?",
+        "options": [
+          {
+            "text": "Verify the actual processing configuration against intended terms and requirements",
+            "rationale": "A contractual option is not proof of the setting used.",
+            "correct": true
+          },
+          {
+            "text": "Treat availability of the option as equivalent to activation",
+            "rationale": "Capability and configuration differ.",
+            "correct": false
+          },
+          {
+            "text": "Ignore settings if the price is favourable",
+            "rationale": "Price does not resolve processing risk.",
+            "correct": false
+          },
+          {
+            "text": "Assess only the wording of the generated answers",
+            "rationale": "Answer content does not establish provider data reuse.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "IV.B.2-practice-2",
+        "stem": "An open-model licence restricts certain applications and offers no operational support. What should the deployer assess?",
+        "options": [
+          {
+            "text": "Assume download availability permits every application",
+            "rationale": "Access does not settle licence terms.",
+            "correct": false
+          },
+          {
+            "text": "Treat missing support as proof the model is unsafe in every context",
+            "rationale": "The organisation must assess capability and intended use.",
+            "correct": false
+          },
+          {
+            "text": "Review only training-dataset size",
+            "rationale": "That does not answer the terms and support questions.",
+            "correct": false
+          },
+          {
+            "text": "Licence compatibility and its own ability to provide necessary assurance, support and incident response",
+            "rationale": "Openness does not remove use restrictions or operating responsibility.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -2475,6 +5221,62 @@
       {
         "term": "Lifecycle cost",
         "meaning": "Include monitoring, maintenance, staffing and retirement, not just the initial training expense."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.B.3-practice-1",
+        "stem": "An insurer compares vendor fees with only the initial training cost of an internal model. What is MOST missing?",
+        "options": [
+          {
+            "text": "Only a larger first training run",
+            "rationale": "That does not account for operating needs.",
+            "correct": false
+          },
+          {
+            "text": "A rule that internal ownership removes liability",
+            "rationale": "It does not.",
+            "correct": false
+          },
+          {
+            "text": "The model’s interface colour",
+            "rationale": "That is not the lifecycle comparison.",
+            "correct": false
+          },
+          {
+            "text": "Full lifecycle capability and cost, including data, evaluation, security, monitoring, support and retirement",
+            "rationale": "Internal ownership brings continuing responsibilities.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "IV.B.3-practice-2",
+        "stem": "A proprietary claims model is understood by one engineer who is leaving. Which governance issue is MOST relevant?",
+        "options": [
+          {
+            "text": "No action is needed because weights remain stored",
+            "rationale": "Stored artefacts do not establish maintainable operation.",
+            "correct": false
+          },
+          {
+            "text": "User disclaimers replace technical capability",
+            "rationale": "Users cannot supply missing internal assurance.",
+            "correct": false
+          },
+          {
+            "text": "Continuity of competent operation, documentation, validation and incident responsibility",
+            "rationale": "Ownership benefits depend on sustainable capability.",
+            "correct": true
+          },
+          {
+            "text": "The model automatically becomes unregulated",
+            "rationale": "Staff departure does not determine legal scope.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   },
@@ -2525,6 +5327,62 @@
         "term": "Intervention authority",
         "meaning": "Define who can override, escalate, restrict or stop operation and how that affects outcomes."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.1-practice-1",
+        "stem": "Officers approve AI answers under severe time pressure and cannot inspect supporting information. What is the BEST oversight improvement?",
+        "options": [
+          {
+            "text": "Remove records of overrides to simplify the workflow",
+            "rationale": "That can hide useful evidence.",
+            "correct": false
+          },
+          {
+            "text": "Provide suitable capacity, competence, information and intervention authority, or restrict operation",
+            "rationale": "Oversight must be able to influence outcomes.",
+            "correct": true
+          },
+          {
+            "text": "Keep the approval click as proof of complete control",
+            "rationale": "Nominal review can be ineffective.",
+            "correct": false
+          },
+          {
+            "text": "Increase automation until reviewers see even more cases",
+            "rationale": "That may worsen superficial checking.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "IV.C.1-practice-2",
+        "stem": "A support assistant gives uncertain health guidance. The operator can identify the problem but no escalation team responds. What is MOST lacking?",
+        "options": [
+          {
+            "text": "A functioning operational handoff with ownership and a safe fallback",
+            "rationale": "Recognition must connect to response.",
+            "correct": true
+          },
+          {
+            "text": "Only a more detailed AI definition",
+            "rationale": "Terminology does not staff the route.",
+            "correct": false
+          },
+          {
+            "text": "A higher model-confidence display",
+            "rationale": "Confidence does not create response capability.",
+            "correct": false
+          },
+          {
+            "text": "More answer variants",
+            "rationale": "Variants do not address the failed support path.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      }
     ]
   },
   {
@@ -2573,6 +5431,62 @@
       {
         "term": "Actionable monitoring",
         "meaning": "Thresholds need an investigation owner, response options and evidence that interventions work."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.2-practice-1",
+        "stem": "A marketing dashboard has high satisfaction ratings but repeated factual corrections and harmful campaign use. Which monitoring approach is BEST?",
+        "options": [
+          {
+            "text": "Combine output quality, use, corrections and downstream impact with technical and satisfaction signals",
+            "rationale": "No single convenient metric covers the described risk.",
+            "correct": true
+          },
+          {
+            "text": "Retain satisfaction as the sole correctness measure",
+            "rationale": "Users may reward confident errors.",
+            "correct": false
+          },
+          {
+            "text": "Monitor only response time",
+            "rationale": "Latency measures another property.",
+            "correct": false
+          },
+          {
+            "text": "Stop collecting correction feedback",
+            "rationale": "That removes a relevant quality signal.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "IV.C.2-practice-2",
+        "stem": "An alert threshold exists, but nobody investigates it and there are no response options. What should be added FIRST?",
+        "options": [
+          {
+            "text": "More charts of the same alert",
+            "rationale": "Display does not create responsibility.",
+            "correct": false
+          },
+          {
+            "text": "A higher threshold simply to avoid alerts",
+            "rationale": "That can conceal deterioration.",
+            "correct": false
+          },
+          {
+            "text": "Automatic approval of every alerted output",
+            "rationale": "That reverses the purpose of monitoring.",
+            "correct": false
+          },
+          {
+            "text": "An owner, investigation process and defined interventions linked to the signal",
+            "rationale": "Monitoring should support action.",
+            "correct": true
+          }
+        ],
+        "answer": 3
       }
     ]
   },
@@ -2623,6 +5537,62 @@
         "term": "Regression evidence",
         "meaning": "Verify the relevant fix and examine whether it introduces new failures or blocks legitimate use."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.3-practice-1",
+        "stem": "A deployed communications assistant gets a new retrieval source and tool integration. Which assurance response is MOST appropriate?",
+        "options": [
+          {
+            "text": "Wait indefinitely for the usual review date",
+            "rationale": "Material change can require earlier review.",
+            "correct": false
+          },
+          {
+            "text": "Use only an unchanged screenshot as regression evidence",
+            "rationale": "Appearance does not establish behaviour.",
+            "correct": false
+          },
+          {
+            "text": "Assume old tests cover every new permission",
+            "rationale": "Their scope may no longer fit.",
+            "correct": false
+          },
+          {
+            "text": "Run relevant change-triggered security, reliability and safety tests and verify fixes",
+            "rationale": "New dependencies can change the threat surface.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "IV.C.3-practice-2",
+        "stem": "A safety patch passes one attack but blocks legitimate multilingual requests. What should the assurance team do?",
+        "options": [
+          {
+            "text": "Remove supported languages from evaluation without changing the service",
+            "rationale": "That hides real use conditions.",
+            "correct": false
+          },
+          {
+            "text": "Approve solely because the supplier wrote the patch",
+            "rationale": "Supplier authorship is not outcome evidence.",
+            "correct": false
+          },
+          {
+            "text": "Evaluate attack variants and legitimate-use regression before accepting the patch",
+            "rationale": "Both protection and approved usefulness matter.",
+            "correct": true
+          },
+          {
+            "text": "Count every refusal as proof of improved quality",
+            "rationale": "Refusal can be a service failure.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -2672,6 +5642,62 @@
         "term": "Post-market learning",
         "meaning": "Use outcomes and follow-up to refine monitoring and controls rather than only store reports."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.4-practice-1",
+        "stem": "A detector incorrectly flags safe messages. Which incident record BEST supports response and future monitoring?",
+        "options": [
+          {
+            "text": "Every user message retained indefinitely without purpose limits",
+            "rationale": "That adds unjustified data exposure.",
+            "correct": false
+          },
+          {
+            "text": "Only the original training benchmark",
+            "rationale": "It may not explain the incident.",
+            "correct": false
+          },
+          {
+            "text": "Relevant versions, affected scope, impact, decisions, owners, recovery and follow-up with protected evidence",
+            "rationale": "It supports reconstruction, correction and learning.",
+            "correct": true
+          },
+          {
+            "text": "Only a timestamp and the phrase model error",
+            "rationale": "That is inadequate for impact and response review.",
+            "correct": false
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "id": "IV.C.4-practice-2",
+        "stem": "A monitoring alert has not yet been confirmed as an incident. How should it be documented?",
+        "options": [
+          {
+            "text": "Publish all raw evidence before checking relevance",
+            "rationale": "Disclosure requires scope and protection.",
+            "correct": false
+          },
+          {
+            "text": "Keep its status, evidence, investigation ownership and decisions explicit",
+            "rationale": "Suspected and confirmed findings should be distinguishable.",
+            "correct": true
+          },
+          {
+            "text": "Label it a confirmed cause immediately",
+            "rationale": "An alert is not a diagnosis.",
+            "correct": false
+          },
+          {
+            "text": "Discard it because uncertainty remains",
+            "rationale": "It may require investigation.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -2720,6 +5746,62 @@
       {
         "term": "Purpose controls",
         "meaning": "Restrict harmful reuse and require reassessment for consequential new applications."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.5-practice-1",
+        "stem": "A campaign dashboard’s aggregate scores are exported to rank named employees. Which governance response is MOST appropriate?",
+        "options": [
+          {
+            "text": "Add employee names to every report to improve transparency",
+            "rationale": "That can increase the very exposure under review.",
+            "correct": false
+          },
+          {
+            "text": "Review and restrict the changed purpose and downstream harm pathway before enabling it",
+            "rationale": "The new affected population and decision require reassessment.",
+            "correct": true
+          },
+          {
+            "text": "Accept it because the underlying model is unchanged",
+            "rationale": "Stable weights do not preserve the approved use.",
+            "correct": false
+          },
+          {
+            "text": "Treat the export as harmless because it is technically possible",
+            "rationale": "Capability does not establish acceptable purpose.",
+            "correct": false
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "id": "IV.C.5-practice-2",
+        "stem": "A team wants to prevent a sentiment tool becoming a critic blacklist without blocking aggregate analysis. Which control BEST fits?",
+        "options": [
+          {
+            "text": "Role- and purpose-based export restrictions, approved aggregates and change review",
+            "rationale": "It targets the harmful reuse while preserving justified use.",
+            "correct": true
+          },
+          {
+            "text": "Ban all reporting permanently",
+            "rationale": "That is broader than the stated need.",
+            "correct": false
+          },
+          {
+            "text": "Allow all person-level exports with a generic disclaimer",
+            "rationale": "A disclaimer does not prevent the pathway.",
+            "correct": false
+          },
+          {
+            "text": "Depend only on model accuracy",
+            "rationale": "Correct sentiment can still be misused.",
+            "correct": false
+          }
+        ],
+        "answer": 0
       }
     ]
   },
@@ -2771,6 +5853,62 @@
         "term": "Approval and channels",
         "meaning": "Assign spokesperson, coordination and official routes so correction reaches the people who relied on the output."
       }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.6-practice-1",
+        "stem": "An agency assistant invented a deadline and residents may have relied on it. What should the communication response prioritise?",
+        "options": [
+          {
+            "text": "Verified correction, affected-user help and coordinated official channels with accountable approval",
+            "rationale": "The response should address practical reliance.",
+            "correct": true
+          },
+          {
+            "text": "A speculative explanation of who caused the failure",
+            "rationale": "Unverified blame can mislead.",
+            "correct": false
+          },
+          {
+            "text": "Quiet deletion of the answer only",
+            "rationale": "People who relied on it remain uninformed.",
+            "correct": false
+          },
+          {
+            "text": "Only a technical note to the model provider",
+            "rationale": "The affected audience needs useful information.",
+            "correct": false
+          }
+        ],
+        "answer": 0
+      },
+      {
+        "id": "IV.C.6-practice-2",
+        "stem": "An incident’s root cause is uncertain, but a safe user action is known. Which communication is BEST?",
+        "options": [
+          {
+            "text": "Wait for absolute certainty regardless of ongoing reliance",
+            "rationale": "That can prolong harm.",
+            "correct": false
+          },
+          {
+            "text": "Present the leading hypothesis as a confirmed fact",
+            "rationale": "That overstates the evidence.",
+            "correct": false
+          },
+          {
+            "text": "Release all personal data to demonstrate openness",
+            "rationale": "Transparency does not justify unnecessary exposure.",
+            "correct": false
+          },
+          {
+            "text": "State verified facts and next steps promptly while distinguishing the ongoing investigation",
+            "rationale": "Useful timely communication can coexist with uncertainty.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      }
     ]
   },
   {
@@ -2819,6 +5957,62 @@
       {
         "term": "Restoration criteria",
         "meaning": "Correct, retest and approve relevant controls before resuming; restarting a service is not revalidation."
+      }
+    ],
+    "additionalPractice": [
+      {
+        "id": "IV.C.7-practice-1",
+        "stem": "A regulator prohibits a model feature in one jurisdiction. Which deactivation-policy approach is MOST robust?",
+        "options": [
+          {
+            "text": "Hide only the visible menu while leaving direct endpoints available",
+            "rationale": "That may not enforce the restriction.",
+            "correct": false
+          },
+          {
+            "text": "Add a disclaimer but leave the feature fully active",
+            "rationale": "Disclosure does not implement the prohibition.",
+            "correct": false
+          },
+          {
+            "text": "Delete every unrelated service in every market without assessment",
+            "rationale": "That may be unnecessarily broad and still omit verification.",
+            "correct": false
+          },
+          {
+            "text": "Assess required restriction/localisation and verify enforcement across interfaces and dependencies, with appropriate fallback",
+            "rationale": "The unsafe or prohibited pathway must actually be contained.",
+            "correct": true
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "id": "IV.C.7-practice-2",
+        "stem": "A scheme assistant is suspended for stale guidance. What evidence is MOST relevant before restoration?",
+        "options": [
+          {
+            "text": "The previous model card has not changed",
+            "rationale": "The source failure needs current evidence.",
+            "correct": false
+          },
+          {
+            "text": "All incident records have been deleted",
+            "rationale": "That can undermine recovery and accountability.",
+            "correct": false
+          },
+          {
+            "text": "Corrected sources, appropriate retesting, dependency checks and authorised approval for the restored scope",
+            "rationale": "Restarting alone does not establish revalidation.",
+            "correct": true
+          },
+          {
+            "text": "The service process starts successfully",
+            "rationale": "Availability does not prove answer fitness.",
+            "correct": false
+          }
+        ],
+        "answer": 2
       }
     ]
   }
@@ -2874,6 +6068,18 @@ function renderLesson(){
  if(!l.samplePanels){const feedback=document.querySelector('#review .feedback');const last=feedback.querySelector('p:last-child');last.innerHTML='<strong>Why the alternatives fail:</strong> '+esc(l.depth.wrongReasoning);}
  document.getElementById('sourceReference').textContent=l.ref+' · '+l.refName+' · p.'+l.page+'. Blueprint: '+l.id+' — '+l.text;
  document.getElementById('previousLesson').disabled=currentIndex===0;document.getElementById('nextLesson').disabled=currentIndex===LESSONS.length-1;document.getElementById('lessonPosition').textContent='Lesson '+(currentIndex+1)+' of '+LESSONS.length;
+
+ const review=document.getElementById('review');
+ const provenance=document.createElement('details');provenance.className='practice-provenance';
+ provenance.innerHTML='<summary>Where these questions come from</summary><p>The original navigator embeds a 100-question practice-paper bank with answer rationales. Its formats are 98 single-answer questions, one ordering item and one multi-answer item; 27 items link to shared scenarios.</p><p>The two additional questions in each lesson are newly written, using the paper’s predominant four-option, single-best-answer format and its emphasis on application, first steps, best actions and distinctions. They are not copied paper questions or official IAPP questions. Their difficulty has not been validated against the actual exam.</p><p>The original bank flags 12 items for ambiguity or accuracy concerns. Those answer-key defects have not been carried into these new questions. The paper bank, rather than the original PDF file, was available for this analysis.</p>';
+ review.querySelector('form').before(provenance);
+ const extra=document.createElement('section');extra.className='practice-set';
+ extra.innerHTML='<h3>Additional paper-style practice</h3><p class="small">Choose one best answer for each question. Watch for FIRST, MOST and LEAST: the question asks for the action or distinction supported by the facts, not merely another useful activity.</p>'+l.additionalPractice.map((q,i)=>{
+ const letter=String.fromCharCode(65+q.answer);
+ return '<form class="question" data-answer="'+q.answer+'"><fieldset><legend>'+esc('Practice '+(i+1)+'. '+q.stem)+'</legend>'+q.options.map((o,j)=>'<label class="option"><input type="radio" name="'+esc(q.id)+'" value="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(o.text)+'</label>').join('')+'</fieldset><button class="check" type="submit">Check answer</button><div class="feedback" role="status" hidden><strong class="result"></strong><p><strong>Best answer: '+letter+'.</strong> '+esc(q.options[q.answer].text)+'</p><h4>Reasoning for every option</h4><ul class="option-reasons">'+q.options.map((o,j)=>'<li><strong>'+String.fromCharCode(65+j)+(o.correct?' · Best answer':'')+': </strong>'+esc(o.rationale)+'</li>').join('')+'</ul></div></form>';
+ }).join('');
+ const recall=[...review.querySelectorAll('h3')].find(h=>h.textContent==='Explain it without looking.');
+ if(recall)recall.before(extra);else review.querySelector('[data-stage]').before(extra);
  document.querySelectorAll('[data-stage]').forEach(button=>button.addEventListener('click',()=>setStage(button.dataset.stage,true)));
  document.querySelectorAll('.question').forEach(form=>{
  form.addEventListener('submit',e=>{e.preventDefault();const selected=form.querySelector('input:checked');if(!selected){let prompt=form.querySelector('.choose-prompt');if(!prompt){prompt=document.createElement('p');prompt.className='choose-prompt';prompt.setAttribute('role','status');prompt.textContent='Choose an answer first, then check your reasoning.';form.querySelector('.check').after(prompt);}return;}form.querySelector('.choose-prompt')?.remove();const feedback=form.querySelector('.feedback');feedback.querySelector('.result').textContent=selected.value===form.dataset.answer?'Correct — here’s why.':'Revisit this decision — here’s why.';feedback.hidden=false;});form.addEventListener('change',()=>form.querySelector('.feedback').hidden=true);
