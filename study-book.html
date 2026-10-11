@@ -10,17 +10,19 @@
 .concept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.concept-grid article{background:var(--wash);border-radius:6px;padding:18px}.concept-grid h3{font-size:16px;margin:0 0 12px}.concept-grid p{font-size:15px;margin:0}@media(max-width:800px){.concept-grid{grid-template-columns:1fr}}
 
 .practice-provenance{font-size:14px}.option-reasons li{margin:10px 0}.feedback h4{font-size:15px;margin:14px 0 4px}.practice-set{padding-top:20px;border-top:1px solid var(--line)}
+
+.clear-memory{font:inherit;font-size:13px;color:#864125;background:transparent;border:1px solid var(--line);padding:8px 12px;border-radius:5px}.question-memory{font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--line)}#memoryNotice:empty{display:none}
 </style></head><body>
 <a class="skip" href="#chapter">Skip to lesson</a>
 <header class="top"><a class="brand" href="study-book.html">AIGP / GUIDED STUDY BOOK</a><a href="aigp-cookbook-index.html">Original cookbook navigator ↗</a></header>
-<div class="layout"><aside class="rail" aria-label="Book navigation"><p class="eyebrow">Your study edition</p><p class="book-intro">Four domains. 57 lessons.<br>Understand → practise → review.</p><p class="book-progress" id="progressText" aria-live="polite"></p><div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+<div class="layout"><aside class="rail" aria-label="Book navigation"><p class="eyebrow">Your study edition</p><p class="book-intro">Four domains. 57 lessons.<br>Understand → practise → review.</p><p class="book-progress" id="progressText" aria-live="polite"></p><p class="book-progress" id="questionProgress" aria-live="polite"></p><button type="button" id="clearStudyMemory" class="clear-memory">Clear study memory</button><p class="small" id="memoryNotice" role="status"></p><div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
 <details class="contents" id="contents" open><summary>Chapters & learning objectives</summary><label class="small" for="bookSearch">Search lessons, products or concepts</label><input id="bookSearch" type="search" placeholder="Try LifeSG, fairness, red team…" autocomplete="off"><p class="small" id="searchCount" role="status"></p><nav id="toc" aria-label="Learning objectives"></nav></details><p class="book-note">Original explanations and practice questions. Singapore cases illustrate the syllabus; hypothetical public-service AI features are labelled. This is a study companion, not official IAPP material or legal advice.</p></aside>
 <main id="chapter" tabindex="-1"><header class="chapter-head"><p class="eyebrow" id="lessonLabel"></p><h1 id="lessonTitle"></h1><p class="deck" id="lessonDeck"></p><div class="metadata" id="lessonMeta"></div></header>
 <div class="goal"><p class="eyebrow">By the end of this lesson</p><p id="lessonGoal"></p></div>
 <div class="tabs" role="tablist" aria-label="Reading stages"><button id="tab-learn" role="tab" aria-selected="true" aria-controls="learn" tabindex="0">01 · Learn</button><button id="tab-apply" role="tab" aria-selected="false" aria-controls="apply" tabindex="-1">02 · Apply</button><button id="tab-review" role="tab" aria-selected="false" aria-controls="review" tabindex="-1">03 · Review</button></div>
 <section id="learn" class="panel" role="tabpanel" aria-labelledby="tab-learn" tabindex="0"></section><section id="apply" class="panel" role="tabpanel" aria-labelledby="tab-apply" tabindex="0" hidden></section><section id="review" class="panel" role="tabpanel" aria-labelledby="tab-review" tabindex="0" hidden></section>
 <footer><details class="source-details"><summary>Cookbook reference & source scope</summary><p id="sourceReference"></p><p>The teaching explanations, decisions and questions in this book are original additions. They do not quote the trainer’s notes. Read the original material through the existing navigator; its embedded reader and full source text remain available.</p><a href="aigp-cookbook-index.html">Open original cookbook navigator →</a></details>
-<button id="markReviewed" class="mark-button" type="button" aria-pressed="false">Mark lesson reviewed</button><p class="small" id="storageStatus">Review progress is stored in this browser only. Marking a lesson is your choice; it is not an assessment score.</p><div class="lesson-nav"><button id="previousLesson" type="button">← Previous lesson</button><span class="chapter-position" id="lessonPosition"></span><button id="nextLesson" type="button">Next lesson →</button></div></footer>
+<button id="markReviewed" class="mark-button" type="button" aria-pressed="false">Mark lesson reviewed</button><p class="small" id="storageStatus">Answers, question checks and lesson-review progress are saved in this browser. Use Clear study memory to reset them. Progress is not shared between devices.</p><div class="lesson-nav"><button id="previousLesson" type="button">← Previous lesson</button><span class="chapter-position" id="lessonPosition"></span><button id="nextLesson" type="button">Next lesson →</button></div></footer>
 </main></div><script id="bookData" type="application/json">[
   {
     "text": "Know the generally accepted definitions and types of AI",
@@ -6019,8 +6021,38 @@
 ]</script><script>
 const LESSONS=JSON.parse(document.getElementById('bookData').textContent);
 const STAGES=['learn','apply','review'];const STORAGE_KEY='aigp_guided_book_v1';
+const QUESTION_STORAGE_KEY='aigp_guided_book_questions_v1';
+const QUESTION_IDS=new Set(LESSONS.flatMap(l=>[...Array.from({length:l.samplePanels?2:1},(_,i)=>l.id+'-foundation-'+(i+1)),...l.additionalPractice.map(q=>q.id)]));
+let questionRecords=Object.create(null);
 let currentIndex=0,currentStage='learn',reviewed=new Set(),storageAvailable=true;
-try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');if(Array.isArray(saved))reviewed=new Set(saved.filter(id=>LESSONS.some(l=>l.id===id)));}catch{storageAvailable=false;}
+function readStudyMemory(){
+ reviewed=new Set();questionRecords=Object.create(null);
+ try{
+  const rawLessons=localStorage.getItem(STORAGE_KEY),rawQuestions=localStorage.getItem(QUESTION_STORAGE_KEY);
+  let savedLessons=[],savedQuestions={};try{savedLessons=JSON.parse(rawLessons||'[]');}catch{}try{savedQuestions=JSON.parse(rawQuestions||'{}');}catch{}
+  if(Array.isArray(savedLessons))reviewed=new Set(savedLessons.filter(id=>LESSONS.some(l=>l.id===id)));
+  if(savedQuestions&&typeof savedQuestions==='object'&&!Array.isArray(savedQuestions)){
+   for(const [id,record] of Object.entries(savedQuestions)){
+    if(QUESTION_IDS.has(id)&&record&&typeof record==='object'&&typeof record.fingerprint==='string'&&Number.isInteger(record.checks)&&record.checks>=0&&typeof record.selected==='string'&&(record.checked===null||typeof record.checked==='string')&&(record.firstCorrect===null||typeof record.firstCorrect==='boolean'))questionRecords[id]=record;
+   }
+  }
+ }catch{storageAvailable=false;}
+}
+readStudyMemory();
+function saveQuestionMemory(){try{localStorage.setItem(QUESTION_STORAGE_KEY,JSON.stringify(questionRecords));}catch{storageAvailable=false;}}
+function questionFingerprint(form){
+ const text=JSON.stringify([form.querySelector('legend').textContent,[...form.querySelectorAll('.option')].map(el=>el.textContent),form.dataset.answer]);
+ let hash=2166136261;for(let i=0;i<text.length;i++){hash^=text.charCodeAt(i);hash=Math.imul(hash,16777619);}return (hash>>>0).toString(16);
+}
+function checkedCount(lesson){return [...QUESTION_IDS].filter(id=>id.startsWith(lesson.id+'-')&&questionRecords[id]?.checks>0).length;}
+function showQuestionFeedback(form,selected){const feedback=form.querySelector('.feedback');feedback.querySelector('.result').textContent=selected===form.dataset.answer?'Correct — here’s why.':'Revisit this decision — here’s why.';feedback.hidden=false;}
+function showQuestionMemory(form,record){
+ const status=form.querySelector('.question-memory');
+ if(!record){status.textContent='Not checked yet.';return;}
+ if(!record.checks){status.textContent=(storageAvailable?'Selection saved':'Session selection')+' · not checked yet.';return;}
+ status.textContent=(storageAvailable?'Saved':'Session only')+' · '+record.checks+' check'+(record.checks===1?'':'s')+' · first check '+(record.firstCorrect?'correct':'incorrect')+' · last check '+(record.checked===form.dataset.answer?'correct':'incorrect')+(record.selected!==record.checked?' · current selection not checked yet':'');
+}
+
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paragraph=(label,text)=>'<p><strong>'+esc(label)+': </strong>'+esc(text)+'</p>';
 function renderToc(){
@@ -6030,7 +6062,7 @@ function renderToc(){
   if(domain!==l.domain){domain=l.domain;const h=document.createElement('h2');h.className='domain-heading';h.textContent=l.domainName;toc.append(h);}
   if(competency!==l.competency){competency=l.competency;const h=document.createElement('h3');h.className='competency-heading';h.textContent=l.competency+' · '+l.competencyName;toc.append(h);}
   const button=document.createElement('button');button.type='button';button.className='chapter-link';button.dataset.lesson=l.id;if(LESSONS[currentIndex].id===l.id)button.setAttribute('aria-current','page');
-  const number=document.createElement('span');number.className='number';number.textContent=l.id+(reviewed.has(l.id)?' · Reviewed':'');button.append(number,document.createTextNode(l.title));
+  const number=document.createElement('span');number.className='number';const tried=checkedCount(l);number.textContent=l.id+(reviewed.has(l.id)?' · Reviewed':'')+(tried?' · '+tried+'/'+(l.samplePanels?4:3)+' questions checked':'');button.append(number,document.createTextNode(l.title));
   button.addEventListener('click',()=>goToLesson(LESSONS.indexOf(l),true));toc.append(button);
  });
  if(!matches.length){const message=document.createElement('p');message.className='no-results';message.textContent='No lessons found. Try a different concept or product.';toc.append(message);}
@@ -6039,7 +6071,9 @@ function renderToc(){
 function updateProgress(){
  document.getElementById('progressText').textContent=reviewed.size+' / '+LESSONS.length+' lessons marked reviewed';document.getElementById('progressFill').style.width=(reviewed.size/LESSONS.length*100)+'%';
  const button=document.getElementById('markReviewed'),done=reviewed.has(LESSONS[currentIndex].id);button.setAttribute('aria-pressed',String(done));button.textContent=done?'Reviewed ✓ · Undo':'Mark lesson reviewed';
- if(!storageAvailable)document.getElementById('storageStatus').textContent='Browser storage is unavailable. Progress works for this session but may not be saved.';
+ const checked=Object.values(questionRecords).filter(record=>record.checks>0);const correct=checked.filter(record=>record.lastCorrect===true).length;
+ document.getElementById('questionProgress').textContent=checked.length+' / '+QUESTION_IDS.size+' questions checked · '+correct+' correct on last check';
+ if(!storageAvailable)document.getElementById('storageStatus').textContent='Browser storage is unavailable. Answers and progress work for this session but may not survive a reload.';
 }
 function renderLesson(){
  const l=LESSONS[currentIndex],[product,kind,context]=l.product;
@@ -6076,13 +6110,31 @@ function renderLesson(){
  const extra=document.createElement('section');extra.className='practice-set';
  extra.innerHTML='<h3>Additional paper-style practice</h3><p class="small">Choose one best answer for each question. Watch for FIRST, MOST and LEAST: the question asks for the action or distinction supported by the facts, not merely another useful activity.</p>'+l.additionalPractice.map((q,i)=>{
  const letter=String.fromCharCode(65+q.answer);
- return '<form class="question" data-answer="'+q.answer+'"><fieldset><legend>'+esc('Practice '+(i+1)+'. '+q.stem)+'</legend>'+q.options.map((o,j)=>'<label class="option"><input type="radio" name="'+esc(q.id)+'" value="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(o.text)+'</label>').join('')+'</fieldset><button class="check" type="submit">Check answer</button><div class="feedback" role="status" hidden><strong class="result"></strong><p><strong>Best answer: '+letter+'.</strong> '+esc(q.options[q.answer].text)+'</p><h4>Reasoning for every option</h4><ul class="option-reasons">'+q.options.map((o,j)=>'<li><strong>'+String.fromCharCode(65+j)+(o.correct?' · Best answer':'')+': </strong>'+esc(o.rationale)+'</li>').join('')+'</ul></div></form>';
+ return '<form class="question" data-question-id="'+esc(q.id)+'" data-answer="'+q.answer+'"><fieldset><legend>'+esc('Practice '+(i+1)+'. '+q.stem)+'</legend>'+q.options.map((o,j)=>'<label class="option"><input type="radio" name="'+esc(q.id)+'" value="'+j+'">'+String.fromCharCode(65+j)+'. '+esc(o.text)+'</label>').join('')+'</fieldset><button class="check" type="submit">Check answer</button><div class="feedback" role="status" hidden><strong class="result"></strong><p><strong>Best answer: '+letter+'.</strong> '+esc(q.options[q.answer].text)+'</p><h4>Reasoning for every option</h4><ul class="option-reasons">'+q.options.map((o,j)=>'<li><strong>'+String.fromCharCode(65+j)+(o.correct?' · Best answer':'')+': </strong>'+esc(o.rationale)+'</li>').join('')+'</ul></div></form>';
  }).join('');
  const recall=[...review.querySelectorAll('h3')].find(h=>h.textContent==='Explain it without looking.');
  if(recall)recall.before(extra);else review.querySelector('[data-stage]').before(extra);
  document.querySelectorAll('[data-stage]').forEach(button=>button.addEventListener('click',()=>setStage(button.dataset.stage,true)));
- document.querySelectorAll('.question').forEach(form=>{
- form.addEventListener('submit',e=>{e.preventDefault();const selected=form.querySelector('input:checked');if(!selected){let prompt=form.querySelector('.choose-prompt');if(!prompt){prompt=document.createElement('p');prompt.className='choose-prompt';prompt.setAttribute('role','status');prompt.textContent='Choose an answer first, then check your reasoning.';form.querySelector('.check').after(prompt);}return;}form.querySelector('.choose-prompt')?.remove();const feedback=form.querySelector('.feedback');feedback.querySelector('.result').textContent=selected.value===form.dataset.answer?'Correct — here’s why.':'Revisit this decision — here’s why.';feedback.hidden=false;});form.addEventListener('change',()=>form.querySelector('.feedback').hidden=true);
+ document.querySelectorAll('.question').forEach((form,index)=>{
+  const id=form.dataset.questionId||l.id+'-foundation-'+(index+1);form.dataset.questionId=id;
+  const fingerprint=questionFingerprint(form),values=new Set([...form.querySelectorAll('input')].map(input=>input.value));
+  let record=questionRecords[id];
+  if(record&&(record.fingerprint!==fingerprint||!values.has(record.selected)||(record.checks>0&&!values.has(record.checked)))){delete questionRecords[id];record=null;saveQuestionMemory();}
+  const status=document.createElement('p');status.className='question-memory';status.setAttribute('role','status');form.querySelector('fieldset').before(status);
+  if(record){for(const input of form.querySelectorAll('input'))input.checked=input.value===record.selected;if(record.checks>0&&record.selected===record.checked)showQuestionFeedback(form,record.checked);}
+  showQuestionMemory(form,record);
+  form.addEventListener('submit',e=>{
+   e.preventDefault();const selected=form.querySelector('input:checked');
+   if(!selected){let prompt=form.querySelector('.choose-prompt');if(!prompt){prompt=document.createElement('p');prompt.className='choose-prompt';prompt.setAttribute('role','status');prompt.textContent='Choose an answer first, then check your reasoning.';form.querySelector('.check').after(prompt);}return;}
+   form.querySelector('.choose-prompt')?.remove();const previous=questionRecords[id],correct=selected.value===form.dataset.answer;
+   questionRecords[id]={fingerprint,selected:selected.value,checked:selected.value,checks:(previous?.checks||0)+1,firstCorrect:previous?.checks?previous.firstCorrect:correct,lastCorrect:correct,updatedAt:new Date().toISOString()};
+   showQuestionFeedback(form,selected.value);saveQuestionMemory();showQuestionMemory(form,questionRecords[id]);updateProgress();renderToc();
+  });
+  form.addEventListener('change',()=>{
+   const selected=form.querySelector('input:checked');if(!selected)return;
+   const previous=questionRecords[id];questionRecords[id]={fingerprint,selected:selected.value,checked:previous?.checked??null,checks:previous?.checks||0,firstCorrect:previous?.firstCorrect??null,lastCorrect:previous?.lastCorrect??null,updatedAt:new Date().toISOString()};
+   form.querySelector('.feedback').hidden=true;saveQuestionMemory();showQuestionMemory(form,questionRecords[id]);updateProgress();
+  });
  });updateProgress();renderToc();
 }
 function setStage(stage,moveFocus=false,writeHash=true){
@@ -6098,5 +6150,13 @@ function readLocation(){let [id,stage]=location.hash.slice(1).split('/');const i
 STAGES.forEach((id,i)=>{const tab=document.getElementById('tab-'+id);tab.addEventListener('click',()=>setStage(id,true));tab.addEventListener('keydown',e=>{let index;if(e.key==='ArrowRight')index=(i+1)%3;else if(e.key==='ArrowLeft')index=(i+2)%3;else if(e.key==='Home')index=0;else if(e.key==='End')index=2;else return;e.preventDefault();setStage(STAGES[index],true);document.getElementById('tab-'+STAGES[index]).focus();});});
 document.getElementById('bookSearch').addEventListener('input',renderToc);document.getElementById('previousLesson').addEventListener('click',()=>goToLesson(currentIndex-1,true));document.getElementById('nextLesson').addEventListener('click',()=>goToLesson(currentIndex+1,true));
 document.getElementById('markReviewed').addEventListener('click',()=>{const id=LESSONS[currentIndex].id;if(reviewed.has(id))reviewed.delete(id);else reviewed.add(id);try{localStorage.setItem(STORAGE_KEY,JSON.stringify([...reviewed]));}catch{storageAvailable=false;}updateProgress();renderToc();});
+document.getElementById('clearStudyMemory').addEventListener('click',()=>{
+ if(!confirm('Clear all saved question selections, checks and lessons marked Reviewed for this study book in this browser? Your original navigator and flashcard progress will be kept.'))return;
+ reviewed=new Set();questionRecords=Object.create(null);let cleared=true;
+ try{localStorage.removeItem(QUESTION_STORAGE_KEY);localStorage.removeItem(STORAGE_KEY);}catch{storageAvailable=false;cleared=false;}
+ const stage=currentStage;renderLesson();setStage(stage,false,false);
+ document.getElementById('memoryNotice').textContent=cleared?'Study memory cleared. You can start again.':'Session memory cleared, but browser storage could not be cleared. Previously saved progress may return after a reload.';
+});
+window.addEventListener('storage',event=>{if(event.key===STORAGE_KEY||event.key===QUESTION_STORAGE_KEY||event.key===null){const stage=currentStage;readStudyMemory();renderLesson();setStage(stage,false,false);}});
 if(innerWidth<=800)document.getElementById('contents').open=false;renderLesson();readLocation();window.addEventListener('hashchange',readLocation);
 </script></body></html>
